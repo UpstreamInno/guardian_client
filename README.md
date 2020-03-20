@@ -43,15 +43,25 @@ The application compares time-location of own time-location with those of the in
 You were 20m from infected person at 15:35 yesterday, or
 Alert! You were < 5m from infected person at 11:15
 
-# Advantages of approach:
-## There is a high degree of privacy because 
+# Advantages of approach
+
+## Easy of Use
+
+Anybody can use it (young and old). No complicated setups or data to enter. And if we get the healthcare plugin working, then a healthcare worker can do it on your behalf.
+
+## Community driven
+
+Do your part without giving up too much privacy.
+
+## Privacy
+
 My full time-location track is only sent to the server if I confirm that I was infected (otherwise the only thing sent to the server is the region time-track)
 
 The users own exposure warning is only shown to the user and not known by the server - there could be a permission that would allow my application to report “collisions” if we wanted to know how many people were close in that track, but maybe not initially
 
 This feels good. I feel good about letting other people know when I am infected. Otherwise I really don’t like sharing my position with a random cloud service
 
-## This is a very scalable approach, 
+## Scalable
 it limits the data tracked on the server to “region” tracking
 
 Traffic to the server is limited to region entering, which means if people are not moving much there is not a lot of data transmitted!
