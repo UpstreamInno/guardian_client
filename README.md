@@ -1,14 +1,19 @@
-This application concept could be developed to Beta in as little as 2 (intense) weeks by an estimate of 5 persons. It could save lives by:
-Communicating the social-distance concept.
+This application concept could be developed to Beta in as little as 2 (intense) weeks by an estimate of 5 persons. 
 
 
 # Motivation
 
-Social media works. Social distancing is hard to communicate to people. Draconian big-brother measures of citizen tracking is doesn't feel good. We can make a system that enforces a high level of privacy, is scalable, and primarily community driven. Over time it can get better, and use more verifiable healthcare submitted information.
+Social media works. Social distancing and other preventive measures is hard to communicate to people. Draconian big-brother measures of citizen location tracking doesn't feel good. We can make a system that has a high level of privacy, is scalable, and primarily community driven. Over time it can get better, and use more verifiable healthcare submitted information can be incorportated.
 
-Unlike other applications, this application does not show things on a map and expect you to figure out if you were near an infected person. It mostly does nothing unless an infection was reported and you happened to be close to this person. In this way it will serve to remind you (scare you) that we have to understand social distancing is real.
+This application mostly does nothing! You install it, and forget you are using it. Occasionally you get an alert. If you unfortunately contract COVID-19 then you can report it and alert others. But it is as accurate as possible. It will compare your locations to others down to 5 minutes and within the accuracy of GPS.
 
-If this virus has a long tail, then even after we start lifting travel restrictions we will see cases popping up at various locations almost seemingly at random. In this way, a warning system like this can be very effective and cause rapid reaction by users, i.e. you can put it in your pocket and forget about it until you need it! Think about it: showing on a map where infectious persons were is not very useful, because a) they are not there anymore, and b) do you really expect people to be glued to their phones looking at maps for the next 18 months? 
+Unlike other applications, this application does not show things on a map and expect you to figure out if you were near an infected person. It mostly does nothing unless an infection was reported and you happened to be close to this person. In this way it will serve to remind you (scare you a little bit) that this is still real, and social distancing and other measures are important. 
+
+Note: showing on a map where infectious persons were is not very useful, because a) they are not there anymore, and b) do you really expect people to be glued to their phones looking at maps for the next 18 months? 
+
+If this virus has a long tail, then even after we start lifting travel restrictions we will see cases popping up at various locations almost seemingly at random. In this way, a warning system like this can be very effective and tigger rapid reaction by users. What reaction? You might think twice about going to work if you feel sick or have a fever, you might wash your hands, you might maintain 2 meters apart, etc.
+
+You can put it in your pocket and forget about it until you need it! 
 
 
 # Architecture
@@ -28,7 +33,7 @@ User can report COVID case (or suspecting him/herself):
 * Confirmed by test (test# should be entered)
 * Strongly suspected (self-assessed against high fever)
 
-When a user is confirming a COVID case their entire location track is uploaded to cloud service (with permission). This data is for the last 5 days and all location time-data points. Your location data is encrypted so only the server can decrypt (this is done with public/private keypair generated when you signed up for the service)
+When a user is confirming a COVID-19 case their entire location track is uploaded to cloud service (with permission). This data is for the last 5 days and all location time-data points. Your location data is encrypted so only the server can decrypt (this is done with public/private keypair generated when you signed up for the service)
 
 Server then checks which users have intersected time and region with you (the infected subject)
 
@@ -56,21 +61,17 @@ During social distancing this is even more scalable because people aren’t movi
 
 # Criticisms:
 People will spoof it. 
+* You must be registered. This limits spoofing. 
+* Your entire time-location track is uploaded when you report you are infected.
+* Your time-location track is encrypted and must be believable.
+* Moderation could limit spoofs
+* We could use healthcare verification of testing (some sort of test-id, etc., that can be verified or entered by healthcare worker). 
 
-You must be registered. This limits spoofing. 
+It uselessly alerts people. We should leave it up to authorities to trace contacts. True.
 
-Your entire time-location track is uploaded when you report you are infected.
-
-Your time-location track is encrypted and must be believable.
-
-Moderation could limit spoofs
-
-If enough people use it we could use healthcare verification of testing (some sort of test-id, etc., that can be verified or entered by healthcare worker).
-
-
+GPS is not very accurate. What use is it in an apartment for example. True. But then again, it's just letting you know that this is indeed real.
 
 # Estimates on data storage/traffic:
-
 
 Position tracked: once every 5 minutes? = 288 stored in application positions: 
 
