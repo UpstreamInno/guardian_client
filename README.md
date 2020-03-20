@@ -94,10 +94,10 @@ The population of the use is about 100x that of in Finland. Also much bigger geo
 * Region crossings report to server (using REST API)
 * Infection reporting UI
 * Infection alert processing:
-*.  Interest regional time-location track received
-*.  Alert user how close they were to infection
+*  Interest regional time-location track received
+*  Alert user how close they were to infection
 * Android Application
-*. Same as iOS basically
+* Same as iOS basically
 
 
 # Server Backend
