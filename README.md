@@ -1,4 +1,10 @@
-This application concept could be developed to Beta in as little as 2 (intense) weeks by an estimate of 5 persons. 
+
+
+
+There are other applications like this. How is this one different?
+* Privacy
+* Scalability
+* Community driven, but verifiable
 
 
 # Motivation
@@ -57,9 +63,13 @@ Do your part without giving up too much privacy.
 
 My full time-location track is only sent to the server if I confirm that I was infected (otherwise the only thing sent to the server is the region time-track)
 
-The users own exposure warning is only shown to the user and not known by the server - there could be a permission that would allow my application to report “collisions” if we wanted to know how many people were close in that track, but maybe not initially
+My tracking data based on regions is communicated to other user application only to the extent of intersection of regions. An infected persons true location is *never* shown to the other user. The other user just sees that they were "close" to someone infected.
 
-This feels good. I feel good about letting other people know when I am infected. Otherwise I really don’t like sharing my position with a random cloud service
+This feels good. 
+* I feel good about letting other people know if I am diagnosed as being infected - I'd feel really bad if I killed someone. 
+* If someone else is infected and I was near them, I'd like to know.
+
+Otherwise, I really don’t like sharing my exact location with a random cloud service.
 
 ## Scalable
 it limits the data tracked on the server to “region” tracking
