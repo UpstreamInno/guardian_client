@@ -4,9 +4,9 @@ Communicating the social-distance concept.
 
 # Motivation
 
-Social media works. Social distancing is hard to communicate to people. Western countries will not accept draconian big-brother measures of citizen tracking until things get really really bad. We can make a system that enforces a high level of privacy, is scalable, and primarily community driven. Over time it can get better, and use more verifiable information.
+Social media works. Social distancing is hard to communicate to people. Draconian big-brother measures of citizen tracking is doesn't feel good. We can make a system that enforces a high level of privacy, is scalable, and primarily community driven. Over time it can get better, and use more verifiable healthcare submitted information.
 
-Unlike other applications, it does not show things on a map and expect you to figure out if you were near an infected person. It mostly does nothing unless an infection was reported and you happened to be close to this person. In this way it will serve to remind you (scare you) that we have to understand social distancing is real.
+Unlike other applications, this application does not show things on a map and expect you to figure out if you were near an infected person. It mostly does nothing unless an infection was reported and you happened to be close to this person. In this way it will serve to remind you (scare you) that we have to understand social distancing is real.
 
 If this virus has a long tail, then even after we start lifting travel restrictions we will see cases popping up at various locations almost seemingly at random. In this way, a warning system like this can be very effective and cause rapid reaction by users, i.e. you can put it in your pocket and forget about it until you need it! Think about it: showing on a map where infectious persons were is not very useful, because a) they are not there anymore, and b) do you really expect people to be glued to their phones looking at maps for the next 18 months? 
 
