@@ -2,6 +2,12 @@
 
  # A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Alert System
 
+# Specifications
+* [Client Application](https://github.com/tomjoro/save_the_world/blob/master/specifications/application.md)
+* [Backend and Protocol](https://github.com/tomjoro/save_the_world/blob/master/specifications/backend.md)
+* [Healthcare Portal](https://github.com/tomjoro/save_the_world/blob/master/specifications/healthcare_portal.md)
+
+
 # Background
 
 The goal of this system is to give users some peace of mind that there is something they can do with very little effort that can have a large impact on the outcome of the pandemic. 
