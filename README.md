@@ -19,7 +19,7 @@ This system can save lives with the potential for mass installations because:
 * It is simple,
 * It is secure,
 * It is scalable,
-* It enforces user privacy and anonyminity
+* It enforces user privacy and anonymity
 * It can be integrated to healthcare systems doing widescale testing.
 
 
