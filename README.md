@@ -1,5 +1,12 @@
 
 
+
+ 
+ # A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Alert System
+
+
+
+
 # Background
 
 The goal of this system is to give users some peace of mind that there is something they can do with very little effort that can have a large impact on the outcome of the pandemic. 
