@@ -8,21 +8,22 @@ Code name: *Guardian*
 
 Guardian is strongly authenticated mobile phone application, which works in conjunction with a secure data collection backend server.
 
-Users install Guardian on their mobile phone, and then they forget about it.
+Users install Guardian on their mobile phone, and then they forget about it.  *I want to install this application on my mother-in-laws mobile phone.*
 
 They can do two things with Guardian:
 * They will get alerts when they have been close to someone who has reported symptoms, or has been verified to have tested positive.
 * They can report symptoms, or confirm a positive or negative test result.
 
-This system can save lives because it has the potential for mass installations because:
+
+This system can save lives with the potential for mass installations because:
 * It is simple,
 * It is secure,
 * It is scalable,
 * It enforces user privacy and anonyminity
 * It can be integrated to healthcare systems doing widescale testing.
 
-Furthermore, it serves to reinforce and remind the user of the important instructions we have been given from healthcare professionals, e.g. social distancing and hand-washing hygiene. 
 
+Furthermore, it serves to reinforce and remind the user of the important instructions we have been given from healthcare professionals, e.g. social distancing and hand-washing hygiene. 
 
 *Real time reporting of symptoms don't help things much because you will usually report them from home! What's important is knowing who you might have had close contact with over the last few days, often before you were showing symptoms! The only way to achieve this is with a passive background location tracker requiring no interactions from the user.*
 
@@ -53,6 +54,7 @@ There are other applications like this. How is this one different?
 * Community driven, but verifiable
 
 # Motivation
+
 
 Social media works. Social distancing and other preventive measures is hard to communicate to people. Over time people get lax with their personal preventive measures. At the same time draconian big-brother measures of citizen location tracking doesn't feel good. We can make a system that has a high level of privacy, is scalable, and primarily community driven. Over time it can get better, and use more verifiable healthcare submitted information can be incorportated.
 
