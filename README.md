@@ -26,6 +26,8 @@ You can put it in your pocket and forget about it until you need it!
 
 Regions are basically a predefined grid that is more dense in higher population areas (similar to cell in a phone network).
 
+![The Grid](/specifications/the_grid.png)
+
 # Tracker Application 
 
 User has smartphone application which tracks their position throughout the day - every 5 minutes it checks your position and stores locally your position track
