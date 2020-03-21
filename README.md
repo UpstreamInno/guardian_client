@@ -11,7 +11,7 @@ Guardian is strongly authenticated mobile phone application, which works in conj
 Users install Guardian on their mobile phone, and then they forget about it.  *I want to install this application on my mother-in-laws mobile phone.*
 
 They can do two things with Guardian:
-* They will get alerts when they have been close to someone who has reported symptoms, or has been verified to have tested positive.
+* They will get alerts when they have been close to someone who has reported symptoms, or has been verified to have tested positive,
 * They can report symptoms, or confirm a positive or negative test result.
 
 
@@ -21,7 +21,6 @@ This system can save lives with the potential for mass installations because:
 * It is scalable,
 * It enforces user privacy and anonymity
 * It can be integrated to healthcare systems doing widescale testing.
-
 
 Furthermore, it serves to reinforce and remind the user of the important instructions we have been given from healthcare professionals, e.g. social distancing and hand-washing hygiene. 
 
@@ -38,11 +37,11 @@ Furthermore, it serves to reinforce and remind the user of the important instruc
 
 The goal of this system is to give users some peace of mind that there is something they can do with very little effort that can have a large impact on the outcome of the pandemic. 
 
-This system does use gps location tracking, however, the motivation is simply to alert users when they have been close to someone who has been verified to have COVID-19. It also has a mechanism to report themselves as being diagnosed with COVID-19 (and verified by healthcare workers).
+This system uses GPS location tracking, however, the motivation is simply to alert users when they have been close to someone who has been verified to have COVID-19. It also has a mechanism to report themselves as being diagnosed with COVID-19 (and verified by healthcare workers).
 
-This system is based on the premise that the rapid spread of COVID-19 is primarily due to people moving about with they have mild systems and are untested. It further assumes that when diagnosed, a person will self-quarantine. This diagnosed person will feel remorse for potentially putting others at risk, and hence will be willing to share more detailed information about their movements during the pre-dianosis timeframe.
+This system is based on the premise that the rapid spread of COVID-19 is primarily due to people moving about with they have mild systems and are unaware and untested. It further assumes that when diagnosed, a person will self-quarantine. This diagnosed person will feel remorse for potentially putting others at risk, and hence will be willing to share more detailed information about their movements during the pre-dianosis timeframe. This is a guilt driven application.
 
-However, even though the information is shared, no other users will know your name or know exactly where you have been - it's really non of their business. A users movement is their own private information. What it will show is a risk factor based upon you own movement.  (see diagrams)
+However, even though your locations are shared, no other users will know your name or know exactly where you have been - it's really non of their business. A persons movement is their own private information. What Guardian will show is a risk factor based upon you own movement.  (see diagrams)
 
 These alerts will serve to remind persons that there are still new cases of COVID-19 being diagnosed. Their reaction should be to continue preventive measures such as social distancing and proper hand washing hygiene - an alert that you were close to someone recently diagnosed will make you think twice about going to work when you feel sick.
 
@@ -54,7 +53,6 @@ There are other applications like this. How is this one different?
 * Community driven, but verifiable
 
 # Motivation
-
 
 Social media works. Social distancing and other preventive measures is hard to communicate to people. Over time people get lax with their personal preventive measures. At the same time draconian big-brother measures of citizen location tracking doesn't feel good. We can make a system that has a high level of privacy, is scalable, and primarily community driven. Over time it can get better, and use more verifiable healthcare submitted information can be incorportated.
 
