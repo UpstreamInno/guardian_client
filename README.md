@@ -1,26 +1,31 @@
 
 
+# Background
+
+The goal of this system is to give users some peace of mind that there is something they can do with very little effort that can have a large impact on the outcome of the pandemic. 
+
+This system does use gps location tracking, however, the motivation is simply to alert users when they have been close to someone who has been verified to have COVID-19. It also has a mechanism to report themselves as being diagnosed with COVID-19 (and verified by healthcare workers).
+
+This system is based on the premise that the rapid spread of COVID-19 is primarily due to people moving abuot with they have mild systems and are untested. It further assumes that when diagnosed, a person will self-quarantine. This diagnosed person will feel remorse for potentially putting others at risk, and hence will be willing to share more detailed information about their movements during the pre-dianosis timeframe.
+
+However, even though the information is shared, no other users will know your name or know exactly where you have been - it's really non of their business. A users movement is their own private information. What it will show is a risk factor based upon you own movement.  (see diagrams)
+
+These alerts will serve to remind persons that there are still new cases of COVID-19 being diagnosed. Their reaction should be to continue preventive measures such as social distancing and proper hygiene - an alert that you were close to someone recently diagnosed will make you think twice about going to work when you feel sick.
+
+What do alerts look like? Initially they will be very simple: "Alert, yesterday at 9:00 you were 20 meters from someone who was diagnosed yesterday".
 
 There are other applications like this. How is this one different?
 * Privacy
 * Scalability
 * Community driven, but verifiable
 
-
 # Motivation
 
-Social media works. Social distancing and other preventive measures is hard to communicate to people. Draconian big-brother measures of citizen location tracking doesn't feel good. We can make a system that has a high level of privacy, is scalable, and primarily community driven. Over time it can get better, and use more verifiable healthcare submitted information can be incorportated.
+Social media works. Social distancing and other preventive measures is hard to communicate to people. Over time people get lax with their personal preventive measures. At the same time draconian big-brother measures of citizen location tracking doesn't feel good. We can make a system that has a high level of privacy, is scalable, and primarily community driven. Over time it can get better, and use more verifiable healthcare submitted information can be incorportated.
 
 This application mostly does nothing! You install it, and forget you are using it. Occasionally you get an alert. If you unfortunately contract COVID-19 then you can report it and alert others. But it is as accurate as possible. It will compare your locations to others down to 5 minutes and within the accuracy of GPS.
 
-Unlike other applications, this application does not show things on a map and expect you to figure out if you were near an infected person. It mostly does nothing unless an infection was reported and you happened to be close to this person. In this way it will serve to remind you (scare you a little bit) that this is still real, and social distancing and other measures are important. 
-
-Note: showing on a map where infectious persons were is not very useful, because a) they are not there anymore, and b) do you really expect people to be glued to their phones looking at maps for the next 18 months? 
-
-If this virus has a long tail, then even after we start lifting travel restrictions we will see cases popping up at various locations almost seemingly at random. In this way, a warning system like this can be very effective and tigger rapid reaction by users. What reaction? You might think twice about going to work if you feel sick or have a fever, you might wash your hands, you might maintain 2 meters apart, etc.
-
-You can put it in your pocket and forget about it until you need it! 
-
+ It would be possible to show this information on a map, but a map is not really actionable information in this case - it's just sensationalism. This may go on for 18 months and people are not going to want to stare at their phone everyday. 
 
 # Architecture
 
