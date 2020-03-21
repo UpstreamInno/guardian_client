@@ -1,4 +1,5 @@
 
+
  # A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Alert System
 
 # Background
@@ -149,3 +150,5 @@ Take a look at the specifications directory
 
 
  
+
+(c) 2020 Thomas O'Rourke
