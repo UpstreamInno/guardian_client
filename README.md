@@ -1,11 +1,5 @@
 
-
-
- 
  # A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Alert System
-
-
-
 
 # Background
 
@@ -17,7 +11,7 @@ This system is based on the premise that the rapid spread of COVID-19 is primari
 
 However, even though the information is shared, no other users will know your name or know exactly where you have been - it's really non of their business. A users movement is their own private information. What it will show is a risk factor based upon you own movement.  (see diagrams)
 
-These alerts will serve to remind persons that there are still new cases of COVID-19 being diagnosed. Their reaction should be to continue preventive measures such as social distancing and proper hygiene - an alert that you were close to someone recently diagnosed will make you think twice about going to work when you feel sick.
+These alerts will serve to remind persons that there are still new cases of COVID-19 being diagnosed. Their reaction should be to continue preventive measures such as social distancing and proper hand washing hygiene - an alert that you were close to someone recently diagnosed will make you think twice about going to work when you feel sick.
 
 What do alerts look like? Initially they will be very simple: "Alert, yesterday at 9:00 you were 20 meters from someone who was diagnosed yesterday".
 
