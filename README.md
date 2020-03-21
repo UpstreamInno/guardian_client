@@ -95,7 +95,7 @@ During social distancing this is even more scalable because people aren’t movi
 
 # Criticisms:
 People will spoof it. 
-* You must be registered. This limits spoofing. 
+* You must be registered. This limits some amount of spoofing. 
 * Your entire time-location track is uploaded when you report you are infected.
 * Your time-location track is encrypted and must be believable.
 * Moderation could limit spoofs
@@ -103,7 +103,7 @@ People will spoof it.
 
 It uselessly alerts people. We should leave it up to authorities to trace contacts. True.
 
-GPS is not very accurate. What use is it in an apartment for example. True. But then again, it's just letting you know that this is indeed real.
+GPS is not very accurate. What use is it in an apartment for example? True. But then again, it's just letting you know that this is indeed real and peopel are still being diagnosed. It seems that a lot of systems are focusing on targeting the subject (infected person) too closely and trying to single an individual which is very privacy invasive, and works against the goal of communicating the pandemic to the larger public and getting participation in such a system. As such, accuracy is actually working against broad usage of such applications.
 
 # Estimates on data storage/traffic:
 
