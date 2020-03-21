@@ -37,7 +37,7 @@ The goal of this system is to give users some peace of mind that there is someth
 
 This system does use gps location tracking, however, the motivation is simply to alert users when they have been close to someone who has been verified to have COVID-19. It also has a mechanism to report themselves as being diagnosed with COVID-19 (and verified by healthcare workers).
 
-This system is based on the premise that the rapid spread of COVID-19 is primarily due to people moving abuot with they have mild systems and are untested. It further assumes that when diagnosed, a person will self-quarantine. This diagnosed person will feel remorse for potentially putting others at risk, and hence will be willing to share more detailed information about their movements during the pre-dianosis timeframe.
+This system is based on the premise that the rapid spread of COVID-19 is primarily due to people moving about with they have mild systems and are untested. It further assumes that when diagnosed, a person will self-quarantine. This diagnosed person will feel remorse for potentially putting others at risk, and hence will be willing to share more detailed information about their movements during the pre-dianosis timeframe.
 
 However, even though the information is shared, no other users will know your name or know exactly where you have been - it's really non of their business. A users movement is their own private information. What it will show is a risk factor based upon you own movement.  (see diagrams)
 
@@ -61,6 +61,8 @@ This application mostly does nothing! You install it, and forget you are using i
 # Architecture
 
 Regions are basically a predefined grid that is more dense in higher population areas (similar to cell in a phone network).
+
+The client *only* communicate region-transitions times when a user moves from one region to the next. In normal use the server never receives preceise location information from the client (mobile phone). In the case of reporting a symptom or infection, it then does communicate precise information, but only on users consent, and only to the extent that you have overlaps in regions. 
 
 ![The Grid](/specifications/the_grid.png)
 
