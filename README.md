@@ -1,6 +1,8 @@
 
 
- # A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Alert System
+ # Guardian
+ 
+A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Alert System
 
 Code name: *Guardian*
 
