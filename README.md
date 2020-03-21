@@ -103,6 +103,8 @@ People will spoof it.
 
 It uselessly alerts people. We should leave it up to authorities to trace contacts. True.
 
+It creates panic. Potentially. But because the alert you receive is for your movements on previous days, there is nothing you can immediately do to change the situation. Also, the location itself is not the problem - this is not a chemical spill.
+
 GPS is not very accurate. What use is it in an apartment for example? True. But then again, it's just letting you know that this is indeed real and peopel are still being diagnosed. It seems that a lot of systems are focusing on targeting the subject (infected person) too closely and trying to single an individual which is very privacy invasive, and works against the goal of communicating the pandemic to the larger public and getting participation in such a system. As such, accuracy is actually working against broad usage of such applications.
 
 # Estimates on data storage/traffic:
