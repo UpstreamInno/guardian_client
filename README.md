@@ -93,7 +93,7 @@ Traffic to the server is limited to region entering, which means if people are n
 Also, since the general infection rate is fairly low (at least for the time being) there may be only several hundred infections per day in Finland.
 During social distancing this is even more scalable because people aren’t moving much.
 
-# Criticisms:
+# Criticisms
 People will spoof it. 
 * You must be registered. This limits some amount of spoofing. 
 * Your entire time-location track is uploaded when you report you are infected.
@@ -107,7 +107,7 @@ It creates panic. Potentially. But because the alert you receive is for your mov
 
 GPS is not very accurate. What use is it in an apartment for example? True. But then again, it's just letting you know that this is indeed real and peopel are still being diagnosed. It seems that a lot of systems are focusing on targeting the subject (infected person) too closely and trying to single an individual which is very privacy invasive, and works against the goal of communicating the pandemic to the larger public and getting participation in such a system. As such, accuracy is actually working against broad usage of such applications.
 
-# Estimates on data storage/traffic:
+# Data Estimates
 
 Position tracked: once every 5 minutes? = 288 stored in application positions: 
 
@@ -124,29 +124,33 @@ In a country the size/population of Finland, this is easily doable on a single s
 
 The population of the use is about 100x that of in Finland. Also much bigger geographically. Probably would require 30 or 40 AWS instances. Maybe $40K a month operating.
 
+
 # Development Plan
+
+Take a look at the specifications directory
+
 * iOS Application
-* Signup API and verify email (or Facebook auth)
-* Background location tracking
-* Region crossings report to server (using REST API)
-* Infection reporting UI
+    * Signup API and verify email (or Facebook auth)
+    * Background location tracking
+    * Region crossings report to server (using REST API)
+    * Infection reporting UI
 * Infection alert processing:
-*  Interest regional time-location track received
-*  Alert user how close they were to infection
+    *  Intersect regional time-location track received
+    *  Alert user how close they were to infection
 * Android Application
-* Same as iOS basically
+    * Same as iOS basically
 
 
 # Server Backend
 * Signup api
-* public/private key per signed up user
+    * public/private key per signed up user
 * Geo-partioning
-* Collecting geo-region entering times for a user
+    * Collecting geo-region entering times for a user
 * Infection report
 * Geo-region (using PostgreSQL GEO search) can find all time-locations that intersect when user was in that region
 * Creating infection report (estimate of infection date)
-* Push data to clients 
-* Push region intersect time-location track to clients
+    * Push data to clients 
+    * Push region intersect time-location track to clients
              
 
 
