@@ -64,7 +64,7 @@ This application mostly does nothing! You install it, and forget you are using i
 
 Regions are basically a predefined grid that is more dense in higher population areas (similar to cell in a phone network).
 
-The client *only* communicate region-transitions times when a user moves from one region to the next. In normal use the server never receives preceise location information from the client (mobile phone). In the case of reporting a symptom or infection, it then does communicate precise information, but only on users consent, and only to the extent that you have overlaps in regions. 
+The client *only* communicate region-transitions times when a user moves from one region to the next. In normal use the server never receives preceise location information from the client (mobile phone). In the case of reporting a symptom or infection, it then does communicate precise information, but only on users consent, and only to the extent that you have overlaps in regions with other users. 
 
 ![The Grid](/specifications/the_grid.png)
 
