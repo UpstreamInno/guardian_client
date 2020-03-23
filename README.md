@@ -7,7 +7,7 @@ A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Aler
 Code name: *Guardian*
 
 Start here:
-* [PDF Mockups](https://github.com/tomjoro/guardian/blob/master/media/Guardian\ HQ.pdf)
+* [PDF Mockups](https://github.com/tomjoro/guardian/blob/master/media/GuardianHQ.pdf)
 
 Guardian is strongly authenticated mobile phone application, which works in conjunction with a secure data collection backend server.
 
