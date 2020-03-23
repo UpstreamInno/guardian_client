@@ -19,7 +19,7 @@ They can do two things with Guardian:
 
 
 This system can save lives with the potential for mass installations because:
-* It is simple,
+* It is simple, it has to the most simple app possible that anyone can use,
 * It is secure,
 * It is scalable,
 * It enforces user privacy and anonymity
@@ -27,7 +27,9 @@ This system can save lives with the potential for mass installations because:
 
 Furthermore, it serves to reinforce and remind the user of the important instructions we have been given from healthcare professionals, e.g. social distancing and hand-washing hygiene. 
 
-*Real time reporting of symptoms don't help things much because you will usually report them from home! What's important is knowing who you might have had close contact with over the last few days, often before you were showing symptoms! The only way to achieve this is with a passive background location tracker requiring no interactions from the user.*
+*People have to stop focusing on maps! Maps are not important. What is important is who you might have bumped into before you knew you were sick.*
+
+*Real time reporting is also not going to work. People will report they are sick from their home usually - and they've already been sick for a day or so.*
 
 
 # Specifications
