@@ -25,12 +25,15 @@ This system can save lives with the potential for mass installations because:
 * It enforces user privacy and anonymity
 * It can be integrated to healthcare systems doing widescale testing.
 
-Furthermore, it serves to reinforce and remind the user of the important instructions we have been given from healthcare professionals, e.g. social distancing and hand-washing hygiene. 
 
-*People have to stop focusing on maps! Maps are not important. What is important is who you might have bumped into before you knew you were sick.*
+Some key points:
+* **Alerts are calls-to-action**. They ask the user to do a self-inspection. They remind the user to follow instructions - social distance, handwashing, etc. They ask you to report if you are sick.
+* **Maps are not that important** - we have to stop staring at maps. What is important your historic location track - who were you close to, and who was close to you. 
+* **Real time is not important** - If someone starts to feel ill, they usually will make there way to their home before they report this. So the location of report is not that critical.
 
-*Real time reporting is also not going to work. People will report they are sick from their home usually - and they've already been sick for a day or so.*
-
+Some key assumptions:
+* **People want to do the right thing**, when they are sick they will stay home, 
+* **If given the opportunity** they would be willing to anonymously warn others who they might have put at risk. 
 
 # Specifications
 * [Client Application](https://github.com/tomjoro/guardian/blob/master/specifications/application.md)
