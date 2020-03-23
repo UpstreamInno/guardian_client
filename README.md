@@ -6,6 +6,9 @@ A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Aler
 
 Code name: *Guardian*
 
+Start here:
+* [PDF Mockups](https://github.com/tomjoro/guardian/blob/master/media/Guardian\ HQ.pdf)
+
 Guardian is strongly authenticated mobile phone application, which works in conjunction with a secure data collection backend server.
 
 Users install Guardian on their mobile phone, and then they forget about it.  *I want to install this application on my mother-in-laws mobile phone.*
@@ -28,9 +31,9 @@ Furthermore, it serves to reinforce and remind the user of the important instruc
 
 
 # Specifications
-* [Client Application](https://github.com/tomjoro/save_the_world/blob/master/specifications/application.md)
-* [Backend and Protocol](https://github.com/tomjoro/save_the_world/blob/master/specifications/backend.md)
-* [Healthcare Portal](https://github.com/tomjoro/save_the_world/blob/master/specifications/healthcare_portal.md)
+* [Client Application](https://github.com/tomjoro/guardian/blob/master/specifications/application.md)
+* [Backend and Protocol](https://github.com/tomjoro/guardian/blob/master/specifications/backend.md)
+* [Healthcare Portal](https://github.com/tomjoro/guardian/blob/master/specifications/healthcare_portal.md)
 
 
 # Background
