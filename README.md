@@ -6,12 +6,9 @@ A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Aler
 
 Code name: *Guardian*
 
-Start here:
-* [PDF Mockups](https://github.com/tomjoro/guardian/blob/master/media/GuardianHQ.pdf)
-
 Guardian is strongly authenticated mobile phone application, which works in conjunction with a secure data collection backend server.
 
-Users install Guardian on their mobile phone, and then they forget about it.  *I want to install this application on my mother-in-laws mobile phone.*
+Users install Guardian on their mobile phone, and then they mostly forget about it. 
 
 They can do two things with Guardian:
 * They will get alerts when they have been close to someone who has reported symptoms, or has been verified to have tested positive,
