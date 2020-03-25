@@ -19,7 +19,7 @@ We are developing a lightweight tracking and alert/contact system that can integ
 *Gates called for a "national tracking system similar to South Korea, saying that "in Seattle, the [University of Washington] is providing thousands of tests per day but no one is connected to a national tracking system" and that "Whenever there is a positive test it should be seen to understand where the disease is and whether we need to strengthen the social distancing."*
 
 
-We need to get a system onto users mobile phones that be extended in the future. Wwher
+We need to get a system onto users mobile phones that be extended in the future. 
 
 # Description
 
