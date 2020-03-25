@@ -48,11 +48,9 @@ Here's what they can do with the application:
 What do alerts look like? Initially they will be very simple: "Alert, yesterday for 10 minutes you were in proximity of someone who tested positive" 
 
 Consent and Privacy:
-1. **To anonymously track** users large-scale movement inside of regions. Precise location data is *only stored on users local mobile phone* and not shared (unless separate consent is given). This is required to use the application.
-1. **When reporting** (self, or confirmed result), users can consent to "do the right thing and warn others who might have been exposed". The user's more precise location track is shared anonymously and everything possible is done to prevent identifying individual persons.
-1. **To be contacted**  
-
-*Note: users only need to consent to share their large scale movements unless they are reporting.*
+1. **To anonymously track** users movement between large geographic regions. Regions are defined to have similar population size to preserve anonyminity. Precise location data is *only stored on users local mobile phone* and not shared (unless separate user consent is given). This is required to use the application.
+1. **When reporting** (self, or confirmed result), users can a) consent to give the location data to authorities, or b) consent to "do the right thing and warn others who might have been exposed". The user's more precise location track is shared anonymously and everything possible is done to prevent identifying individual persons.
+1. **To be contacted** Testing will become widely available. Who should be tested? How will they be contacted? Who will be given prioirty?
 
 
 Some key points:
