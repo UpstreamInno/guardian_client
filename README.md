@@ -7,6 +7,8 @@
 * [Backend and Protocol](https://github.com/tomjoro/guardian/blob/master/specifications/backend.md)
 * [Healthcare Portal](https://github.com/tomjoro/guardian/blob/master/specifications/healthcare_portal.md)
 
+* [Public Data Access](https://github.com/tomjoro/guardian/blob/master/specifications/public_data_api.md)
+
 
  # Guardian
 
