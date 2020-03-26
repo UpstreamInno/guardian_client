@@ -1,6 +1,6 @@
 # Guardian
 
- (https://github.com/tomjoro/guardian/blob/master/guardian.png)
+
  
 A Privacy Focused, Scalable, Community Driven but Verifiable Infection Risk Alert System
 
