@@ -6,6 +6,8 @@
 
 ### Running ios
 
+* We need background location support https://docs.expo.io/versions/latest/guides/adhoc-builds/
+* Install custom expo client to allow that location support
 * `yarn ios`
 
 ### Running android

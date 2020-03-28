@@ -12,6 +12,15 @@
       "ios",
       "android",
       "web"
-    ]
+    ],
+    "ios": {
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+        ],
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "",
+        "NSLocationWhenInUseUsageDescription": ""
+      }
+    }
   }
 }
