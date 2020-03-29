@@ -2,12 +2,12 @@
 
 # Documentation Index
 
-* [Detailed](https://github.com/tomjoro/guardian_client/blob/master/details.md)
-* [Client Application](https://github.com/tomjoro/guardian_client/blob/master/application.md)
+* [Detailed](https://github.com/UpstreamInno/guardian_client/blob/master/details.md)
+* [Client Application](https://github.com/UpstreamInno/guardian_client/blob/master/application.md)
 
  # Guardian
 
-![Image](https://github.com/tomjoro/guardian_client/blob/master/guardian.png)
+![Image](https://github.com/UpstreamInno/guardian_client/blob/master/guardian.png)
 
 
 A Practical, Privacy Focused, Scalable, Community and Consent Driven, Verifiable Infection Risk Alert System
