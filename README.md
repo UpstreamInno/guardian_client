@@ -32,11 +32,13 @@ Can be extended, but the core product is very simple.
 
 We are developing a lightweight tracking and alert/contact system that can integrate with verified test results. This system must do everything possible to preserve a high level of privacy and be simple enough that everyone and anyone can use it - with their consent and ensuring security by using private data models which limits transmitting or storing private data on the Guardian servers.
 
-If we do this now, work with both healthcare and privacy/security experts to come up with the best solution.
+We work with both healthcare and privacy/security experts to come up with the best solution.
+
+Guardian will be especially useful as we enter the "long tail" of this pandemic. People will want to get out of their houses and start moving around again. Testing will be increasing. Guardian will help eliminate this pandemic. 
+
+Guardian employes an innovative adjustable privacy model. During a pandemic, and declared emergency, privacy can be reduced to some **extent** - but there still must be limits even if users give consent! **Guardian allows privacy controls to be adjusted to different jurisdictions so as to comply with rapidly changing privacy laws and regulations.** After the emergency is over, privacy must be increased again - but that doesn't mean the pandemic will be over.
 
 *Gates called for a "national tracking system similar to South Korea, saying that "in Seattle, the [University of Washington] is providing thousands of tests per day but no one is connected to a national tracking system" and that "Whenever there is a positive test it should be seen to understand where the disease is and whether we need to strengthen the social distancing."*
-
-Guardian will be especially useful as we enter the "long tail" of this pandemic. People will want to get out of their houses and start moving around again. Testing will be increasing. Guardian will help eliminate this pandemic.
 
 # Description
 
