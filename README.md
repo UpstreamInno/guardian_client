@@ -14,20 +14,29 @@ A Practical, Privacy Focused, Scalable, Community and Consent Driven, Verifiable
 
 The goal of this system is to give users some peace of mind that there is something they can do with very little effort that can have a large impact on the outcome of the pandemic. 
 
-This system is based on the premise that the rapid spread of COVID-19 is primarily due to people moving about with they have mild systems and are unaware that they are infected.
+This system is based on the premise that the rapid spread of COVID-19 is primarily due to **people moving about when are unaware that they are infected.**
+
+Countries that have controlled spread have employed mainly two methods in combination:
+* historic tracking
+* testing
+
+Our goals:
+* Preserve privacy,
+* Community driven, but can also utilize verified data,
+
+Can be extended, but the core product is very simple.
 
  # Background
 
- We are already tracked by big companies like Facebook and Google. They know when we have an illness by tracking our interests and locations. Futhermore, the consent to track is mostly given willingfully by users, but also determined using aggregate data. 
+ We are already tracked by big companies like Facebook and Google. They know when we have an illness by tracking our interests and locations. Futhermore, the consent to track is mostly given willingfully by users, but also determined using aggregate data. We are running out of time. We all agree that tracking is an invasion of privacy and something we'd rather not have. Cities are being locked down, and citizens are prevented from moving freely. We need to get a system onto users mobile phones that be extended in the future. 
 
-We are running out of time. We all agree that tracking is an invasion of privacy and something we'd rather not have. Cities are being locked down, and citizens are prevented from moving freely. 
+We are developing a lightweight tracking and alert/contact system that can integrate with verified test results. This system must do everything possible to preserve a high level of privacy and be simple enough that everyone and anyone can use it - with their consent and ensuring security by using private data models which limits transmitting or storing private data on the Guardian servers.
 
-We are developing a lightweight tracking and alert/contact system that can integrate with verified test results. This system must do everything possible to preserve a high level of privacy and be simple enough that everyone and anyone can use it - with their consent. But, it should be recommended by government and healthcare officials. If we do this now, work with privacy and security experts to come up with the best solution.
+If we do this now, work with both healthcare and privacy/security experts to come up with the best solution.
 
 *Gates called for a "national tracking system similar to South Korea, saying that "in Seattle, the [University of Washington] is providing thousands of tests per day but no one is connected to a national tracking system" and that "Whenever there is a positive test it should be seen to understand where the disease is and whether we need to strengthen the social distancing."*
 
-
-We need to get a system onto users mobile phones that be extended in the future. 
+Guardian will be especially useful as we enter the "long tail" of this pandemic. People will want to get out of their houses and start moving around again. Testing will be increasing. Guardian will help eliminate this pandemic.
 
 # Description
 
