@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View, Image } from "react-native";
 import { TouchableOpacity } from "react-native";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
@@ -68,10 +68,16 @@ export default class App extends Component {
 
     return (
       <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
+        <Text style={styles.title}>Guardian</Text>
+        <Image
+          source={require("./images/logo.png")}
+          style={{ width: 300, height: 300, marginBottom: 100 }}
+        />
+        <Text style={styles.instructions}>Phone Number</Text>
         <TouchableOpacity onPress={this.onPress}>
           <Text>Enable background location</Text>
+          {/* <Text style={styles.paragraph}>{text}</Text> */}
         </TouchableOpacity>
-        <Text style={styles.paragraph}>{text}</Text>
       </LinearGradient>
     );
   }
@@ -109,5 +115,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     color: "#000"
+  },
+  title: {
+    fontSize: 50,
+    fontWeight: "bold",
+    textAlign: "center",
+    margin: 10,
+    color: "#ffffff"
   }
 });
