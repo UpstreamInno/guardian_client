@@ -2,17 +2,12 @@
 
 # Documentation Index
 
-* [Detailed](https://github.com/tomjoro/guardian/blob/master/details.md)
-* [Client Application](https://github.com/tomjoro/guardian/blob/master/specifications/application.md)
-* [Backend and Protocol](https://github.com/tomjoro/guardian/blob/master/specifications/backend.md)
-* [Healthcare Portal](https://github.com/tomjoro/guardian/blob/master/specifications/healthcare_portal.md)
-
-* [Public Data Access](https://github.com/tomjoro/guardian/blob/master/specifications/public_data_api.md)
-
+* [Detailed](https://github.com/tomjoro/guardian_client/blob/master/details.md)
+* [Client Application](https://github.com/tomjoro/guardian_client/blob/master/application.md)
 
  # Guardian
 
-![Image](https://github.com/tomjoro/guardian/blob/master/guardian.png)
+![Image](https://github.com/tomjoro/guardian_client/blob/master/guardian.png)
 
 
 A Practical, Privacy Focused, Scalable, Community and Consent Driven, Verifiable Infection Risk Alert System
