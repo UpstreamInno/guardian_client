@@ -48,6 +48,7 @@ export default class App extends Component {
     }
   }
 
+  //Could this be a more specific name? There are multiple onPress functions on this page, so this variable name could be ambiguous
   onPress = async () => {
     const { status, ios } = await Location.requestPermissionsAsync();
     if (status !== "granted") {
@@ -66,6 +67,12 @@ export default class App extends Component {
         pausesUpdatesAutomatically: true
       });
     }
+  };
+
+  signUpPress = () => {
+    this.state.phoneNumber = this.state.inputText;
+    alert(`input Text: ${this.state.inputText}
+    Recorder phone number: ${this.state.phoneNumber}`);
   };
 
   render() {
@@ -103,7 +110,7 @@ export default class App extends Component {
             onChangeText={text => (this.state.inputText = text)}
           />
           <TouchableOpacity
-            onPress={(this.state.phoneNumber = this.state.inputText)}
+            onPress={this.signUpPress}
             title="Submit"
             accessibilityLabel="Submit phone number"
           >
@@ -114,6 +121,14 @@ export default class App extends Component {
       );
     }
 
+    //This entire section is intended to be removed for production and is just verifying to phone number is captured for now
+
+    // Sub-note. This is currently broken. It really should be done in it's own file anyway and will need to be refactored when we switch to redux anyway.
+    let enteredPhoneNumber = "No phone number in state";
+    if (this.state.phoneNumber) {
+      enteredPhoneNumber = <Text>{this.state.phoneNumber}</Text>;
+    }
+
     return (
       <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
         <Text style={styles.title}>Guardian</Text>
@@ -122,6 +137,7 @@ export default class App extends Component {
           style={{ width: 200, height: 200, marginBottom: 50 }}
         />
         <View>{phoneOrLocRequest}</View>
+        <Text>{enteredPhoneNumber}</Text>
       </LinearGradient>
     );
   }
