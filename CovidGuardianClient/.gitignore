@@ -1,3 +1,7 @@
+
+.expo/*
+web-build/
+
 # OSX
 #
 .DS_Store
