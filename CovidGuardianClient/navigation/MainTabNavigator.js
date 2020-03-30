@@ -7,6 +7,7 @@ import TabBarIcon from "Components/TabBarIcon";
 import {
     HomeScreen,
     LocationScreen,
+    ProfileScreen,
     ReportScreen,
 } from "Screens";
 
@@ -52,7 +53,7 @@ ReportStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      name={Platform.OS === "ios" ? "ios-heart" : "md-heart"}
     />
   ),
 };
@@ -72,17 +73,38 @@ LocationStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      name={Platform.OS === "ios" ? "ios-pin" : "md-pin"}
     />
   ),
 };
 
 LocationStack.path = "";
 
+// Profile stack
+const ProfileStack = createStackNavigator(
+  {
+    Links: ProfileScreen,
+  },
+  config,
+);
+
+ProfileStack.navigationOptions = {
+  tabBarLabel: "Profile",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-body" : "md-body"}
+    />
+  ),
+};
+
+ProfileStack.path = "";
+
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LocationStack,
+  ProfileStack,
   ReportStack,
 });
 
