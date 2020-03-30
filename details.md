@@ -133,22 +133,6 @@ It creates panic. Potentially. But because the alert you receive is for your mov
 
 GPS is not very accurate. What use is it in an apartment for example? True. But then again, it's just letting you know that this is indeed real and peopel are still being diagnosed. It seems that a lot of systems are focusing on targeting the subject (infected person) too closely and trying to single an individual which is very privacy invasive, and works against the goal of communicating the pandemic to the larger public and getting participation in such a system. As such, accuracy is actually working against broad usage of such applications.
 
-# Data Estimates
-
-Position tracked: once every 5 minutes? = 288 stored in application positions: 
-
-Regions in Finland: 5000 (average person per region 1000) - grid based regions
-
-Average size of region?: 1km sz? 
-
-Movements between region on given day: 10% of people move 5 regions on a day = 1million * 5 = 5 million region events a day
-
-Infections a day: 500. Generating 1440 data points down to intersecting time/region. Might be several hundred at most. 
-
-
-In a country the size/population of Finland, this is easily doable on a single server with a single database!
-
-The population of the use is about 100x that of in Finland. Also much bigger geographically. Probably would require 30 or 40 AWS instances. Maybe $40K a month operating.
 
 
 # Development Plan
@@ -173,7 +157,7 @@ Take a look at the specifications directory
 * Geo-partioning
     * Collecting geo-region entering times for a user
 * Infection report
-* Geo-region (using PostgreSQL GEO search) can find all time-locations that intersect when user was in that region
+* Geo-region can find all time-locations that intersect when user was in that region
 * Creating infection report (estimate of infection date)
     * Push data to clients 
     * Push region intersect time-location track to clients
