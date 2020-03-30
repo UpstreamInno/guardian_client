@@ -1,5 +1,15 @@
-/* eslint-disable global-require */
-
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  Button,
+  TouchableOpacity
+} from "react-native";
+import {  } from "react-native";
+import Constants from "expo-constants";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import * as TaskManager from "expo-task-manager";
@@ -7,14 +17,6 @@ import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import React, { Component } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Image
-} from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: "center",
-    color: "#333333",
+    color: "#fff",
     marginBottom: 5
   },
   paragraph: {
@@ -68,7 +70,9 @@ class LocationScreen extends Component {
 
   state = {
     location: null,
-    errorMessage: null
+    errorMessage: null,
+    inputText: null,
+    phoneNumber: null
   };
 
   constructor(props) {
@@ -119,19 +123,53 @@ class LocationScreen extends Component {
     } else if (this.state.location) {
       text = JSON.stringify(this.state.location);
     }
+    let phoneOrLocRequest = "Loading...";
+    // ***** Set to "not" for testing, should be changed back for production *****
+    if (!this.state.location) {
+      phoneOrLocRequest = (
+        <TouchableOpacity onPress={this.onPress}>
+          <Text>Enable background location</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      phoneOrLocRequest = (
+        <View>
+          <Text style={styles.instructions}>Phone Number</Text>
+          <TextInput
+            style={{
+              width: 250,
+              height: 40,
+              borderColor: "gray",
+              borderWidth: 1,
+              marginBottom: 10,
+              alignSelf: "center",
+              margin: "auto"
+            }}
+            autoCompleteType="tel"
+            type="tel"
+            placeholder="+1(555)555-555"
+            onChangeText={text => (this.state.inputText = text)}
+          />
+          <TouchableOpacity
+            onPress={(this.state.phoneNumber = this.state.inputText)}
+            title="Submit"
+            accessibilityLabel="Submit phone number"
+          >
+            <Text style={styles.instructions}>Sign Up</Text>
+          </TouchableOpacity>
+          <Text style={styles.paragraph}>{text}</Text>
+        </View>
+      );
+    }
 
     return (
       <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
         <Text style={styles.title}>Guardian</Text>
         <Image
           source={require("./images/logo.png")}
-          style={{ width: 300, height: 300, marginBottom: 100 }}
+          style={{ width: 200, height: 200, marginBottom: 50 }}
         />
-        <Text style={styles.instructions}>Phone Number</Text>
-        <TouchableOpacity onPress={this.onPress}>
-          <Text>Enable background location</Text>
-          {/* <Text style={styles.paragraph}>{text}</Text> */}
-        </TouchableOpacity>
+        <View>{phoneOrLocRequest}</View>
       </LinearGradient>
     );
   }
@@ -140,5 +178,3 @@ class LocationScreen extends Component {
 LocationScreen.navigationOptions = {
   header: null,
 };
-
-export default LocationScreen;
