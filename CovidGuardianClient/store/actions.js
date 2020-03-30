@@ -1,7 +1,10 @@
-import * as userActions from "./user/actions";
+export const SET_USER_PHONE = "SET_USER_PHONE"
 
-const actions = {
-  ...userActions,
-};
-
-export default actions;
+export function setUserPhone(userPhone) {
+  return {
+    type: SET_USER_PHONE,
+    payload: {
+      userPhone,
+    },
+  };
+}

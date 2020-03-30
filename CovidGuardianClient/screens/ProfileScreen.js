@@ -5,7 +5,7 @@ import {
 } from "react-native";
 
 import { useDispatch, useSelector } from "react-redux";
-import actions from "Store/actions";
+import { setUserPhone } from "Store/actions";
 
 import { UserPhoneInput } from "Components/user-phone-input"
 
@@ -18,15 +18,19 @@ const styles = StyleSheet.create({
 const ProfileScreen = () => {
   const dispatch = useDispatch();
 
-  const userPhone = useSelector(state => state.userReducer.user.phone);
+  const {
+    userPhone
+  } = useSelector(state => state);
 
-  const setUserPhone = phone => dispatch(actions.SET_PHONE_NUMBER(phone));
+  const onSetUserPhone = phoneNumber => {
+    dispatch(setUserPhone(phoneNumber));
+  };
 
   return (
     <View style={styles.container}>
       <UserPhoneInput
-        onChange={setUserPhone}
-        phone={userPhone}
+        onChange={onSetUserPhone}
+        phoneNumber={userPhone}
       />
     </View>
   );

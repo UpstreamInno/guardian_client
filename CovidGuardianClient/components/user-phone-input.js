@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 
 
-export const UserPhoneInput = ({ onChange, phone }) => {
+export const UserPhoneInput = ({ onChange, phoneNumber }) => {
 
   return (
     <>
@@ -13,10 +13,10 @@ export const UserPhoneInput = ({ onChange, phone }) => {
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
         onChangeText={onChange}
-        value={phone}
+        value={phoneNumber}
       />
       <Text>User phone from store:</Text>
-      <Text>{phone}</Text>
+      <Text>{phoneNumber}</Text>
     </>
   );
 };

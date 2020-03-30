@@ -23,3 +23,8 @@
 * Install expo on mobile device
 * `expo start`
 * Scan QR code provided
+
+### test
+
+* `npm run test`
+* `npm run test:watch`
