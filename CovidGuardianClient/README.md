@@ -14,9 +14,12 @@
 
 * Install android emulator https://docs.expo.io/versions/latest/workflow/android-studio-emulator/
 
+### Run Web
+
+* `npm run web`
+
 ### Running on device
 
 * Install expo on mobile device
 * `expo start`
 * Scan QR code provided
-

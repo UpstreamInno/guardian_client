@@ -7,6 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo/samples": "~36.0.0",
+    "@expo/vector-icons": "^10.0.6",
+    "@react-navigation/web": "^1.0.0-alpha.9",
     "expo": "~36.0.0",
     "expo-constants": "^9.0.0",
     "expo-location": "^8.1.0",
@@ -20,14 +23,21 @@
     "react-native-reanimated": "~1.4.0",
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-unimodules": "~0.7.0",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-navigation": "~4.0.10",
+    "react-navigation-stack": "~1.10.3",
+    "react-navigation-tabs": "~2.6.2",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "~7.6.0",
     "babel-jest": "~24.9.0",
+    "babel-preset-expo": "~8.0.0",
     "jest": "~24.9.0",
     "metro-react-native-babel-preset": "~0.56.0",
-    "react-test-renderer": "~16.9.0"
+    "react-test-renderer": "~16.9.0",
+    "remote-redux-devtools": "^0.5.16"
   },
   "jest": {
     "preset": "react-native"
