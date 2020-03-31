@@ -16,7 +16,7 @@
     "ios": {
       "infoPlist": {
         "UIBackgroundModes": [
-          "location",
+          "location"
         ],
         "NSLocationAlwaysAndWhenInUseUsageDescription": "",
         "NSLocationWhenInUseUsageDescription": ""

@@ -8,10 +8,10 @@ module.exports = function(api) {
         {
           root: ['./'],
           alias: {
-            Screens: './screens',
-            Store: './store',
-            Components: './components',
-            Lib: './lib',
+            Screens: './src/screens',
+            Store: './src/store',
+            Components: './src/components',
+            Lib: './src/lib',
           }
         }
       ]
