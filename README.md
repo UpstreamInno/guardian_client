@@ -1,9 +1,7 @@
-
-
 # Documentation Index
 
-* [Detailed](https://github.com/UpstreamInno/guardian_client/blob/master/details.md)
-* [Client Application](https://github.com/UpstreamInno/guardian_client/blob/master/application.md)
+* [Detailed](https://github.com/UpstreamInno/guardian_client/blob/master/docs/details.md)
+* [Client Application](https://github.com/UpstreamInno/guardian_client/blob/master/docs/application.md)
 
  # Guardian
 
@@ -122,6 +120,37 @@ Take a look at the specifications directory
 ## Server Backend
 * Scalable backend
              
+ 
+## Setup
+
+* `npm i -g expo-cli`
+* `npm i -g react-native-cli`
+* `expo start`
+
+### Running ios
+
+* We need background location support https://docs.expo.io/versions/latest/guides/adhoc-builds/
+* Install custom expo client to allow that location support
+* `yarn ios`
+
+### Running android
+
+* Install android emulator https://docs.expo.io/versions/latest/workflow/android-studio-emulator/
+
+### Run Web
+
+* `npm run web`
+
+### Running on device
+
+* Install expo on mobile device
+* `expo start`
+* Scan QR code provided
+
+### test
+
+* `npm run test`
+* `npm run test:watch`
+ 
+
 (c) 2020 Thomas O'Rourke
- 
- 
