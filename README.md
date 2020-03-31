@@ -1,7 +1,4 @@
- # Guardian
-
-![Image](https://github.com/UpstreamInno/guardian_client/blob/master/guardian.png)
-
+# Guardian
 
 A Practical, Privacy Focused, Scalable, Community and Consent Driven, Verifiable Infection Risk Alert System
 
