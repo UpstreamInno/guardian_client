@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 89301,
   "expoServerNgrokUrl": "https://rx-n7n.kvey.covidguardianclient.exp.direct",
   "packagerNgrokUrl": "https://packager.rx-n7n.kvey.covidguardianclient.exp.direct",
-  "ngrokPid": 53414
+  "ngrokPid": 89332,
+  "webpackServerPort": 19006
 }

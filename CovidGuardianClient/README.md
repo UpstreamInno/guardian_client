@@ -2,7 +2,7 @@
 
 * `npm i -g expo-cli`
 * `npm i -g react-native-cli`
-* `cd ios && pod install && cd -`
+* `expo start`
 
 ### Running ios
 
