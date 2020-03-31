@@ -1,8 +1,3 @@
-# Documentation Index
-
-* [Detailed](https://github.com/UpstreamInno/guardian_client/blob/master/docs/details.md)
-* [Client Application](https://github.com/UpstreamInno/guardian_client/blob/master/docs/application.md)
-
  # Guardian
 
 ![Image](https://github.com/UpstreamInno/guardian_client/blob/master/guardian.png)
