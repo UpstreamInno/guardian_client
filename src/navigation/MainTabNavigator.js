@@ -9,6 +9,7 @@ import {
     LocationScreen,
     ProfileScreen,
     ReportScreen,
+    AlertScreen,
 } from "Screens";
 
 const config = Platform.select({
@@ -100,12 +101,34 @@ ProfileStack.navigationOptions = {
 
 ProfileStack.path = "";
 
+// Alert stack
+const AlertStack = createStackNavigator(
+  {
+    Links: AlertScreen,
+  },
+  config,
+);
+
+AlertStack.navigationOptions = {
+  tabBarLabel: "Alert",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-body" : "md-warning"}
+    />
+  ),
+};
+
+AlertStack.path = "";
+
+
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LocationStack,
   ProfileStack,
   ReportStack,
+  AlertStack,
 });
 
 tabNavigator.path = "";
