@@ -8,7 +8,6 @@ import {
   Button,
   TouchableOpacity
 } from "react-native";
-import {  } from "react-native";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -17,6 +16,7 @@ import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import React, { Component } from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import PhoneOrLocRequest from "../components/PhoneOrLocRequest.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -64,10 +64,8 @@ TaskManager.defineTask(TASK_GUARDIAN_LOCATION, ({ data, error }) => {
   }
 });
 
-
 // TODO: convert to functional component!
 class LocationScreen extends Component {
-
   state = {
     location: null,
     errorMessage: null,
@@ -94,7 +92,7 @@ class LocationScreen extends Component {
   watchLocation = async () => {
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
-  }
+  };
 
   onPress = async () => {
     const { status, ios } = await Location.requestPermissionsAsync();
@@ -123,44 +121,6 @@ class LocationScreen extends Component {
     } else if (this.state.location) {
       text = JSON.stringify(this.state.location);
     }
-    let phoneOrLocRequest = "Loading...";
-    // ***** Set to "not" for testing, should be changed back for production *****
-    if (!this.state.location) {
-      phoneOrLocRequest = (
-        <TouchableOpacity onPress={this.onPress}>
-          <Text>Enable background location</Text>
-        </TouchableOpacity>
-      );
-    } else {
-      phoneOrLocRequest = (
-        <View>
-          <Text style={styles.instructions}>Phone Number</Text>
-          <TextInput
-            style={{
-              width: 250,
-              height: 40,
-              borderColor: "gray",
-              borderWidth: 1,
-              marginBottom: 10,
-              alignSelf: "center",
-              margin: "auto"
-            }}
-            autoCompleteType="tel"
-            type="tel"
-            placeholder="+1(555)555-555"
-            onChangeText={text => (this.state.inputText = text)}
-          />
-          <TouchableOpacity
-            onPress={(this.state.phoneNumber = this.state.inputText)}
-            title="Submit"
-            accessibilityLabel="Submit phone number"
-          >
-            <Text style={styles.instructions}>Sign Up</Text>
-          </TouchableOpacity>
-          <Text style={styles.paragraph}>{text}</Text>
-        </View>
-      );
-    }
 
     return (
       <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
@@ -169,12 +129,12 @@ class LocationScreen extends Component {
           source={require("./images/logo.png")}
           style={{ width: 200, height: 200, marginBottom: 50 }}
         />
-        <View>{phoneOrLocRequest}</View>
+        <View>{PhoneOrLocRequest}</View>
       </LinearGradient>
     );
   }
-};
+}
 
 LocationScreen.navigationOptions = {
-  header: null,
+  header: null
 };
