@@ -126,7 +126,7 @@ class LocationScreen extends Component {
       <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
         <Text style={styles.title}>Guardian</Text>
         <Image
-          source={require("./images/logo.png")}
+          source={require("../../CovidGuardianClient/images/logo.png")}
           style={{ width: 200, height: 200, marginBottom: 50 }}
         />
         <View>{PhoneOrLocRequest}</View>
