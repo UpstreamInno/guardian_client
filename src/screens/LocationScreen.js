@@ -1,19 +1,7 @@
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity
-} from "react-native";
+import { Platform, StyleSheet, Text, View, Image } from "react-native";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
 import * as TaskManager from "expo-task-manager";
-import * as WebBrowser from "expo-web-browser";
-import Constants from "expo-constants";
 import React, { Component } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import PhoneOrLocRequest from "../components/PhoneOrLocRequest.js";
