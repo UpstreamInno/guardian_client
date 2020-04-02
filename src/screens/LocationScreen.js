@@ -13,7 +13,6 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import * as TaskManager from "expo-task-manager";
 import * as WebBrowser from "expo-web-browser";
-import Constants from "expo-constants";
 import React, { Component } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import PhoneOrLocRequest from "../components/PhoneOrLocRequest.js";
@@ -138,3 +137,5 @@ class LocationScreen extends Component {
 LocationScreen.navigationOptions = {
   header: null
 };
+
+export default LocationScreen;
