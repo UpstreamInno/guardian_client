@@ -8,7 +8,7 @@ import {
   Button,
   TouchableOpacity
 } from "react-native";
-//import Constants from "expo-constants";
+import Constants from "expo-constants";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import * as TaskManager from "expo-task-manager";
