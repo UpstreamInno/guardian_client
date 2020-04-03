@@ -10,8 +10,12 @@ const AlertScreen = () => {
   return(
 
       <AlertMessage message = {input} />
-    
+
   );
+};
+
+AlertScreen.navigationOptions = {
+  header: null,
 };
 
 export default AlertScreen;
