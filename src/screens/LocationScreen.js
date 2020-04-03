@@ -2,48 +2,49 @@
 
 import * as WebBrowser from "expo-web-browser";
 import React, { Component } from "react";
-import * as Permissions from 'expo-permissions';
-import * as Location from 'expo-location';
-import * as TaskManager from 'expo-task-manager';
-import Constants from 'expo-constants';
+import * as Permissions from "expo-permissions";
+import * as Location from "expo-location";
+import * as TaskManager from "expo-task-manager";
+import Constants from "expo-constants";
+import { LinearGradient } from "expo-linear-gradient";
 
 import {
   Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: "#ecf0f1"
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    textAlign: "center",
+    margin: 10
   },
   instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 5
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
-    textAlign: 'center',
-    color: '#000',
-  },
+    textAlign: "center",
+    color: "#000"
+  }
 });
 
-const TASK_GUARDIAN_LOCATION = "guardian_location"
+const TASK_GUARDIAN_LOCATION = "guardian_location";
 
-TaskManager.defineTask(TASK_GUARDIAN_LOCATION, ({data, error}) => {
+TaskManager.defineTask(TASK_GUARDIAN_LOCATION, ({ data, error }) => {
   if (error) {
     return;
   }
@@ -52,23 +53,21 @@ TaskManager.defineTask(TASK_GUARDIAN_LOCATION, ({data, error}) => {
     // TODO: AsyncStorage
     // TODO: SecureStorage
   }
-
-})
-
+});
 
 // TODO: convert to functional component!
 class LocationScreen extends Component {
-
   state = {
     location: null,
-    errorMessage: null,
+    errorMessage: null
   };
 
   constructor(props) {
     super(props);
-    if (Platform.OS === 'android' && !Constants.isDevice) {
+    if (Platform.OS === "android" && !Constants.isDevice) {
       this.setState({
-        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+        errorMessage:
+          "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
       });
     } else {
       this.watchLocation();
@@ -82,31 +81,30 @@ class LocationScreen extends Component {
   watchLocation = async () => {
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
-  }
+  };
 
   onPress = async () => {
     const { status, ios } = await Location.requestPermissionsAsync();
-    if (status !== 'granted') {
+    if (status !== "granted") {
       this.setState({
-        errorMessage: 'Permission to access location was denied',
+        errorMessage: "Permission to access location was denied"
       });
     }
-    if (status === 'granted') {
-      await Location.startLocationUpdatesAsync(
-        TASK_GUARDIAN_LOCATION, {
-          accuracy: Location.HIGH,
-          showsBackgroundLocationIndicator: true,
-          //timeInterval: 0,
-          distanceInterval: '20', // meters
-          deferredUpdatesInterval: '200', //ms
-          deferredUpdatesDistance: '20', //meters
-          pausesUpdatesAutomatically: true,
-      })
+    if (status === "granted") {
+      await Location.startLocationUpdatesAsync(TASK_GUARDIAN_LOCATION, {
+        accuracy: Location.HIGH,
+        showsBackgroundLocationIndicator: true,
+        //timeInterval: 0,
+        distanceInterval: "20", // meters
+        deferredUpdatesInterval: "200", //ms
+        deferredUpdatesDistance: "20", //meters
+        pausesUpdatesAutomatically: true
+      });
     }
   };
 
   render() {
-    let text = 'Waiting..';
+    let text = "Waiting..";
     if (this.state.errorMessage) {
       text = this.state.errorMessage;
     } else if (this.state.location) {
@@ -114,18 +112,21 @@ class LocationScreen extends Component {
     }
 
     return (
-      <View style={styles.container}>
+      <LinearGradient
+        colors={["#4c669f", "#3b5998", "#192f6a"]}
+        style={styles.container}
+      >
         <TouchableOpacity onPress={this.onPress}>
           <Text>Enable background location</Text>
         </TouchableOpacity>
         <Text style={styles.paragraph}>{text}</Text>
-      </View>
+      </LinearGradient>
     );
   }
-};
+}
 
 LocationScreen.navigationOptions = {
-  header: null,
+  header: null
 };
 
 export default LocationScreen;
