@@ -1,4 +1,12 @@
-import { Platform, StyleSheet, Text, View, Image } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Button
+} from "react-native";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
@@ -27,7 +35,8 @@ const styles = StyleSheet.create({
   paragraph: {
     fontSize: 13,
     textAlign: "center",
-    color: "#4bade3"
+    color: "#4bade3",
+    textAlign: "center"
   },
   header3: {
     fontSize: 15,
@@ -41,8 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",
-    margin: 10,
-    marginBottom: 10,
+    marginBottom: 5,
     color: "#4bade3"
   },
   textBlock: {
@@ -67,11 +75,47 @@ function ConfirmationScreen() {
         <Text style={styles.paragraph}>
           Your security and privacy are our main concerns!
         </Text>
+        <TouchableOpacity
+          onPress={() => {
+            alert("I have no function");
+          }}
+          style={{ marginTop: 5 }}
+        >
+          <Text style={{ textAlign: "center", fontSize: 12 }}>Learn More</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.textBlock}>
-        <Text style={styles.paragraph}>HELLO WORLD</Text>
+        <Text style={styles.header4}>Keep your Community Safe</Text>
+        <Text style={styles.paragraph}>
+          Take an active role in keeping those around you informed!
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            alert("I have no function");
+          }}
+          style={{ marginTop: 5 }}
+        >
+          <Text style={{ textAlign: "center", fontSize: 12 }}>Learn More</Text>
+        </TouchableOpacity>
       </View>
-      <Text>HELLO WORLD</Text>
+      <View
+        style={{
+          marginTop: 15
+        }}
+      >
+        <TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 20,
+              color: "#fff",
+              fontWeight: "bold",
+              textDecorationLine: "underline"
+            }}
+          >
+            Continue
+          </Text>
+        </TouchableOpacity>
+      </View>
     </LinearGradient>
   );
 }
