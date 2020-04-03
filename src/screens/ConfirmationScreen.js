@@ -25,28 +25,41 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   paragraph: {
-    margin: 24,
-    fontSize: 18,
+    fontSize: 12,
     textAlign: "center",
     color: "#000"
   },
-  title: {
-    fontSize: 50,
+  header3: {
+    fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",
     margin: 10,
+    marginBottom: 30,
     color: "#ffffff"
+  },
+  textBlock: {
+    width: 300,
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+    backgroundColor: "#fff"
   }
 });
 
 function ConfirmationScreen() {
   return (
     <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
-      <Text style={styles.title}>Guardian</Text>
       <Image
-        source={require("../../CovidGuardianClient/images/logo.png")}
-        style={{ width: 200, height: 200, marginBottom: 50 }}
+        source={require("../../CovidGuardianClient/images/simple-check.png")}
+        style={{ width: 200, height: 200, marginBottom: 30 }}
       />
+      <Text style={styles.header3}>Successful Sign Up!</Text>
+      <View style={styles.textBlock}>
+        <Text style={styles.paragraph}>HELLO WORLD</Text>
+      </View>
+      <View style={styles.textBlock}>
+        <Text style={styles.paragraph}>HELLO WORLD</Text>
+      </View>
       <Text>HELLO WORLD</Text>
     </LinearGradient>
   );
