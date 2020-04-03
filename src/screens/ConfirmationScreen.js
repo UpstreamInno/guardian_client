@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   paragraph: {
-    fontSize: 12,
+    fontSize: 13,
     textAlign: "center",
-    color: "#000"
+    color: "#4bade3"
   },
   header3: {
     fontSize: 15,
@@ -36,6 +36,14 @@ const styles = StyleSheet.create({
     margin: 10,
     marginBottom: 30,
     color: "#ffffff"
+  },
+  header4: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center",
+    margin: 10,
+    marginBottom: 10,
+    color: "#4bade3"
   },
   textBlock: {
     width: 300,
@@ -55,7 +63,10 @@ function ConfirmationScreen() {
       />
       <Text style={styles.header3}>Successful Sign Up!</Text>
       <View style={styles.textBlock}>
-        <Text style={styles.paragraph}>HELLO WORLD</Text>
+        <Text style={styles.header4}>You are in Control</Text>
+        <Text style={styles.paragraph}>
+          Your security and privacy are our main concerns!
+        </Text>
       </View>
       <View style={styles.textBlock}>
         <Text style={styles.paragraph}>HELLO WORLD</Text>
