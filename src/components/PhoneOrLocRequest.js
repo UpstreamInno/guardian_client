@@ -5,13 +5,13 @@ import UserPhoneInput from "./user-phone-input.js";
 
 function PhoneOrLocRequest() {
   if (Location) {
+    return <UserPhoneInput />;
+  } else {
     return (
       <TouchableOpacity onPress={this.onPress}>
         <Text>Enable background location</Text>
       </TouchableOpacity>
     );
-  } else {
-    return <UserPhoneInput />;
   }
 }
 export default PhoneOrLocRequest;
