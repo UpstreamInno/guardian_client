@@ -1,20 +1,21 @@
-/* eslint-disable global-require */
-
-import * as WebBrowser from "expo-web-browser";
-import React, { Component } from "react";
-import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
-import * as TaskManager from "expo-task-manager";
-import Constants from "expo-constants";
-import { LinearGradient } from "expo-linear-gradient";
-
 import {
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  View
+  View,
+  Image,
+  TextInput,
+  Button,
+  TouchableOpacity
 } from "react-native";
+import Constants from "expo-constants";
+import * as Location from "expo-location";
+import * as Permissions from "expo-permissions";
+import * as TaskManager from "expo-task-manager";
+import * as WebBrowser from "expo-web-browser";
+import React, { Component } from "react";
+import { LinearGradient } from "expo-linear-gradient";
+import PhoneOrLocRequest from "../components/PhoneOrLocRequest.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: "center",
-    color: "#333333",
+    color: "#fff",
     marginBottom: 5
   },
   paragraph: {
@@ -39,6 +40,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     color: "#000"
+  },
+  title: {
+    fontSize: 50,
+    fontWeight: "bold",
+    textAlign: "center",
+    margin: 10,
+    color: "#ffffff"
   }
 });
 
@@ -59,7 +67,9 @@ TaskManager.defineTask(TASK_GUARDIAN_LOCATION, ({ data, error }) => {
 class LocationScreen extends Component {
   state = {
     location: null,
-    errorMessage: null
+    errorMessage: null,
+    inputText: null,
+    phoneNumber: null
   };
 
   constructor(props) {
@@ -112,14 +122,13 @@ class LocationScreen extends Component {
     }
 
     return (
-      <LinearGradient
-        colors={["#4c669f", "#3b5998", "#192f6a"]}
-        style={styles.container}
-      >
-        <TouchableOpacity onPress={this.onPress}>
-          <Text>Enable background location</Text>
-        </TouchableOpacity>
-        <Text style={styles.paragraph}>{text}</Text>
+      <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
+        <Text style={styles.title}>Guardian</Text>
+        <Image
+          source={require("../../CovidGuardianClient/images/logo.png")}
+          style={{ width: 200, height: 200, marginBottom: 50 }}
+        />
+        <View>{PhoneOrLocRequest}</View>
       </LinearGradient>
     );
   }
@@ -130,5 +139,3 @@ LocationScreen.navigationOptions = {
 };
 
 export default LocationScreen;
-
-/* eslint-enable global-require */
