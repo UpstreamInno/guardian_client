@@ -7,8 +7,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import AppNavigator from "./src/navigation/AppNavigator";
 import { store } from "Store";
-
 import { LinearGradient } from "expo-linear-gradient";
+import LocationScreen from "./src/screens/LocationScreen.js";
 
 const styles = StyleSheet.create({
   container: {
