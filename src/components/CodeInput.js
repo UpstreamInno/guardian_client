@@ -40,9 +40,7 @@ const styles = StyleSheet.create({
 export const CodeInput = ({ onChange, codeValue, style }) => {
   let code = ["", "", "", ""];
   if (codeValue) {
-    codeValue.split("").map((c, i) => {
-      code[i] = c;
-    })
+    code = codeValue.split("").slice(0,4)
   }
 
   let hiddenTextInput;
