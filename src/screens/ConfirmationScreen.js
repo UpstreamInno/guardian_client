@@ -5,7 +5,7 @@ import {
   View,
   Image,
   TouchableOpacity,
-  Button
+  Button,
 } from "react-native";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
@@ -20,23 +20,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1"
+    backgroundColor: "#ecf0f1",
   },
-  welcome: {
-    fontSize: 20,
+  link: {
     textAlign: "center",
-    margin: 10
+    fontSize: 12,
   },
-  instructions: {
-    textAlign: "center",
-    color: "#fff",
-    marginBottom: 5
+  linkContainer: {
+    marginTop: 5,
   },
   paragraph: {
     fontSize: 13,
     textAlign: "center",
     color: "#4bade3",
-    textAlign: "center"
+    textAlign: "center",
   },
   header3: {
     fontSize: 15,
@@ -44,22 +41,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 10,
     marginBottom: 30,
-    color: "#ffffff"
+    color: "#ffffff",
   },
   header4: {
     fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 5,
-    color: "#4bade3"
+    color: "#4bade3",
   },
   textBlock: {
     width: 300,
     padding: 10,
     borderRadius: 5,
     margin: 10,
-    backgroundColor: "#fff"
-  }
+    backgroundColor: "#fff",
+  },
 });
 
 function ConfirmationScreen() {
@@ -79,9 +76,9 @@ function ConfirmationScreen() {
           onPress={() => {
             alert("I have no function");
           }}
-          style={{ marginTop: 5 }}
+          style={styles.linkContainer}
         >
-          <Text style={{ textAlign: "center", fontSize: 12 }}>Learn More</Text>
+          <Text style={styles.link}>Learn More</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.textBlock}>
@@ -93,14 +90,14 @@ function ConfirmationScreen() {
           onPress={() => {
             alert("I have no function");
           }}
-          style={{ marginTop: 5 }}
+          style={styles.linkContainer}
         >
-          <Text style={{ textAlign: "center", fontSize: 12 }}>Learn More</Text>
+          <Text style={styles.link}>Learn More</Text>
         </TouchableOpacity>
       </View>
       <View
         style={{
-          marginTop: 15
+          marginTop: 15,
         }}
       >
         <TouchableOpacity>
@@ -109,7 +106,7 @@ function ConfirmationScreen() {
               fontSize: 20,
               color: "#fff",
               fontWeight: "bold",
-              textDecorationLine: "underline"
+              textDecorationLine: "underline",
             }}
           >
             Continue
