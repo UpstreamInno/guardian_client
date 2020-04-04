@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setUserPhone } from "Store/actions";
 
-import { UserPhoneInput } from "Components/user-phone-input"
+import { UserPhoneInput } from "Components/UserPhoneInput"
 
 const styles = StyleSheet.create({
   container: {

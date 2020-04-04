@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import * as Location from "expo-location";
-import UserPhoneInput from "./user-phone-input.js";
+import UserPhoneInput from "./UserPhoneInput.js";
 
 export default function PhoneOrLocRequest() {
   if (Location) {
