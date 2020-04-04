@@ -67,6 +67,7 @@ const TRACK_COLOR = { false: "#FFF", true: "#81b0ff" }
 const THUMB_COLOR = "#f5dd4b"
 const IOS_SWITCH_BG_COLOR = "#3e3e3e"
 
+
 const ReportScreen = () => {
 
 
@@ -77,94 +78,32 @@ const ReportScreen = () => {
   const toggleSwitch = () => {
   }
 
+  const SwitchRow = ({symptom}) => {
+    <View style={styles.row}>
+      <Switch
+        trackColor={TRACK_COLOR}
+        thumbColor={THUMB_COLOR}
+        ios_backgroundColor={IOS_SWITCH_BG_COLOR}
+        onValueChange={(v) => setSymptoms({...symptoms, [symptom]: v})}
+        value={symptoms[symptom]}
+      />
+      <Text style={styles.label}>
+        Loss of Sense of Smell
+      </Text>
+    </View>
+  }
+
   return (
     <LinearGradient colors={["#000", "#000"]} style={styles.container}>
       <Text style={styles.title}>Since the exposure, have you felt any of the following?</Text>
       <View style={styles.switchContainer}>
-        <View style={styles.row}>
-          <Switch
-            trackColor={TRACK_COLOR}
-            thumbColor={THUMB_COLOR}
-            ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-            onValueChange={(v) => setSymptoms({...symptoms, "lossOfSenseOfSmell": v})}
-            value={symptoms["lossOfSenseOfSmell"]}
-          />
-          <Text style={styles.label}>
-            Loss of Sense of Smell
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Switch
-            trackColor={TRACK_COLOR}
-            thumbColor={THUMB_COLOR}
-            ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-            onValueChange={(v) => setSymptoms({...symptoms, "cough": v})}
-            value={symptoms["cough"]}
-          />
-          <Text style={styles.label}>
-            Cough
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Switch
-            trackColor={TRACK_COLOR}
-            thumbColor={THUMB_COLOR}
-            ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-            onValueChange={(v) => setSymptoms({...symptoms, "fever": v})}
-            value={symptoms["fever"]}
-          />
-          <Text style={styles.label}>
-            Fever
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Switch
-            trackColor={TRACK_COLOR}
-            thumbColor={THUMB_COLOR}
-            ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-            onValueChange={(v) => setSymptoms({...symptoms, "tiredness": v})}
-            value={symptoms["tiredness"]}
-          />
-          <Text style={styles.label}>
-            Tiredness
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Switch
-            trackColor={TRACK_COLOR}
-            thumbColor={THUMB_COLOR}
-            ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-            onValueChange={(v) => setSymptoms({...symptoms, "difficultyBreathing": v})}
-            value={symptoms["difficultyBreathing"]}
-          />
-          <Text style={styles.label}>
-            Difficulty Breathing
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Switch
-            trackColor={TRACK_COLOR}
-            thumbColor={THUMB_COLOR}
-            ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-            onValueChange={(v) => setSymptoms({...symptoms, "pressureInChest": v})}
-            value={symptoms["pressureInChest"]}
-          />
-          <Text style={styles.label}>
-            Pressure in Chest
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Switch
-            trackColor={TRACK_COLOR}
-            thumbColor={THUMB_COLOR}
-            ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-            onValueChange={(v) => setSymptoms({...symptoms, "testedPositive": v})}
-            value={symptoms["testedPositive"]}
-          />
-          <Text style={styles.label}>
-            Tested Positive
-          </Text>
-        </View>
+        <SwitchRow symptom="lossOfSenseOfSmell"/>
+        <SwitchRow symptom="cough"/>
+        <SwitchRow symptom="fever"/>
+        <SwitchRow symptom="tiredness"/>
+        <SwitchRow symptom="difficultyBreathing"/>
+        <SwitchRow symptom="pressureInChest"/>
+        <SwitchRow symptom="testedPositive"/>
       </View>
       <View style={styles.submitContainer}>
         <TouchableOpacity onPress={onSubmit}>
