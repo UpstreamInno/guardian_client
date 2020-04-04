@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 const AlertMessage = props => {
   const {message} = props;
 
-  if ({message}) {
+  if (message) {
     return (
       <View style={styles.outer}>
         <View style={styles.titleContainer}>
