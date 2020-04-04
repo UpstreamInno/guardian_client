@@ -55,15 +55,17 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: "#fff",
   },
+  continueButton: {
+    fontSize: 25,
+    color: "#fff",
+    fontWeight: "bold",
+  },
 });
 
 function ConfirmationScreen() {
   return (
     <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
-      <Image
-        source={require("../../CovidGuardianClient/images/simple-check.png")}
-        style={{ width: 200, height: 200, marginBottom: 30 }}
-      />
+      <Ionicons name="md-checkmark-circle" size={100} color="white" />
       <Text style={styles.header3}>Successful Sign Up!</Text>
       <View style={styles.textBlock}>
         <Text style={styles.header4}>You are in Control</Text>
@@ -98,16 +100,18 @@ function ConfirmationScreen() {
           marginTop: 15,
         }}
       >
-        <TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 20,
-              color: "#fff",
-              fontWeight: "bold",
-              textDecorationLine: "underline",
-            }}
-          >
-            Continue
+        <TouchableOpacity
+          onPress={() => {
+            alert("I should go somewhere");
+          }}
+        >
+          <Text style={styles.continueButton}>
+            {"Continue "}
+            <Ionicons
+              name="ios-arrow-dropright-circle"
+              size={25}
+              color="white"
+            />
           </Text>
         </TouchableOpacity>
       </View>
