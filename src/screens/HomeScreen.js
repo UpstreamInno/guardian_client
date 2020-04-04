@@ -1,209 +1,181 @@
-/* eslint-disable global-require */
-
-import * as WebBrowser from "expo-web-browser";
-import React from "react";
+import React, { useState } from "react";
 import {
-  Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { MonoText } from "Components/StyledText";
 import { t } from 'Lib/i18n';
+import { 
+  setUserLastPathSentTime,
+  setUserSignUpData,
+  setUserSession,
+  resetStore 
+} from "Store/actions";
+import {
+  sendPath,
+  signIn,
+  signUp, 
+} from "Lib/Api";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const styles = StyleSheet.create({
   container: {
+    paddingLeft: "40px",
+    paddingTop: "20px",
     flex: 1,
     backgroundColor: "#fff",
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: "rgba(0,0,0,0.4)",
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: "center",
+  row: {
+    flexDirection: "row",
   },
-  contentContainer: {
-    paddingTop: 30,
+  keyContainer: {
+    flex: 0.2,
+    borderWidth: "1px",
+    borderColor: "#CECECE",
+    paddingLeft: "10px",
   },
-  welcomeContainer: {
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20,
+  valueContainer: {
+    flex: 0.7,
+    borderWidth: "1px",
+    borderColor: "#CECECE",
+    paddingLeft: "10px",
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: "contain",
-    marginTop: 3,
-    marginLeft: -10,
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
   },
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)",
-  },
-  codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center",
-  },
-  tabBarInfoContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: "black",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: "center",
-    backgroundColor: "#fbfbfb",
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    textAlign: "center",
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: "center",
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: "#2e78b7",
-  },
+  textArea: {
+    borderColor: 'gray',
+    borderWidth: 1,
+  }
 });
 
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    "https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes",
-  );
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    "https://docs.expo.io/versions/latest/workflow/development-mode/",
-  );
-}
-
 const HomeScreen = () => {
-  const now = new Date();
+  const state = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  // input states, used only for this page to simulate UI input
+  const [inputPhone, setInputPhone] = useState('1123456789');
+  const [inputPath, setInputPath] = useState(JSON.stringify([
+    ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
+    ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
+  ], null, 2));
+
+  const onSignUp = () => {
+    signUp(inputPhone).then((data) =>{
+      const { code, id } = data;
+
+      // store registration code and id for the signup request
+      dispatch(setUserSignUpData({ registrationCode: code, registrationId: id }))
+    })
+  }
+  
+  const onSignIn = () => {
+    signIn({
+      registrationId: state.registrationId, 
+      registrationCode: state.registrationCode,
+    }).then((data) =>{
+      const { sessionId, sessionPhone } = data;
+
+      // store session information for subsequent requests
+      dispatch(setUserSession({ sessionId, sessionPhone }))
+    })
+  }
+
+  const onSendPath = () => {
+    // sendPath expects data in this form:
+    //  [
+    //    ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
+    //    ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
+    //  ];
+    //
+    // however to enable user input on the debug page, we stringify the json.
+    const pathData = JSON.parse(inputPath);
+
+    sendPath(pathData).then((data) =>{
+      // dont need to do anything with the response for now
+      console.log("Path response, ignoring...", data)
+
+      // store the last sent path time
+      if(data.errors.length === 0) {
+        dispatch(setUserLastPathSentTime({ time: Date.now() }));
+      }
+    })
+  }
+
   return (
     <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require("../../assets/images/robot-dev.png")
-                : require("../../assets/images/robot-prod.png")
-            }
-            style={styles.welcomeImage}
+      <Text>{t('debug_menu', {date: new Date()})}</Text>
+      <Text>User/Device Inputs</Text>
+
+      <View style={styles.row}>
+        <View style={styles.keyContainer} >
+          <Text>(Registration) User Phone </Text>
+        </View>
+        <View style={styles.valueContainer} >
+          <TextInput
+            style={styles.input}
+            onChangeText={setInputPhone}
+            value={inputPhone} 
           />
         </View>
-
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>{t('get_started', { date: now} )}</Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          >
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Rover! Change this text and your app will automatically reload.
-          </Text>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.keyContainer} >
+          <Text>(Device) Device Path</Text>
         </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}
-        >
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
+        <View style={styles.valueContainer} >
+          <TextInput
+            multiline={true}
+            numberOfLines={6}
+            style={styles.textArea}
+            onChangeText={setInputPath}
+            value={inputPath} 
+          />
         </View>
       </View>
+
+      <Text>Actions</Text>
+      {actionRow("1. signUp", "POST /sign_up API", onSignUp)}
+      {actionRow("2. signIn", "POST /sign_in API", onSignIn)}
+      {actionRow("3. path", "POST /path API", onSendPath)}
+      {actionRow("resetStore", "resets the store to initial values", () => dispatch(resetStore()))}
+
+      <Text>Store</Text>
+      {
+        Object.keys(state).map((key) => row({key, value: state[key]}))
+      }
     </View>
   );
 };
+
+function row({key, value, onPress}) {
+  return (
+    <TouchableOpacity {...{onPress, key}}>
+      <View style={styles.row}>
+        <View style={styles.keyContainer} >
+          <Text>{key}</Text>
+        </View>
+        <View style={styles.valueContainer} >
+          <Text>{value}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+function actionRow(action, description, onPress) {
+  return row({key: action, value: description, onPress})
+}
+
 
 HomeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools.
-        {learnMoreButton}
-      </Text>
-    );
-  }
-
-  return (
-    <Text style={styles.developmentModeText}>
-      You are not in development mode: your app will run at full speed.
-    </Text>
-  );
-}
-
 export default HomeScreen;
-
-/* eslint-enable global-require */

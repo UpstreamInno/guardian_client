@@ -1,7 +1,7 @@
 {
   "common": {
     "header": "Header",
-    "get_started": "Get Started {{date, DD MMM YY}}",
+    "debug_menu": "Debug Menu {{date, DD MMM YY}}",
     "enable_background_location":"Enable background location",
     "user_phone_from_store":"User phone from store:"
   }
