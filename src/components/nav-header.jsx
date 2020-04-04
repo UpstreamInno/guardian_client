@@ -11,6 +11,7 @@ import {
   Right,
   Body,
 } from "native-base";
+import { t } from 'Lib/i18n';
 
 export const NavHeader = () => {
   return (
@@ -21,7 +22,7 @@ export const NavHeader = () => {
         </Button>
       </Left>
       <Body>
-        <Title>Header</Title>
+        <Title>{t('header')}</Title>
       </Body>
       <Right>
         <Button transparent>
