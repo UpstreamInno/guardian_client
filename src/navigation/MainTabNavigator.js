@@ -5,10 +5,11 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 
 import TabBarIcon from "Components/TabBarIcon";
 import {
-    HomeScreen,
-    LocationScreen,
-    ProfileScreen,
-    ReportScreen,
+  HomeScreen,
+  LocationScreen,
+  ProfileScreen,
+  ReportScreen,
+  VerificationScreen,
 } from "Screens";
 
 const config = Platform.select({
@@ -100,12 +101,33 @@ ProfileStack.navigationOptions = {
 
 ProfileStack.path = "";
 
+// Verification stack
+const VerificationStack = createStackNavigator(
+  {
+    Links: VerificationScreen,
+  },
+  config,
+);
+
+VerificationStack.navigationOptions = {
+  tabBarLabel: "Verification",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-body" : "md-body"}
+    />
+  ),
+};
+
+VerificationStack.path = "";
+
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LocationStack,
   ProfileStack,
   ReportStack,
+  VerificationStack
 });
 
 tabNavigator.path = "";
