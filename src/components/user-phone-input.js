@@ -6,7 +6,13 @@ const UserPhoneInput = ({ onChange, phoneNumber }) => {
     <>
       <Text>User Phone:</Text>
       <TextInput
-        style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+        style={{
+          width: 200,
+          height: 35,
+          borderColor: "#696969",
+          borderWidth: 1,
+          margin: 5
+        }}
         onChangeText={onChange}
         value={phoneNumber}
       />
