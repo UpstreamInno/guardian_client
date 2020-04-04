@@ -8,11 +8,9 @@ import {
   Button,
 } from "react-native";
 import Constants from "expo-constants";
-import * as Location from "expo-location";
-import * as TaskManager from "expo-task-manager";
-import React, { Component } from "react";
+import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import PhoneOrLocRequest from "../components/PhoneOrLocRequest.js";
+import { Ionicons } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
   container: {
