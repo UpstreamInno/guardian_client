@@ -2,13 +2,13 @@ import React from "react";
 import { Platform } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-
 import TabBarIcon from "Components/TabBarIcon";
 import {
     HomeScreen,
     LocationScreen,
     ProfileScreen,
     ReportScreen,
+    OtpScreen
 } from "Screens";
 
 const config = Platform.select({
@@ -49,16 +49,41 @@ const ReportStack = createStackNavigator(
 );
 
 ReportStack.navigationOptions = {
-  tabBarLabel: "Report",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-heart" : "md-heart"}
-    />
-  ),
+    tabBarLabel: "Report",
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === "ios" ? "ios-heart" : "md-heart"}
+        />
+    ),
 };
 
 ReportStack.path = "";
+
+// report stack
+const OtpStack = createStackNavigator(
+    {
+        Links: {
+            screen: OtpScreen,
+            navigationOptions: {
+                header: null,
+            },
+        },
+    },
+    config,
+);
+
+OtpStack.navigationOptions = {
+    tabBarLabel: "Otp",
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === "ios" ? "ios-heart" : "md-heart"}
+        />
+    ),
+};
+
+OtpStack.path = "";
 
 // location stack
 const LocationStack = createStackNavigator(
@@ -102,10 +127,11 @@ ProfileStack.path = "";
 
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LocationStack,
-  ProfileStack,
-  ReportStack,
+    HomeStack,
+    LocationStack,
+    ProfileStack,
+    ReportStack,
+    OtpStack
 });
 
 tabNavigator.path = "";
