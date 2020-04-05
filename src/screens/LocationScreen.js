@@ -128,7 +128,7 @@ class LocationScreen extends Component {
           source={require("../../CovidGuardianClient/images/logo.png")}
           style={{ width: 200, height: 200, marginBottom: 50 }}
         />
-        <View>{PhoneOrLocRequest}</View>
+        <PhoneOrLocRequest />
       </LinearGradient>
     );
   }

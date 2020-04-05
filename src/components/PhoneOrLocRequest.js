@@ -1,16 +1,19 @@
 import React from "react";
 import { Text } from "react-native";
 import * as Location from "expo-location";
+import { t } from 'Lib/i18n';
+
 import UserPhoneInput from "./user-phone-input.js";
 
-export default function PhoneOrLocRequest() {
+function PhoneOrLocRequest() {
   if (Location) {
+    return <UserPhoneInput />;
+  } else {
     return (
       <TouchableOpacity onPress={this.onPress}>
-        <Text>Enable background location</Text>
+        <Text>{t('enable_background_location')}</Text>
       </TouchableOpacity>
     );
-  } else {
-    return <UserPhoneInput />;
   }
 }
+export default PhoneOrLocRequest;
