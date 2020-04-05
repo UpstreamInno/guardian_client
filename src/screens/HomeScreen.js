@@ -12,6 +12,7 @@ import {
   View,
 } from "react-native";
 import { MonoText } from "Components/StyledText";
+import { t } from 'Lib/i18n';
 
 const styles = StyleSheet.create({
   container: {
@@ -115,6 +116,7 @@ function handleLearnMorePress() {
 }
 
 const HomeScreen = () => {
+  const now = new Date();
   return (
     <View style={styles.container}>
       <ScrollView
@@ -135,7 +137,7 @@ const HomeScreen = () => {
         <View style={styles.getStartedContainer}>
           <DevelopmentModeNotice />
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
+          <Text style={styles.getStartedText}>{t('get_started', { date: now} )}</Text>
 
           <View
             style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
