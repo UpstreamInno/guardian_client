@@ -5,14 +5,12 @@ import {
   View,
   Image,
   TouchableOpacity,
-  Button
+  Button,
 } from "react-native";
 import Constants from "expo-constants";
-import * as Location from "expo-location";
-import * as TaskManager from "expo-task-manager";
-import React, { Component } from "react";
+import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import PhoneOrLocRequest from "../components/PhoneOrLocRequest.js";
+import { Ionicons } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
   container: {
@@ -20,23 +18,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1"
+    backgroundColor: "#ecf0f1",
   },
-  welcome: {
-    fontSize: 20,
+  link: {
     textAlign: "center",
-    margin: 10
+    fontSize: 12,
   },
-  instructions: {
-    textAlign: "center",
-    color: "#fff",
-    marginBottom: 5
+  linkContainer: {
+    marginTop: 5,
   },
   paragraph: {
     fontSize: 13,
     textAlign: "center",
     color: "#4bade3",
-    textAlign: "center"
+    textAlign: "center",
   },
   header3: {
     fontSize: 15,
@@ -44,31 +39,33 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 10,
     marginBottom: 30,
-    color: "#ffffff"
+    color: "#ffffff",
   },
   header4: {
     fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 5,
-    color: "#4bade3"
+    color: "#4bade3",
   },
   textBlock: {
     width: 300,
     padding: 10,
     borderRadius: 5,
     margin: 10,
-    backgroundColor: "#fff"
-  }
+    backgroundColor: "#fff",
+  },
+  continueButton: {
+    fontSize: 25,
+    color: "#fff",
+    fontWeight: "bold",
+  },
 });
 
 function ConfirmationScreen() {
   return (
     <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
-      <Image
-        source={require("../../CovidGuardianClient/images/simple-check.png")}
-        style={{ width: 200, height: 200, marginBottom: 30 }}
-      />
+      <Ionicons name="md-checkmark-circle" size={100} color="white" />
       <Text style={styles.header3}>Successful Sign Up!</Text>
       <View style={styles.textBlock}>
         <Text style={styles.header4}>You are in Control</Text>
@@ -79,9 +76,9 @@ function ConfirmationScreen() {
           onPress={() => {
             alert("I have no function");
           }}
-          style={{ marginTop: 5 }}
+          style={styles.linkContainer}
         >
-          <Text style={{ textAlign: "center", fontSize: 12 }}>Learn More</Text>
+          <Text style={styles.link}>Learn More</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.textBlock}>
@@ -93,26 +90,28 @@ function ConfirmationScreen() {
           onPress={() => {
             alert("I have no function");
           }}
-          style={{ marginTop: 5 }}
+          style={styles.linkContainer}
         >
-          <Text style={{ textAlign: "center", fontSize: 12 }}>Learn More</Text>
+          <Text style={styles.link}>Learn More</Text>
         </TouchableOpacity>
       </View>
       <View
         style={{
-          marginTop: 15
+          marginTop: 15,
         }}
       >
-        <TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 20,
-              color: "#fff",
-              fontWeight: "bold",
-              textDecorationLine: "underline"
-            }}
-          >
-            Continue
+        <TouchableOpacity
+          onPress={() => {
+            alert("I should go somewhere");
+          }}
+        >
+          <Text style={styles.continueButton}>
+            {"Continue "}
+            <Ionicons
+              name="ios-arrow-dropright-circle"
+              size={25}
+              color="white"
+            />
           </Text>
         </TouchableOpacity>
       </View>
