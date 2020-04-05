@@ -5,14 +5,15 @@ import { t } from 'Lib/i18n';
 
 import UserPhoneInput from "./user-phone-input.js";
 
-export default function PhoneOrLocRequest() {
+function PhoneOrLocRequest() {
   if (Location) {
+    return <UserPhoneInput />;
+  } else {
     return (
       <TouchableOpacity onPress={this.onPress}>
         <Text>{t('enable_background_location')}</Text>
       </TouchableOpacity>
     );
-  } else {
-    return <UserPhoneInput />;
   }
 }
+export default PhoneOrLocRequest;
