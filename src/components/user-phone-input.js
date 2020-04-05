@@ -1,7 +1,12 @@
 import React from "react";
-import { Text, TextInput } from "react-native";
+import {
+  Text,
+  TextInput
+} from 'react-native';
 
-const UserPhoneInput = ({ onChange, phoneNumber }) => {
+import { t } from 'Lib/i18n';
+
+export const UserPhoneInput = ({ onChange, phoneNumber }) => {
   return (
     <>
       <Text>User Phone:</Text>
@@ -16,7 +21,7 @@ const UserPhoneInput = ({ onChange, phoneNumber }) => {
         onChangeText={onChange}
         value={phoneNumber}
       />
-      <Text>User phone from store:</Text>
+      <Text>{t('user_phone_from_store')}</Text>
       <Text>{phoneNumber}</Text>
     </>
   );

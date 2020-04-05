@@ -1,0 +1,1 @@
+export { default, t } from './i18n';
