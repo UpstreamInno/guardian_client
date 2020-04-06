@@ -11,4 +11,6 @@ export default {
   warningText: "#666804",
   noticeBackground: tintColor,
   noticeText: "#fff",
+  lightText: '#fff',
+  popupBackground: ['#A5E2f6', '#72B9E5', '#4B94D3']
 };
