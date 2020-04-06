@@ -12,7 +12,6 @@ export const initialState = {
   registrationCode: null,
   registrationId: null,
   sessionId: null,
-  sessionPhone: null,
   lastPathSentTime: null
 }
 
@@ -33,7 +32,6 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         sessionId: (action.payload && action.payload.sessionId) || null,
-        sessionPhone: (action.payload && action.payload.sessionPhone) || null,
       };
     case SET_USER_LAST_PATH_SENT_TIME:
       return {

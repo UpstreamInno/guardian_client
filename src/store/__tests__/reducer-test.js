@@ -12,7 +12,6 @@ const fakePhone = "999-000-1234";
 const registrationCode = "a498l"
 const registrationId = "p07"
 const sessionId = "lhkwfoeih"
-const sessionPhone = fakePhone
 
 describe("rootReducer", () => {
   it(`handles supported action`, () => {
@@ -32,10 +31,8 @@ describe("rootReducer", () => {
   it(`handles setUserSession`, () => {
     const state = reducer(undefined, setUserSession({
       sessionId, 
-      sessionPhone,
     }));
     expect(state.sessionId).toEqual(sessionId);
-    expect(state.sessionPhone).toEqual(sessionPhone);
   });
 
   it(`handles setUserLastPathSentTime`, () => {

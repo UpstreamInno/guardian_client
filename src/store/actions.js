@@ -18,7 +18,6 @@ export function setUserSession({ sessionId, sessionPhone }) {
     type: SET_USER_SESSION,
     payload: {
       sessionId,
-      sessionPhone,
     },
   };
 }

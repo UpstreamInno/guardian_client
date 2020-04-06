@@ -9,13 +9,25 @@ const DEFAULT_HEADERS = {
 }
 
 async function sendPath(path) {
-  const body = JSON.stringify({path});
+  const body = JSON.stringify({points: path});
 
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/path`, {
       method: 'POST',
       headers: DEFAULT_HEADERS,
       body,
+    })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch((error) => reject(error));
+  });
+};
+
+async function getPath() {
+  return new Promise((resolve, reject)=>{
+    fetch(`${CONFIG.API_ENDPOINT}/users/path`, {
+      method: 'GET',
+      headers: DEFAULT_HEADERS,
     })
     .then((response) => response.json())
     .then((data) => resolve(data))
@@ -55,8 +67,7 @@ async function signIn({registrationId, registrationCode}) {
     .then((response) => response.json())
     .then((data) => {
       return resolve({
-        sessionId: data.data.user.id,
-        sessionPhone: data.data.user["phone_number"],
+        sessionId: data["user_id"],
       })
     })
     .catch((error) => reject(error));
@@ -64,6 +75,7 @@ async function signIn({registrationId, registrationCode}) {
 };
 
 export {
+  getPath,
   sendPath,
   signUp,
   signIn,

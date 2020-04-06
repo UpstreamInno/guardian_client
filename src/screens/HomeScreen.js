@@ -15,6 +15,7 @@ import {
   resetStore 
 } from "Store/actions";
 import {
+  getPath,
   sendPath,
   signIn,
   signUp, 
@@ -80,10 +81,9 @@ const HomeScreen = () => {
       registrationId: state.registrationId, 
       registrationCode: state.registrationCode,
     }).then((data) =>{
-      const { sessionId, sessionPhone } = data;
-
+      const { sessionId } = data;
       // store session information for subsequent requests
-      dispatch(setUserSession({ sessionId, sessionPhone }))
+      dispatch(setUserSession({ sessionId }))
     })
   }
 
@@ -105,6 +105,12 @@ const HomeScreen = () => {
       if(data.errors.length === 0) {
         dispatch(setUserLastPathSentTime({ time: Date.now() }));
       }
+    })
+  }
+
+  const onGetPath = () => {
+    getPath().then((data) =>{
+      console.log("got path data", data)
     })
   }
 
@@ -144,6 +150,8 @@ const HomeScreen = () => {
       {actionRow("1. signUp", "POST /sign_up API", onSignUp)}
       {actionRow("2. signIn", "POST /sign_in API", onSignIn)}
       {actionRow("3. path", "POST /path API", onSendPath)}
+      {actionRow("[DEBUG] get path", "GET /path API", onGetPath)}
+
       {actionRow("resetStore", "resets the store to initial values", () => dispatch(resetStore()))}
 
       <Text>Store</Text>
