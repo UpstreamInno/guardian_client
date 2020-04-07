@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Platform, StatusBar, StyleSheet, View, I18nManager as RNI18nManager } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
-import AppNavigator from "./src/navigation/AppNavigator";
+import GuardianContainer from "Components/GuardianContainer"
 import { store } from "Store";
 
 import i18n from 'Lib/i18n';
@@ -80,7 +80,7 @@ const App = props => {
       <React.Suspense fallback="loading">
         <View style={styles.container}>
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <AppNavigator />
+          <GuardianContainer />
         </View>
       </React.Suspense>
     </Provider>

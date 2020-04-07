@@ -25,7 +25,7 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: "Home☀️",
+  tabBarLabel: "App",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -127,11 +127,11 @@ ProfileStack.path = "";
 
 
 const tabNavigator = createBottomTabNavigator({
-    HomeStack,
     LocationStack,
     ProfileStack,
     ReportStack,
-    OtpStack
+    OtpStack,
+    HomeStack,
 });
 
 tabNavigator.path = "";
