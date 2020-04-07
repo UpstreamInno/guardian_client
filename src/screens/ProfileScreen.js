@@ -8,16 +8,16 @@ import UserPhoneInput from "Components/user-phone-input";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff"
-  }
+    backgroundColor: "#fff",
+  },
 });
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
 
-  const { userPhone } = useSelector(state => state);
+  const { userPhone } = useSelector((state) => state);
 
-  const onSetUserPhone = phoneNumber => {
+  const onSetUserPhone = (phoneNumber) => {
     dispatch(setUserPhone(phoneNumber));
   };
 
