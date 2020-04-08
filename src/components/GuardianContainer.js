@@ -8,6 +8,7 @@ import HomeScreen from "Components/HomeScreen"
 import OtpScreen from "Components/OtpScreen"
 import SignupScreen from "Components/SignupScreen"
 import LocationScreen from "Components/LocationScreen";
+import AlertScreen from "Components/AlertScreen";
 
 export const Pages = {
   SIGNUP: "SIGNUP",
@@ -19,6 +20,7 @@ export const Pages = {
   MESSAGE_DETAILS: "MESSAGE_DETAILS",
   SYMPTOM_SURVEY: "SYMPTOM_SURVEY",
   SURVEY_COMPLETE: "SURVEY_COMPLETE",
+  ALERT_NOTIFICATION: "ALERT_NOTIFICATION",
 
   // TODO: hide these debug pages in release builds
   DEBUG_MENU: "DEBUG_MENU",
@@ -48,6 +50,8 @@ export default function GuardianContainer() {
       return <SignupScreen />;
     case Pages.SIGNUP_VERIFY:
       return <OtpScreen />;
+    case Pages.ALERT_NOTIFICATION:
+      return <AlertScreen />;
     case Pages.CONSENT_LOCATION:
       return <LocationScreen />;
     case Pages.SIGNUP_COMPLETE:
