@@ -1,5 +1,5 @@
-
 import {
+  ROUTE_TO,
   SET_USER_LAST_PATH_SENT_TIME,
   SET_USER_PHONE,
   SET_USER_SESSION,
@@ -7,12 +7,16 @@ import {
   RESET_STORE,
 } from "./actions"
 
+import { Pages } from "Components/GuardianContainer"
+
 export const initialState = {
   userPhone: "",
   registrationCode: null,
   registrationId: null,
   sessionId: null,
-  lastPathSentTime: null
+  lastPathSentTime: null,
+  currentPage: Pages.DebugMenu,
+  previousPage: null,
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -32,6 +36,13 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         sessionId: (action.payload && action.payload.sessionId) || null,
+      };
+    case ROUTE_TO:
+      let previousPage = (action.payload && action.payload.previousPage) || state.page
+      return {
+        ...state,
+        currentPage: (action.payload && action.payload.page) || Pages.HOME,
+        previousPage,
       };
     case SET_USER_LAST_PATH_SENT_TIME:
       return {
