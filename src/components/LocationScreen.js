@@ -15,7 +15,7 @@ import * as TaskManager from "expo-task-manager";
 import * as WebBrowser from "expo-web-browser";
 import React, { Component } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import PhoneOrLocRequest from "../components/PhoneOrLocRequest.js";
+import { t } from 'Lib/i18n';
 
 const styles = StyleSheet.create({
   container: {
@@ -69,7 +69,6 @@ class LocationScreen extends Component {
     location: null,
     errorMessage: null,
     inputText: null,
-    phoneNumber: null,
   };
 
   constructor(props) {
@@ -128,7 +127,9 @@ class LocationScreen extends Component {
           source={require("../../images/logo.png")}
           style={{ width: 200, height: 200, marginBottom: 50 }}
         />
-        <PhoneOrLocRequest />
+        <TouchableOpacity onPress={this.onPress}>
+          <Text>{t('enable_background_location')}</Text>
+        </TouchableOpacity>
       </LinearGradient>
     );
   }

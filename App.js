@@ -6,7 +6,7 @@ import { Platform, StatusBar, StyleSheet, View, I18nManager as RNI18nManager } f
 import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import GuardianContainer from "Components/GuardianContainer"
-import { store } from "Store";
+import { configureStore } from "Store";
 
 import i18n from 'Lib/i18n';
 
@@ -42,6 +42,8 @@ function handleLoadingError(error) {
 function handleFinishLoading(setLoadingComplete) {
   setLoadingComplete(true);
 }
+
+const store = configureStore();
 
 const App = props => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);

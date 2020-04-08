@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { routeTo } from "Store/actions";
 import DebugMenu from "Components/DebugMenu";
-import OtpScreen from "Screens/OtpScreen"
-import LocationScreen from "Screens/LocationScreen"
-import AppNavigator from "../navigation/AppNavigator";
+import HomeScreen from "Components/HomeScreen"
+import OtpScreen from "Components/OtpScreen"
+import SignupScreen from "Components/SignupScreen"
+import LocationScreen from "Components/LocationScreen";
 
 export const Pages = {
   SIGNUP: "SIGNUP",
@@ -21,7 +22,6 @@ export const Pages = {
 
   // TODO: hide these debug pages in release builds
   DEBUG_MENU: "DEBUG_MENU",
-  DEBUG_NAVIGATOR: "DEBUG_NAVIGATOR",
 }
 
 export default function GuardianContainer() {
@@ -42,22 +42,22 @@ export default function GuardianContainer() {
   }
 
   switch (currentPage) {
+    case Pages.HOME:
+      return <HomeScreen />;
     case Pages.SIGNUP:
-      return <LocationScreen />;
+      return <SignupScreen />;
     case Pages.SIGNUP_VERIFY:
       return <OtpScreen />;
-    case Pages.SIGNUP_COMPLETE:
     case Pages.CONSENT_LOCATION:
+      return <LocationScreen />;
+    case Pages.SIGNUP_COMPLETE:
     case Pages.CONSENT_NOTIFICATION:
-    case Pages.HOME:
     case Pages.MESSAGE_DETAILS:
     case Pages.SYMPTOM_SURVEY:
     case Pages.SURVEY_COMPLETE:
       return placeholder(currentPage);
     case Pages.DEBUG_MENU:
       return <DebugMenu />;
-    case Pages.DEBUG_NAVIGATOR:
-      return <AppNavigator />;
     default:
       return <DebugMenu />;
   }

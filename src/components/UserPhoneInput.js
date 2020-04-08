@@ -9,7 +9,7 @@ import { t } from 'Lib/i18n';
 export const UserPhoneInput = ({ onChange, phoneNumber }) => {
   return (
     <>
-      <Text>User Phone:</Text>
+      <Text>{t('phone_number')}</Text>
       <TextInput
         style={{
           width: 200,
@@ -21,8 +21,6 @@ export const UserPhoneInput = ({ onChange, phoneNumber }) => {
         onChangeText={onChange}
         value={phoneNumber}
       />
-      <Text>{t('user_phone_from_store')}</Text>
-      <Text>{phoneNumber}</Text>
     </>
   );
 };

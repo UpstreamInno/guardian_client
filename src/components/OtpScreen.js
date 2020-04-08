@@ -1,15 +1,19 @@
 import React, {useState, useEffect, useRef} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userSignUpVerify } from "Store/actions";
 import {StyleSheet, View, Text, TouchableOpacity, KeyboardAvoidingView, Platform} from "react-native";
-import {LinearGradient} from 'expo-linear-gradient'
+import {LinearGradient} from 'expo-linear-gradient';
 import Colors from "../constants/Colors";
 import BaseTextStyle from "../constants/BaseTextStyle";
 import {AntDesign} from '@expo/vector-icons';
-import OTPInputView from '@twotalltotems/react-native-otp-input'
+import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 const RESEND_OTP_TIME_LIMIT = 30; // 30 secs
 let resendOtpTimerInterval;
 
 const OtpScreen = () => {
+  const dispatch = useDispatch();
+
   const [code, setCode] = useState("");
   const otpRef = useRef(null);
   const [resendButtonDisabledTime, setResendButtonDisabledTime] = useState(
@@ -51,10 +55,17 @@ const OtpScreen = () => {
   };
 
   const onSubmit = () => {
-    // resend OTP Api call
-    // todo
-    console.log('todo: Send OTP');
+    dispatch(userSignUpVerify(code));
   };
+
+  const debugCode = () => {
+    if (__DEV__) {
+      const { registrationCode } = useSelector(state => state);
+      return <Text>ENTER THIS CODE: {registrationCode}</Text>;
+    } else {
+      return <></>;
+    }
+  }
 
   return (
     <KeyboardAvoidingView
@@ -68,21 +79,17 @@ const OtpScreen = () => {
         <View style={styles.container}>
           <Text style={BaseTextStyle.title}>Verification Code</Text>
           <Text style={[styles.subtitleStyle, BaseTextStyle.subtitle]}>Enter the OTP sent to your phone</Text>
+          {debugCode()}
 
           <OTPInputView
             ref={otpRef}
             style={styles.otpContainer}
             pinCount={6}
             code={code}
-            onCodeChanged={code => {
-              setCode(code)
-            }}
+            onCodeChanged={code => setCode(code)}
             autoFocusOnLoad={true}
             codeInputFieldStyle={styles.outlineInputStyle}
             codeInputHighlightStyle={styles.outlineInputHighlightStyle}
-            onCodeFilled={(code => {
-              console.log(`Code is ${code}, you are good to go!`)
-            })}
           />
 
           <Text style={[styles.resendTimerStyle, BaseTextStyle.heading]}>Enter your code
