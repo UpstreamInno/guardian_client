@@ -1,8 +1,12 @@
 {
   "common": {
     "header": "Header",
+    "guardian": "Guardian",
     "debug_menu": "Debug Menu {{date, DD MMM YY}}",
     "enable_background_location":"Enable background location",
-    "user_phone_from_store":"User phone from store:"
+    "phone_number":"Phone Number:",
+    "user_phone_from_store":"Confirm your phone number. This will only be used for",
+    "register":"Register",
+    "home_title":"home"
   }
 }

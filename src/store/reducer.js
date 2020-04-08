@@ -10,7 +10,7 @@ import {
 import { Pages } from "Components/GuardianContainer"
 
 export const initialState = {
-  userPhone: "",
+  userPhone: null,
   registrationCode: null,
   registrationId: null,
   sessionId: null,
@@ -24,7 +24,7 @@ export const rootReducer = (state = initialState, action) => {
     case SET_USER_PHONE:
       return {
         ...state,
-        userPhone: (action.payload && action.payload.userPhone) || "",
+        userPhone: (action.payload && action.payload.userPhone) || null,
       };
     case SET_USER_SIGNUP_DATA:
       return {

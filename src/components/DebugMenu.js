@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Button,
   Picker,
   StyleSheet,
   Text,
@@ -124,6 +125,12 @@ const DebugMenu = () => {
 
   return (
     <View style={styles.container}>
+
+      <Button
+          title="Start App"
+          onPress={() => dispatch(routeTo(Pages.HOME))}
+      />
+
       <Text>{t('debug_menu', {date: new Date()})}</Text>
       <Text>User/Device Inputs</Text>
 
@@ -205,7 +212,6 @@ function routeToRow(key, onSelect){
           >
             {
               Object.keys(Pages).map((page) => {
-                console.log(page)
                   return <Picker.Item label={page} value={page} key={page} />
                 }
               )
