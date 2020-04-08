@@ -18,8 +18,10 @@
         "UIBackgroundModes": [
           "location"
         ],
+
+        "NSNotificationUsageDescription": "We will alert you of confirmed COVID-19 cases, and if you're sick, let others know about it anonymously.",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "",
-        "NSLocationWhenInUseUsageDescription": ""
+        "NSLocationWhenInUseUsageDescription": "",
       }
     }
   }
