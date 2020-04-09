@@ -9,6 +9,8 @@ import OtpScreen from "Components/OtpScreen"
 import SignupScreen from "Components/SignupScreen"
 import LocationScreen from "Components/LocationScreen";
 import AlertScreen from "Components/AlertScreen";
+import SignupcompleteScreen from "Components/SignupcompleteScreen";
+import SurveycompleteScreen from "Components/SurveycompleteScreen";
 
 export const Pages = {
   SIGNUP: "SIGNUP",
@@ -55,11 +57,12 @@ export default function GuardianContainer() {
     case Pages.CONSENT_LOCATION:
       return <LocationScreen />;
     case Pages.SIGNUP_COMPLETE:
+      return <SignupcompleteScreen />;
     case Pages.CONSENT_NOTIFICATION:
     case Pages.MESSAGE_DETAILS:
     case Pages.SYMPTOM_SURVEY:
     case Pages.SURVEY_COMPLETE:
-      return placeholder(currentPage);
+      return <SurveycompleteScreen />;
     case Pages.DEBUG_MENU:
       return <DebugMenu />;
     default:
