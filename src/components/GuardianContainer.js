@@ -10,8 +10,27 @@ import SignupScreen from "Components/SignupScreen";
 import LocationScreen from "Components/LocationScreen";
 import AlertScreen from "Components/AlertScreen";
 import ReportScreen from "Components/SymptomSurveyScreen.js";
+<<<<<<< HEAD
 import ActionCompleteScreen from "Components/ActionCompleteScreen";
 import { Pages } from "Lib/Pages";
+=======
+
+export const Pages = {
+  SIGNUP: "SIGNUP",
+  SIGNUP_VERIFY: "SIGNUP_VERIFY",
+  SIGNUP_COMPLETE: "SIGNUP_COMPLETE",
+  CONSENT_LOCATION: "CONSENT_LOCATION",
+  CONSENT_NOTIFICATION: "CONSENT_NOTIFICATION",
+  HOME: "HOME",
+  MESSAGE_DETAILS: "MESSAGE_DETAILS",
+  SYMPTOM_SURVEY: "SYMPTOM_SURVEY",
+  SURVEY_COMPLETE: "SURVEY_COMPLETE",
+  ALERT_NOTIFICATION: "ALERT_NOTIFICATION",
+
+  // TODO: hide these debug pages in release builds
+  DEBUG_MENU: "DEBUG_MENU",
+};
+>>>>>>> f782d55e... Added Report Screen to Container
 
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
