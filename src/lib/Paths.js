@@ -1,6 +1,7 @@
-import { distance, fuzzyEqual } from "./PathHelpers"
+import { distance, fuzzyEqual } from "./PathHelpers";
+import { Path } from "./Path";
 
-export const DEFAULT_TIME_IMPRECISON = 0; // integer seconds
+export const DEFAULT_TIME_IMPRECISON = 30; // integer seconds
 export const DEFAULT_LOCATION_IMPRECISON = 0; // decimal degrees: 1.0° ~ 111km, 0.01° ~ 1.11km, 0.00001° ~ 1.11m
 
 export class Paths {
@@ -59,5 +60,21 @@ export class Paths {
     }
 
     return { intersections };
+  }
+
+
+  // Same as intersctions, but accepts points instead of Path objects
+  static intersectionsFromPoints(points, otherPoints, options) {
+    let pathData = [];
+    points.forEach((p) => {
+      pathData.push({ time: p[2], lat: [0], long: [1]});
+    });
+
+    let otherPathData = [];
+    otherPoints.forEach((p) => {
+      otherPathData.push({ time: p[2], lat: [0], long: [1]});
+    });
+
+    Paths.intersections(new Path(pathData), new Path(otherPathData), options);
   }
 }

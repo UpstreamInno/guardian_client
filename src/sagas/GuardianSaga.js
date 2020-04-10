@@ -1,7 +1,13 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects'
 import { Pages } from "Components/GuardianContainer"
+import { Paths } from "Lib/Paths"
 
 import {
+  getMessages,
+  ackMessage,
+  reportPath,
+  reportTestResults,
+  reportSurvey,
   signUp,
   signIn,
 } from "Lib/Api";
@@ -9,10 +15,13 @@ import {
 import {
   USER_SIGNUP,
   USER_SIGNUP_VERIFY,
+  FETCH_MESSAGES,
+  REPORT_PRECISE_PATH,
   setUserPhone,
   setUserSession,
   routeTo,
   setUserSignUpData,
+  setUserLastReportedPath,
 } from "../store/actions"
 
 function* userSignUp(action) {
@@ -49,10 +58,65 @@ function* userVerify(action) {
   }
 }
 
+function* fetchMessages(action) {
+  console.log("fetch mess");
+  try {
+    const { messages } = yield call(getMessages);
+    messages.forEach((message) => {
+
+      console.log("**** message", message);
+
+      //  check message for intersection against local precise data
+
+      // TODO  get the device path from secure storage, only need X days
+      const devicePoints = [
+        ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
+        ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
+      ]
+
+      let intersections = Paths.intersectionsFromPoints(devicePoints, message.points)
+      console.log("*** intersections", intersections)
+      // if there are intersections, send a local push nontification
+
+      // ack the message
+      // yield call(ackMessage, message.id);
+
+      // TODO: mark message as "read" locally
+      
+    });
+  } catch (error) {
+    console.error("Failed fetching messages, error: ", error);
+    yield put(routeTo(Pages.HOME));
+  }
+}
+
+function* onReportPrecisePath(action) {
+  try {
+    const { path } = action.payload;
+    const { pathId } = yield call(reportPath, {points: path});
+    
+    yield put(setUserLastReportedPath({ pathId, time: Date.now() }));
+    yield call(reportTestResults, pathId);
+    yield call(reportSurvey, pathId);
+    
+  } catch (error) {
+    console.error("Failed reportin path, error: ", error);
+    yield put(routeTo(Pages.HOME));
+  }
+}
+
 export function* watchUserRegister() {
   yield takeLatest(USER_SIGNUP, userSignUp);
 }
 
 export function* watchUserVerify() {
   yield takeLatest(USER_SIGNUP_VERIFY, userVerify);
+}
+
+export function* watchFetchMessages() {
+  yield takeLatest(FETCH_MESSAGES, fetchMessages);
+}
+
+export function* watchReportPrecisePath() {
+  yield takeLatest(REPORT_PRECISE_PATH, onReportPrecisePath);
 }

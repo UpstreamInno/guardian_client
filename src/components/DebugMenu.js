@@ -11,7 +11,9 @@ import {
 
 import { t } from 'Lib/i18n';
 import { 
-  setUserLastPathSentTime,
+  setUserLastRegionPathSentTime,
+  reportPrecisePath,
+  fetchMessages,
   setUserSignUpData,
   setUserSession,
   resetStore,
@@ -19,7 +21,10 @@ import {
 } from "Store/actions";
 import {
   getPath,
-  sendPath,
+  getMessages,
+  ackMessage,
+  sendRegionPath,
+  reportPath,
   signIn,
   signUp, 
 } from "Lib/Api";
@@ -66,7 +71,14 @@ const DebugMenu = () => {
 
   // input states, used only for this page to simulate UI input
   const [inputPhone, setInputPhone] = useState('1123456789');
-  const [inputPath, setInputPath] = useState(JSON.stringify([
+  const [messageId, setMessageId] = useState('');
+  
+  // TODO: this should be computed from precise path!
+  const [inputRegionPath, setInputRegionPath] = useState(JSON.stringify([
+    ["47.60", "-122.33", "2020-04-02T00:18:31Z"],
+    ["47.60", "-122.33", "2020-04-02T00:23:31Z"],
+  ], null, 2));
+  const [inputPrecisePath, setinputPrecisePath] = useState(JSON.stringify([
     ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
     ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
   ], null, 2));
@@ -91,25 +103,29 @@ const DebugMenu = () => {
     })
   }
 
-  const onSendPath = () => {
-    // sendPath expects data in this form:
+  const onSendRegionPath = () => {
+    // sendRegionPath expects data in this form:
     //  [
     //    ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
     //    ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
     //  ];
     //
     // however to enable user input on the debug page, we stringify the json.
-    const pathData = JSON.parse(inputPath);
+    const pathData = JSON.parse(inputRegionPath);
 
-    sendPath(pathData).then((data) =>{
+    sendRegionPath(pathData).then((data) =>{
       // dont need to do anything with the response for now
-      console.log("Path response, ignoring...", data)
+      console.log("sendRegionPath response, ignoring...", data)
 
       // store the last sent path time
       if(data.errors.length === 0) {
-        dispatch(setUserLastPathSentTime({ time: Date.now() }));
+        dispatch(setUserLastRegionPathSentTime({ time: Date.now() }));
       }
     })
+  }
+
+  const onReportPath = () => {
+    dispatch(reportPrecisePath(JSON.parse(inputPrecisePath)));
   }
 
   const onGetPath = () => {
@@ -121,6 +137,22 @@ const DebugMenu = () => {
   const onRouteTo = (page) => {
     console.log("navigate to ", page);
     dispatch(routeTo(page));
+  }
+
+  {actionRow("ackMessage", "GET /messages/ack", onAckMessage)}
+
+  const onGetMessages = () => {
+    dispatch(fetchMessages());
+  }
+
+  const onAckMessage = () => {
+    getMessages(messageId).then((data) =>{
+      console.log(data)
+      // const { code, id } = data;
+
+      // // store registration code and id for the signup request
+      // dispatch(setUserSignUpData({ registrationCode: code, registrationId: id }))
+    })
   }
 
   return (
@@ -148,6 +180,32 @@ const DebugMenu = () => {
       </View>
       <View style={styles.row}>
         <View style={styles.keyContainer} >
+          <Text>Message id to ack</Text>
+        </View>
+        <View style={styles.valueContainer} >
+          <TextInput
+            style={styles.input}
+            onChangeText={setMessageId}
+            value={messageId} 
+          />
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.keyContainer} >
+          <Text>Region Path</Text>
+        </View>
+        <View style={styles.valueContainer} >
+          <TextInput
+            multiline={true}
+            numberOfLines={6}
+            style={styles.textArea}
+            onChangeText={setInputRegionPath}
+            value={inputRegionPath} 
+          />
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.keyContainer} >
           <Text>(Device) Device Path</Text>
         </View>
         <View style={styles.valueContainer} >
@@ -155,17 +213,20 @@ const DebugMenu = () => {
             multiline={true}
             numberOfLines={6}
             style={styles.textArea}
-            onChangeText={setInputPath}
-            value={inputPath} 
+            onChangeText={setinputPrecisePath}
+            value={inputPrecisePath}
           />
         </View>
       </View>
 
       <Text>Actions</Text>
-      {actionRow("1. signUp", "POST /sign_up API", onSignUp)}
-      {actionRow("2. signIn", "POST /sign_in API", onSignIn)}
-      {actionRow("3. path", "POST /path API", onSendPath)}
-      {actionRow("[DEBUG] get path", "GET /path API", onGetPath)}
+      {actionRow("1. signUp", "POST /sign_up", onSignUp)}
+      {actionRow("2. signIn", "POST /sign_in", onSignIn)}
+      {actionRow("sendPath (region)", "POST /path", onSendRegionPath)}
+      {actionRow("reportPath (precise)", "POST /report_path", onReportPath)}
+      {actionRow("getMessages", "GET /messages", onGetMessages)}
+      {actionRow("ackMessage", "GET /messages/ack", onAckMessage)}
+      {actionRow("[DEBUG] get path", "GET /path", onGetPath)}
       {routeToRow("[DEBUG] route to", onRouteTo)}
 
       {actionRow("resetStore", "resets the store to initial values", () => dispatch(resetStore()))}

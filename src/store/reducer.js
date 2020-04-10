@@ -1,6 +1,7 @@
 import {
   ROUTE_TO,
-  SET_USER_LAST_PATH_SENT_TIME,
+  SET_USER_LAST_REGION_PATH_SENT_TIME,
+  SET_USER_LAST_REPORTED_PATH,
   SET_USER_PHONE,
   SET_USER_SESSION,
   SET_USER_SIGNUP_DATA,
@@ -14,7 +15,9 @@ export const initialState = {
   registrationCode: null,
   registrationId: null,
   sessionId: null,
-  lastPathSentTime: null,
+  lastRegionPathSentTime: null,
+  lastReportPathSentTime: null,
+  lastReportPathId: null,
   currentPage: Pages.DebugMenu,
   previousPage: null,
 }
@@ -44,10 +47,16 @@ export const rootReducer = (state = initialState, action) => {
         currentPage: (action.payload && action.payload.page) || Pages.HOME,
         previousPage,
       };
-    case SET_USER_LAST_PATH_SENT_TIME:
+    case SET_USER_LAST_REGION_PATH_SENT_TIME:
       return {
         ...state,
-        lastPathSentTime: (action.payload && action.payload.time) || null,
+        lastRegionPathSentTime: (action.payload && action.payload.time) || null,
+      };
+    case SET_USER_LAST_REPORTED_PATH:
+      return {
+        ...state,
+        lastReportPathSentTime: (action.payload && action.payload.time) || null,
+        lastReportPathId: (action.payload && action.payload.pathId) || null,
       };
     case RESET_STORE:
       return initialState;
