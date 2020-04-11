@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { t } from 'Lib/i18n';
-import { 
+import {
   setUserLastRegionPathSentTime,
   reportPrecisePath,
   fetchMessages,
@@ -21,49 +21,13 @@ import {
 } from "Store/actions";
 import {
   getPath,
-  getMessages,
-  ackMessage,
   sendRegionPath,
-  reportPath,
   signIn,
-  signUp, 
+  signUp,
 } from "Lib/Api";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Pages } from "Components/GuardianContainer"
-
-const styles = StyleSheet.create({
-  container: {
-    paddingLeft: "40px",
-    paddingTop: "20px",
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  row: {
-    flexDirection: "row",
-  },
-  keyContainer: {
-    flex: 0.2,
-    borderWidth: 1,
-    borderColor: "#CECECE",
-    paddingLeft: "10px",
-  },
-  valueContainer: {
-    flex: 0.7,
-    borderWidth: 1,
-    borderColor: "#CECECE",
-    paddingLeft: "10px",
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  textArea: {
-    borderColor: 'gray',
-    borderWidth: 1,
-  }
-});
 
 const DebugMenu = () => {
   const state = useSelector(state => state);
@@ -71,8 +35,7 @@ const DebugMenu = () => {
 
   // input states, used only for this page to simulate UI input
   const [inputPhone, setInputPhone] = useState('1123456789');
-  const [messageId, setMessageId] = useState('');
-  
+
   // TODO: this should be computed from precise path!
   const [inputRegionPath, setInputRegionPath] = useState(JSON.stringify([
     ["47.60", "-122.33", "2020-04-02T00:18:31Z"],
@@ -91,10 +54,10 @@ const DebugMenu = () => {
       dispatch(setUserSignUpData({ registrationCode: code, registrationId: id }))
     })
   }
-  
+
   const onSignIn = () => {
     signIn({
-      registrationId: state.registrationId, 
+      registrationId: state.registrationId,
       registrationCode: state.registrationCode,
     }).then((data) =>{
       const { sessionId } = data;
@@ -118,7 +81,7 @@ const DebugMenu = () => {
       console.log("sendRegionPath response, ignoring...", data)
 
       // store the last sent path time
-      if(data.errors.length === 0) {
+      if (data.errors.length === 0) {
         dispatch(setUserLastRegionPathSentTime({ time: Date.now() }));
       }
     })
@@ -139,20 +102,8 @@ const DebugMenu = () => {
     dispatch(routeTo(page));
   }
 
-  {actionRow("ackMessage", "GET /messages/ack", onAckMessage)}
-
   const onGetMessages = () => {
     dispatch(fetchMessages());
-  }
-
-  const onAckMessage = () => {
-    getMessages(messageId).then((data) =>{
-      console.log(data)
-      // const { code, id } = data;
-
-      // // store registration code and id for the signup request
-      // dispatch(setUserSignUpData({ registrationCode: code, registrationId: id }))
-    })
   }
 
   return (
@@ -163,7 +114,7 @@ const DebugMenu = () => {
           onPress={() => dispatch(routeTo(Pages.HOME))}
       />
 
-      <Text>{t('debug_menu', {date: new Date()})}</Text>
+      <Text>{t('debug_menu')}</Text>
       <Text>User/Device Inputs</Text>
 
       <View style={styles.row}>
@@ -174,19 +125,7 @@ const DebugMenu = () => {
           <TextInput
             style={styles.input}
             onChangeText={setInputPhone}
-            value={inputPhone} 
-          />
-        </View>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.keyContainer} >
-          <Text>Message id to ack</Text>
-        </View>
-        <View style={styles.valueContainer} >
-          <TextInput
-            style={styles.input}
-            onChangeText={setMessageId}
-            value={messageId} 
+            value={inputPhone}
           />
         </View>
       </View>
@@ -200,7 +139,7 @@ const DebugMenu = () => {
             numberOfLines={6}
             style={styles.textArea}
             onChangeText={setInputRegionPath}
-            value={inputRegionPath} 
+            value={inputRegionPath}
           />
         </View>
       </View>
@@ -225,13 +164,12 @@ const DebugMenu = () => {
       {actionRow("sendPath (region)", "POST /path", onSendRegionPath)}
       {actionRow("reportPath (precise)", "POST /report_path", onReportPath)}
       {actionRow("getMessages", "GET /messages", onGetMessages)}
-      {actionRow("ackMessage", "GET /messages/ack", onAckMessage)}
       {actionRow("[DEBUG] get path", "GET /path", onGetPath)}
       {routeToRow("[DEBUG] route to", onRouteTo)}
 
       {actionRow("resetStore", "resets the store to initial values", () => dispatch(resetStore()))}
 
-      <Text>Store</Text>
+      <Text>Redux Store (in memory)</Text>
       {
         Object.keys(state).map((key) => row({key, value: state[key]}))
       }
@@ -247,7 +185,7 @@ function row({key, value, onPress}) {
           <Text>{key}</Text>
         </View>
         <View style={styles.valueContainer} >
-          <Text>{value}</Text>
+          <Text>{typeof value == "object" ? JSON.stringify(value, null, 2) : value}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -283,5 +221,38 @@ function routeToRow(key, onSelect){
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 40,
+    paddingTop: 20,
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  row: {
+    flexDirection: "row",
+  },
+  keyContainer: {
+    flex: 0.2,
+    borderWidth: 1,
+    borderColor: "#CECECE",
+    paddingLeft: 10,
+  },
+  valueContainer: {
+    flex: 0.7,
+    borderWidth: 1,
+    borderColor: "#CECECE",
+    paddingLeft: 10,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+  },
+  textArea: {
+    borderColor: 'gray',
+    borderWidth: 1,
+  }
+});
 
 export default DebugMenu;

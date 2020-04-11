@@ -1,6 +1,8 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects'
 import { Pages } from "Components/GuardianContainer"
 import { Paths } from "Lib/Paths"
+import { epochToDisplayString, distanceToDisplay } from "Lib/PathHelpers"
+import { t } from 'Lib/i18n';
 
 import {
   getMessages,
@@ -17,6 +19,7 @@ import {
   USER_SIGNUP_VERIFY,
   FETCH_MESSAGES,
   REPORT_PRECISE_PATH,
+  saveNotification,
   setUserPhone,
   setUserSession,
   routeTo,
@@ -59,31 +62,43 @@ function* userVerify(action) {
 }
 
 function* fetchMessages(action) {
-  console.log("fetch mess");
   try {
-    const { messages } = yield call(getMessages);
-    messages.forEach((message) => {
+    const message = yield call(getMessages);
+    const messageId = message["message_id"];
 
-      console.log("**** message", message);
+    if (!messageId) {
+      return;
+    }
 
-      //  check message for intersection against local precise data
+    //  check message for intersection against local precise data
+    // TODO get the device path from secure storage, only need X days
+    const devicePoints = [
+      ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
+      ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
+    ]
 
-      // TODO  get the device path from secure storage, only need X days
-      const devicePoints = [
-        ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
-        ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
-      ]
+    let { closestIntersection } = Paths.intersectionsFromPoints(devicePoints, message.points);
 
-      let intersections = Paths.intersectionsFromPoints(devicePoints, message.points)
-      console.log("*** intersections", intersections)
-      // if there are intersections, send a local push nontification
+    // ack the message
+    yield call(ackMessage, message["message_id"]);
 
-      // ack the message
-      // yield call(ackMessage, message.id);
+    if (closestIntersection) {
 
-      // TODO: mark message as "read" locally
-      
-    });
+      // if there are intersections, save it as an alert so it shows up in the notifications section
+      // TODO: localization, move to a "view"
+      let notification = {
+        displayMessage: `On ${epochToDisplayString(closestIntersection.time)} you were within proximity of ${distanceToDisplay(closestIntersection.distance)} of a reported COVID-19 case. We would like to know how you are feeling.`,
+        intersection: closestIntersection,
+        message,
+        id: message["message_id"], // for now just use the message id
+      };
+
+      // store the notification for display in-app
+      yield put(saveNotification(notification));
+
+      // send a local push nontification
+      console.log("*** TODO: send push notification here: ", notification.displayMessage);
+    }
   } catch (error) {
     console.error("Failed fetching messages, error: ", error);
     yield put(routeTo(Pages.HOME));

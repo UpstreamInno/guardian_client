@@ -43,16 +43,13 @@ async function getMessages() {
       headers: DEFAULT_HEADERS,
     })
     .then((response) => response.json())
-    .then((data) => {
-      // messages API is returning a single message for some
-      return resolve({messages: [data]});
-    })
+    .then((data) => resolve(data))
     .catch((error) => reject(error));
   });
 };
 
 async function ackMessage(messageId) {
-  const body = JSON.stringify({ messageId });
+  const body = JSON.stringify({ message_id: messageId });
 
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/messages/ack`, {

@@ -2,11 +2,12 @@
   "common": {
     "header": "Header",
     "guardian": "Guardian",
-    "debug_menu": "Debug Menu {{date, DD MMM YY}}",
+    "debug_menu": "Debug Menu",
     "enable_background_location":"Enable background location",
     "phone_number":"Phone Number:",
     "user_phone_from_store":"Confirm your phone number. This will only be used for",
     "register":"Register",
-    "home_title":"home"
+    "home_title":"home",
+    "proximity_alert": "At {{time}} you were within proximity of {{distance}} of a reported COVID-19 case. We would like to know how you are feeling."
   }
 }
