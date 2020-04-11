@@ -29,7 +29,7 @@ const date = {
      */
     format(date, format) {
         return moment(date).format(format);
-    }
+    },
 };
 
 export default date;

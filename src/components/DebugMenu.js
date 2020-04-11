@@ -32,39 +32,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Pages } from "Components/GuardianContainer"
 
-const styles = StyleSheet.create({
-  container: {
-    paddingLeft: "40px",
-    paddingTop: "20px",
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  row: {
-    flexDirection: "row",
-  },
-  keyContainer: {
-    flex: 0.2,
-    borderWidth: 1,
-    borderColor: "#CECECE",
-    paddingLeft: "10px",
-  },
-  valueContainer: {
-    flex: 0.7,
-    borderWidth: 1,
-    borderColor: "#CECECE",
-    paddingLeft: "10px",
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  textArea: {
-    borderColor: 'gray',
-    borderWidth: 1,
-  }
-});
-
 const DebugMenu = () => {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
@@ -91,7 +58,7 @@ const DebugMenu = () => {
       dispatch(setUserSignUpData({ registrationCode: code, registrationId: id }))
     })
   }
-  
+
   const onSignIn = () => {
     signIn({
       registrationId: state.registrationId, 
@@ -163,7 +130,7 @@ const DebugMenu = () => {
           onPress={() => dispatch(routeTo(Pages.HOME))}
       />
 
-      <Text>{t('debug_menu', {date: new Date()})}</Text>
+      <Text>{t('debug_menu')}</Text>
       <Text>User/Device Inputs</Text>
 
       <View style={styles.row}>
@@ -247,7 +214,7 @@ function row({key, value, onPress}) {
           <Text>{key}</Text>
         </View>
         <View style={styles.valueContainer} >
-          <Text>{value}</Text>
+          <Text>{typeof value == "object" ? JSON.stringify(value, null, 2) : value}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -283,5 +250,38 @@ function routeToRow(key, onSelect){
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: "40px",
+    paddingTop: "20px",
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  row: {
+    flexDirection: "row",
+  },
+  keyContainer: {
+    flex: 0.2,
+    borderWidth: 1,
+    borderColor: "#CECECE",
+    paddingLeft: "10px",
+  },
+  valueContainer: {
+    flex: 0.7,
+    borderWidth: 1,
+    borderColor: "#CECECE",
+    paddingLeft: "10px",
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+  },
+  textArea: {
+    borderColor: 'gray',
+    borderWidth: 1,
+  }
+});
 
 export default DebugMenu;

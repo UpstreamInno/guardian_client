@@ -1,9 +1,11 @@
 export const USER_SIGNUP = "USER_SIGNUP";
 export const USER_SIGNUP_VERIFY = "USER_SIGNUP_VERIFY";
-export const REPORT_PRECISE_PATH = "REPORT_PRECISE_PATH"
+export const REPORT_PRECISE_PATH = "REPORT_PRECISE_PATH";
 export const FETCH_MESSAGES = "FETCH_MESSAGES";
 
 export const ROUTE_TO = "ROUTE_TO";
+export const SAVE_NOTIFICATION = "SAVE_NOTIFICATION";
+export const MARK_NOTIFICATION_READ = "MARK_NOTIFICATION_READ";
 export const SET_USER_PHONE = "SET_USER_PHONE";
 export const SET_USER_SESSION = "SET_USER_SESSION";
 export const SET_USER_SIGNUP_DATA = "SET_USER_SIGNUP_DATA";
@@ -79,6 +81,24 @@ export function setUserPhone(userPhone) {
     type: SET_USER_PHONE,
     payload: {
       userPhone,
+    },
+  };
+}
+
+export function saveNotification(notification) {
+  return {
+    type: SAVE_NOTIFICATION,
+    payload: {
+      notification,
+    },
+  };
+}
+
+export function markNotificationRead(notificationId) {
+  return {
+    type: MARK_NOTIFICATION_READ,
+    payload: {
+      notificationId,
     },
   };
 }

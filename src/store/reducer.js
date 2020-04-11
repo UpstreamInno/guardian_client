@@ -1,5 +1,6 @@
 import {
   ROUTE_TO,
+  SAVE_NOTIFICATION,
   SET_USER_LAST_REGION_PATH_SENT_TIME,
   SET_USER_LAST_REPORTED_PATH,
   SET_USER_PHONE,
@@ -20,6 +21,7 @@ export const initialState = {
   lastReportPathId: null,
   currentPage: Pages.DebugMenu,
   previousPage: null,
+  notifications: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -39,6 +41,16 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         sessionId: (action.payload && action.payload.sessionId) || null,
+      };
+    case SAVE_NOTIFICATION:
+      const notification = (action.payload && action.payload.notification) || null;
+      if (notification == null) {
+        return { ...state };
+      }
+
+      return {
+        ...state,
+        notifications: [...state.notifications, notification]
       };
     case ROUTE_TO:
       let previousPage = (action.payload && action.payload.previousPage) || state.page
