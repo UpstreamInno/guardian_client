@@ -7,6 +7,8 @@ import {
 import React from "react";
 import Constants from "expo-constants";
 import { t } from 'Lib/i18n';
+import { useDispatch, useSelector } from "react-redux";
+import { routeTo } from "Store/actions";
 import { Pages } from "Components/GuardianContainer";
 
 const styles = StyleSheet.create({
@@ -58,6 +60,9 @@ const styles = StyleSheet.create({
 });
 
 const SurveycompleteScreen = () => {
+  const { currentPage } = useSelector(state => state);
+  const dispatch = useDispatch();
+  const returnHome = () => dispatch(routeTo(Pages.HOME));
 
   return (
     <View style={styles.outer}>
@@ -68,7 +73,7 @@ const SurveycompleteScreen = () => {
         <Text style={styles.paragraph}>{t("Thank you for completing the survey. Remember, you are in control of your data, and your health. Stay safe!")}</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress = {returnHome}>
           <Text style={styles.buttonText}>{t("Return Home")}</Text>
         </TouchableOpacity>
       </View>

@@ -8,6 +8,8 @@ import React from "react";
 import Constants from "expo-constants";
 import { t } from 'Lib/i18n';
 import { Pages } from "Components/GuardianContainer";
+import { useDispatch, useSelector } from "react-redux";
+import { routeTo } from "Store/actions";
 
 const styles = StyleSheet.create({
   outer:{
@@ -58,6 +60,9 @@ const styles = StyleSheet.create({
 });
 
 const SignupcompleteScreen = () => {
+  const { currentPage } = useSelector(state => state);
+  const dispatch = useDispatch();
+  const toLocationScreen = () => dispatch(routeTo(Pages.LocationScreen));
 
   return (
     <View style={styles.outer}>
@@ -68,7 +73,7 @@ const SignupcompleteScreen = () => {
         <Text style={styles.paragraph}>{t("Thank you for signing up. Remember, you are in control of your data, and your health. Stay safe!")}</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress = {toLocationScreen}>
           <Text style={styles.buttonText}>{t("Ok, use my location")}</Text>
         </TouchableOpacity>
       </View>
