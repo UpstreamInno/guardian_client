@@ -21,10 +21,7 @@ import {
 } from "Store/actions";
 import {
   getPath,
-  getMessages,
-  ackMessage,
   sendRegionPath,
-  reportPath,
   signIn,
   signUp, 
 } from "Lib/Api";
@@ -38,7 +35,6 @@ const DebugMenu = () => {
 
   // input states, used only for this page to simulate UI input
   const [inputPhone, setInputPhone] = useState('1123456789');
-  const [messageId, setMessageId] = useState('');
   
   // TODO: this should be computed from precise path!
   const [inputRegionPath, setInputRegionPath] = useState(JSON.stringify([
@@ -85,7 +81,7 @@ const DebugMenu = () => {
       console.log("sendRegionPath response, ignoring...", data)
 
       // store the last sent path time
-      if(data.errors.length === 0) {
+      if (data.errors.length === 0) {
         dispatch(setUserLastRegionPathSentTime({ time: Date.now() }));
       }
     })
@@ -106,20 +102,8 @@ const DebugMenu = () => {
     dispatch(routeTo(page));
   }
 
-  {actionRow("ackMessage", "GET /messages/ack", onAckMessage)}
-
   const onGetMessages = () => {
     dispatch(fetchMessages());
-  }
-
-  const onAckMessage = () => {
-    getMessages(messageId).then((data) =>{
-      console.log(data)
-      // const { code, id } = data;
-
-      // // store registration code and id for the signup request
-      // dispatch(setUserSignUpData({ registrationCode: code, registrationId: id }))
-    })
   }
 
   return (
@@ -142,18 +126,6 @@ const DebugMenu = () => {
             style={styles.input}
             onChangeText={setInputPhone}
             value={inputPhone} 
-          />
-        </View>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.keyContainer} >
-          <Text>Message id to ack</Text>
-        </View>
-        <View style={styles.valueContainer} >
-          <TextInput
-            style={styles.input}
-            onChangeText={setMessageId}
-            value={messageId} 
           />
         </View>
       </View>
@@ -192,13 +164,12 @@ const DebugMenu = () => {
       {actionRow("sendPath (region)", "POST /path", onSendRegionPath)}
       {actionRow("reportPath (precise)", "POST /report_path", onReportPath)}
       {actionRow("getMessages", "GET /messages", onGetMessages)}
-      {actionRow("ackMessage", "GET /messages/ack", onAckMessage)}
       {actionRow("[DEBUG] get path", "GET /path", onGetPath)}
       {routeToRow("[DEBUG] route to", onRouteTo)}
 
       {actionRow("resetStore", "resets the store to initial values", () => dispatch(resetStore()))}
 
-      <Text>Store</Text>
+      <Text>Redux Store (in memory)</Text>
       {
         Object.keys(state).map((key) => row({key, value: state[key]}))
       }
