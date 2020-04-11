@@ -3,6 +3,7 @@ import { Pages } from "Components/GuardianContainer"
 import { Paths } from "Lib/Paths"
 import { epochToDisplayString, distanceToDisplay } from "Lib/PathHelpers"
 import { t } from 'Lib/i18n';
+import {sendLocalPush} from 'Lib/Notifications';
 
 import {
   getMessages,
@@ -97,7 +98,7 @@ function* fetchMessages(action) {
       yield put(saveNotification(notification));
 
       // send a local push nontification
-      console.log("*** TODO: send push notification here: ", notification.displayMessage);
+      sendLocalPush(t('proximity_alert_title'), notification.displayMessage)
     }
   } catch (error) {
     console.error("Failed fetching messages, error: ", error);
@@ -109,11 +110,11 @@ function* onReportPrecisePath(action) {
   try {
     const { path } = action.payload;
     const { pathId } = yield call(reportPath, {points: path});
-    
+
     yield put(setUserLastReportedPath({ pathId, time: Date.now() }));
     yield call(reportTestResults, pathId);
     yield call(reportSurvey, pathId);
-    
+
   } catch (error) {
     console.error("Failed reportin path, error: ", error);
     yield put(routeTo(Pages.HOME));

@@ -8,6 +8,8 @@
     "user_phone_from_store":"Confirm your phone number. This will only be used for",
     "register":"Register",
     "home_title":"home",
-    "proximity_alert": "At {{time}} you were within proximity of {{distance}} of a reported COVID-19 case. We would like to know how you are feeling."
+    "proximity_alert": "At {{time}} you were within proximity of {{distance}} of a reported COVID-19 case. We would like to know how you are feeling.",
+    "proximity_alert_title": "Exposure alert",
+    "permission_alert": "We need your permission to alert you in case you have been exposed!"
   }
 }
