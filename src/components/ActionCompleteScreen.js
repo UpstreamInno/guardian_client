@@ -7,9 +7,9 @@ import {
 import React from "react";
 import Constants from "expo-constants";
 import { t } from 'Lib/i18n';
+import { Pages } from "Components/GuardianContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { routeTo } from "Store/actions";
-import { Pages } from "Components/GuardianContainer";
 
 const styles = StyleSheet.create({
   outer:{
@@ -59,26 +59,36 @@ const styles = StyleSheet.create({
   },
 });
 
-const SurveycompleteScreen = () => {
+const ActionCompleteScreen = () => {
   const { currentPage } = useSelector(state => state);
   const dispatch = useDispatch();
-  const returnHome = () => dispatch(routeTo(Pages.HOME));
+  let header, body, button, nextScreen;
+  if (currentPage == Pages.SIGNUP_COMPLETE){
+    header = t("Signup successful!");
+    body = t("Thank you for signing up. Remember, you are in control of your data, and your health. Stay safe!");
+    button = t("Ok, use my location");
+    nextScreen = () => dispatch(routeTo(Pages.CONSENT_LOCATION));
+  } else if (currentPage == Pages.SURVEY_COMPLETE){
+    header = t("Survey Complete!");
+    body = t("Thank you for completing the survey. Remember, you are in control of your data, and your health. Stay safe!");
+    button = t("Return Home");
+    nextScreen = () => dispatch(routeTo(Pages.HOME));
+  }
 
   return (
     <View style={styles.outer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.welcome}> {t("Survey Complete!")} </Text>
+        <Text style={styles.welcome}> {header} </Text>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.paragraph}>{t("Thank you for completing the survey. Remember, you are in control of your data, and your health. Stay safe!")}</Text>
+        <Text style={styles.paragraph}>{body}</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress = {returnHome}>
-          <Text style={styles.buttonText}>{t("Return Home")}</Text>
+        <TouchableOpacity style={styles.button} onPress = {nextScreen}>
+          <Text style={styles.buttonText}>{button}</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-
 };
-export default SurveycompleteScreen;
+export default ActionCompleteScreen;
