@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CryptoJS from "react-native-crypto-js";
+import * as SecureStore from 'expo-secure-store';
 import moment from 'moment'
 
 import {
