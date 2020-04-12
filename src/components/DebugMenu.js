@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { t } from 'Lib/i18n';
-import { 
+import {
   setUserLastRegionPathSentTime,
   reportPrecisePath,
   fetchMessages,
@@ -23,7 +23,7 @@ import {
   getPath,
   sendRegionPath,
   signIn,
-  signUp, 
+  signUp,
 } from "Lib/Api";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -35,7 +35,7 @@ const DebugMenu = () => {
 
   // input states, used only for this page to simulate UI input
   const [inputPhone, setInputPhone] = useState('1123456789');
-  
+
   // TODO: this should be computed from precise path!
   const [inputRegionPath, setInputRegionPath] = useState(JSON.stringify([
     ["47.60", "-122.33", "2020-04-02T00:18:31Z"],
@@ -57,7 +57,7 @@ const DebugMenu = () => {
 
   const onSignIn = () => {
     signIn({
-      registrationId: state.registrationId, 
+      registrationId: state.registrationId,
       registrationCode: state.registrationCode,
     }).then((data) =>{
       const { sessionId } = data;
@@ -125,7 +125,7 @@ const DebugMenu = () => {
           <TextInput
             style={styles.input}
             onChangeText={setInputPhone}
-            value={inputPhone} 
+            value={inputPhone}
           />
         </View>
       </View>
@@ -139,7 +139,7 @@ const DebugMenu = () => {
             numberOfLines={6}
             style={styles.textArea}
             onChangeText={setInputRegionPath}
-            value={inputRegionPath} 
+            value={inputRegionPath}
           />
         </View>
       </View>
@@ -224,8 +224,8 @@ function routeToRow(key, onSelect){
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: "40px",
-    paddingTop: "20px",
+    paddingLeft: 40,
+    paddingTop: 20,
     flex: 1,
     backgroundColor: "#fff",
   },
@@ -236,13 +236,13 @@ const styles = StyleSheet.create({
     flex: 0.2,
     borderWidth: 1,
     borderColor: "#CECECE",
-    paddingLeft: "10px",
+    paddingLeft: 10,
   },
   valueContainer: {
     flex: 0.7,
     borderWidth: 1,
     borderColor: "#CECECE",
-    paddingLeft: "10px",
+    paddingLeft: 10,
   },
   input: {
     height: 40,

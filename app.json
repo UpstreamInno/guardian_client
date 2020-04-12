@@ -21,6 +21,10 @@
         "NSLocationAlwaysAndWhenInUseUsageDescription": "",
         "NSLocationWhenInUseUsageDescription": ""
       }
+    },
+    "android": {
+      "package": "com.covidguardianclient",
+      "versionCode": 1
     }
   }
 }
