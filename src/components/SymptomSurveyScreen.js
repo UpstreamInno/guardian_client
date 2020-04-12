@@ -77,32 +77,46 @@ const ReportScreen = () => {
 
   const toggleSwitch = () => {};
 
-  const SwitchRow = ({ symptom }) => {
-    <View style={styles.row}>
-      <Switch
-        trackColor={TRACK_COLOR}
-        thumbColor={THUMB_COLOR}
-        ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-        onValueChange={(v) => setSymptoms({ ...symptoms, [symptom]: v })}
-        value={symptoms[symptom]}
-      />
-      <Text style={styles.label}>Loss of Sense of Smell</Text>
-    </View>;
+  const SwitchRow = ({ symptom, userFriendlyText }) => {
+    return (
+      <View style={styles.row}>
+        <Switch
+          trackColor={TRACK_COLOR}
+          thumbColor={THUMB_COLOR}
+          ios_backgroundColor={IOS_SWITCH_BG_COLOR}
+          onValueChange={(v) => setSymptoms({ ...symptoms, [symptom]: v })}
+          value={symptoms[symptom]}
+        />
+        <Text style={styles.label}>{userFriendlyText}</Text>
+      </View>
+    );
   };
 
   return (
-    <LinearGradient colors={["#000", "#000"]} style={styles.container}>
+    <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
       <Text style={styles.title}>
         Since the exposure, have you felt any of the following?
       </Text>
       <View style={styles.switchContainer}>
-        <SwitchRow symptom="lossOfSenseOfSmell" />
-        <SwitchRow symptom="cough" />
-        <SwitchRow symptom="fever" />
-        <SwitchRow symptom="tiredness" />
-        <SwitchRow symptom="difficultyBreathing" />
-        <SwitchRow symptom="pressureInChest" />
-        <SwitchRow symptom="testedPositive" />
+        <SwitchRow
+          symptom="lossOfSenseOfSmell"
+          userFriendlyText="Loss of Sense of Smell"
+        />
+        <SwitchRow symptom="cough" userFriendlyText="Cough" />
+        <SwitchRow symptom="fever" userFriendlyText="Fever" />
+        <SwitchRow symptom="tiredness" userFriendlyText="Tiredness" />
+        <SwitchRow
+          symptom="difficultyBreathing"
+          userFriendlyText="Difficulty Breathing"
+        />
+        <SwitchRow
+          symptom="pressureInChest"
+          userFriendlyText="Pressure in Chest"
+        />
+        <SwitchRow
+          symptom="testedPositive"
+          userFriendlyText="Tested Positive"
+        />
       </View>
       <View style={styles.submitContainer}>
         <TouchableOpacity onPress={onSubmit}>
