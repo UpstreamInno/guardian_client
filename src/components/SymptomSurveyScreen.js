@@ -100,7 +100,7 @@ const ReportScreen = () => {
           value={symptoms[symptom]}
           style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
         />
-        <Text style={styles.label}>{userFriendlyText}</Text>
+        <Text style={styles.label}>{t(userFriendlyText)}</Text>
       </View>
     );
   };
