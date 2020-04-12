@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useDispatch } from "react-redux";
 
 const styles = StyleSheet.create({
   container: {
@@ -83,7 +84,9 @@ const IOS_SWITCH_BG_COLOR = "#696969";
 const ReportScreen = () => {
   const [symptoms, setSymptoms] = React.useState({});
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    () => useDispatch({ symptoms });
+  };
 
   const SwitchRow = ({ symptom, userFriendlyText }) => {
     return (
