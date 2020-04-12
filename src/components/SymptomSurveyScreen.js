@@ -108,8 +108,9 @@ const ReportScreen = () => {
   return (
     <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
       <Text style={styles.title}>
-        Please check any of the following symptoms you have experianced since
-        your exposure
+        {t(
+          "Please check any of the following symptoms you have experianced since your exposure"
+        )}
       </Text>
       <View style={styles.switchContainer}>
         <SwitchRow
