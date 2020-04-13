@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CryptoJS from "react-native-crypto-js";
 import * as SecureStore from 'expo-secure-store';
-import moment from 'moment'
 
 import {
   Button,
-  Picker,
+  Picker, 
   StyleSheet,
   Text,
   TextInput,
@@ -27,6 +26,14 @@ import {
   signIn,
   signUp, 
 } from "Lib/Api";
+import {
+  getKey,
+  getMostRecentLocations,
+  addLocationToDatabase,
+  saveArray,
+  remove
+} from "Lib/Storage";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { Pages } from "Components/GuardianContainer"
@@ -127,139 +134,57 @@ const DebugMenu = () => {
     dispatch(routeTo(page));
   }
 
-  const secureStoreOptions = {
-      keychainService: "credentials",
-      keychainAccessible: SecureStore.ALWAYS // iOS only
-  };
+  useEffect(() => {
 
-  getKey = async () => {
-    try {
-      SecureStore.getItemAsync("keystore", secureStoreOptions)
-      .then((itemValue) => {
-        if(itemValue == null){
-          itemValue = 'test-key'//todo fix bug -> key not fetched from storer
-        }
-        return itemValue;
-      }).catch((error) => {
-          console.log("SecureStore: An error occurred while loading the item...", error);
-          // return null;
-          return null;//todo remove this
-      });
-    } catch (e) {
-       // return null;
-       return null;//todo remove this
-      // console.log(e);
-    }
-  };
+  //   // var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
+  //   // alert(ciphertext.toString());
 
-  setKey = async () => {
-    try {
-      SecureStore.setItemAsync("keystore", 'test-key', secureStoreOptions) //todo set key
-      .then(() => {
-          console.log("SecureStore: Successfully stored item!");
-          return "SecureStore: Successfully stored item!";
-      }).catch((error) => {
-          console.log("SecureStore: An error occurred while storing the item...", error);
-          return "SecureStore: An error occurred while storing the item...;";
-      });
-    } catch (e) {
-      // console.log(e);
-    }
-  };
+  //   // get secret key from secure store
+  //   // let ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123').toString();
+  //   // // Decrypt
+  //   // let bytes  = CryptoJS.AES.decrsypt(ciphertext, 'secret key 123');
+  //   // let originalText = bytes.toString(CryptoJS.enc.Utf8);
+  //   // alert(originalText);
 
-  load = async (STORAGE_KEY) => {
-    try {
-      const result = await AsyncStorage.getItem(STORAGE_KEY);
-      // var key = await this.getKey();
-      // console.log("load key", key);
-      // let bytes  = CryptoJS.AES.decrypt(result, key);
-      // let originalResult = bytes.toString(CryptoJS.enc.Utf8);
-      return result;
-    } catch (e) {
-      console.error('Failed to load .', e)
-      return [];
-    }
-  }
+    async function startUp() {
+      // var key = await getKey();
+      // alert(key);
+  //     // You can await here
+      // var addLocation = await addLocationToDatabase(["47.60", "-122.33", "2020-04-12T00:18:31Z"])
+      var locations = await getMostRecentLocations(9);
 
-  saveArray = async (STORAGE_KEY, array) => {
-    try {
-      var string = JSON.stringify(array, null, array.length);
-      // const key = await this.getKey()
-      // await AsyncStorage.setItem(STORAGE_KEY, CryptoJS.AES.encrypt(string, key).toString())
-      await AsyncStorage.setItem(STORAGE_KEY, string);
-      // this.setState({name})
-      return 'object saved';
-    } catch (e) {
-      console.error('Failed to save name.');
-      return 'failed to save object';
-    }
-  }
+      // var sds = remove('locations');
 
-  sortLocationByTime =  async (locations) => {
-    console.log("before sort", locations);
-    for(var i = 0; i < locations.length - 1; i++){
-      for(var j = i + 1; j < locations.length; j++){
-          if(moment(locations[i][2]).format("x") < moment(locations[j][2]).format("x")){
-            var aux = locations[i];
-            locations[i] = locations[j];
-            locations[j] = aux;
-          }
-      }
-    }
-    console.log("sorted", locations);
-    return locations;
-  }
+  //     // await this.deleteLocationsAfterTime(1586114180640);
+  //     var keyStatus = await this.setKey();
+  //     // var key = await this.getKey();
+  //     // console.log("load key", key);
+  //     var locations = await load('locations');
 
-  filterLocationAfterTime = async(locations, time) => {
-    var result = [];
-    for(var i = 0; i < locations.length; i++){
-      if(moment(locations[i][2]).format("x") > time){
-        result.push(locations[i]);
-      }
-    }
-    return result;
-  }
+      // locations = JSON.parse(locations);
+  //     // // locations = await sortLocationByTime(locations);
+  //     // // for(var i = 0; i < locations.length; i++){
+  //     // //   // console.log(locations[i][2]);
+  //     // // }
+      console.log("locationsss", locations);
+    } 
+    startUp();
 
-  getMostRecentLocations = async(latest) => { //latest X locations
-    var locations = await load('locations');
-    locations = JSON.parse(locations);
-    locations = await sortLocationByTime(locations);
-    locations = locations.slice(0, latest);
-    return locations;
-  }
+  //   // console.log(load('locations'));
+  //   // alert(JSON.stringify(load('locations')));
+  //   // alert(moment("2020-04-02T00:18:31Z").format("x"));
+  //   // console.log(moment("2020-04-02T00:18:31Z").format("x"));
 
-  getLocationsWithinDays = async(days) => { // last X days of location data
-    var locations = await load('locations');
-    locations = JSON.parse(locations);
-    locations = await sortLocationByTime(locations);
-    var time = Date.now() - days * 24 * 3600 * 1000;
-    locations = await filterLocationAfterTime(locations, time);
-    return locations;
-  }
+  //   // alert("useEffect");
+  //   // this.remember();
+  //   // this.read();
+  //   // this.save('locations', JSON.stringify([
+  //   //   ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
+  //   //   ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
+  //   // ], null, 2))
+  //   // this.load('locations');
+  })
 
-  addLocationToDatabase = async(location) => { // add location to database location->["47.60", "-122.33", "2020-04-02T00:18:31Z"]
-    var locations = await load('locations');
-    locations = JSON.parse(locations);
-    locations.push(location);
-    locations = await sortLocationByTime(locations);
-    var saveStatus = await saveArray('locations', locations)
-  } 
-
-  deleteLocationsAfterTime = async(time) => {// delete locations by time(milliseconds)
-    var locations = await load('locations');
-    locations = JSON.parse(locations);
-    locations = await sortLocationByTime(locations);
-    locations = await filterLocationAfterTime(locations, time);
-    var saveStatus = await saveArray('locations', locations)
-  }
-
-  deleteLocationsAfterDate = async(date) => { //delete locations by date ex: "2020-04-02T00:18:31Z"
-    var locations = await load('locations');
-    locations = JSON.parse(locations);
-    locations = await sortLocationByTime(locations);
-    locations = await filterLocationAfterTime(locations, moment(date).format('x'));
-    var saveStatus = await saveArray('locations', locations)
-  }
 
   return (
     <View style={styles.container}>
