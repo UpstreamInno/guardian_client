@@ -15,16 +15,14 @@ import {
   setUserLastRegionPathSentTime,
   reportPrecisePath,
   fetchMessages,
-  setUserSignUpData,
-  setUserSession,
+  userSignUp,
+  userSignUpVerify,
   resetStore,
   routeTo,
 } from "Store/actions";
 import {
   getPath,
   sendRegionPath,
-  signIn,
-  signUp,
 } from "Lib/Api";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -48,23 +46,11 @@ const DebugMenu = () => {
   ], null, 2));
 
   const onSignUp = () => {
-    signUp(inputPhone).then((data) =>{
-      const { code, id } = data;
-
-      // store registration code and id for the signup request
-      dispatch(setUserSignUpData({ registrationCode: code, registrationId: id }))
-    })
+    dispatch(userSignUp(inputPhone, false));
   }
 
   const onSignIn = () => {
-    signIn({
-      registrationId: state.registrationId,
-      registrationCode: state.registrationCode,
-    }).then((data) =>{
-      const { sessionId } = data;
-      // store session information for subsequent requests
-      dispatch(setUserSession({ sessionId }))
-    })
+    dispatch(userSignUpVerify(state.registrationCode, false));
   }
 
   const onSendRegionPath = () => {
@@ -167,13 +153,13 @@ const DebugMenu = () => {
       <Text>{t('debug_menu')}</Text>
 
       <Text>Actions</Text>
-      {actionRow("1. signUp", "POST /sign_up", onSignUp)}
-      {actionRow("2. signIn", "POST /sign_in", onSignIn)}
-      {actionRow("sendPath (region)", "POST /path", onSendRegionPath)}
-      {actionRow("reportPath (precise)", "POST /report_path", onReportPath)}
-      {actionRow("getMessages", "GET /messages", onGetMessages)}
-      {actionRow("[DEBUG] get path", "GET /path", onGetPath)}
-      {routeToRow("[DEBUG] route to", onRouteTo)}
+      {actionRow("Sign Up", "POST /sign_up", onSignUp)}
+      {actionRow("Sign In", "POST /sign_in", onSignIn)}
+      {actionRow("Send Region Change", "POST /path", onSendRegionPath)}
+      {actionRow("Report Full Path", "POST /report_path", onReportPath)}
+      {actionRow("Get/Process Messages", "GET /messages", onGetMessages)}
+      {actionRow("[DEBUG] Get path", "GET /path", onGetPath)}
+      {routeToRow("[DEBUG] Route to", onRouteTo)}
 
       {actionRow("resetStore", "resets the store to initial values", () => dispatch(resetStore()))}
 
@@ -196,12 +182,22 @@ function row({key, value, onPress}) {
           <Text>{key}</Text>
         </View>
         <View style={styles.valueContainer} >
-          <Text>{typeof value == "object" ? JSON.stringify(value, null, 2) : value}</Text>
+          <Text>{storeValueText(value)}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 }
+
+function storeValueText(value) {
+  if (typeof value == "object") {
+    return JSON.stringify(value, null, 2)
+  } else if (typeof value == "boolean") {
+    return value.toString();
+  }
+  
+  return value
+} 
 
 function actionRow(action, description, onPress) {
   return row({key: action, value: description, onPress})

@@ -28,13 +28,18 @@ import {
 } from "../store/actions"
 
 function* userSignUp(action) {
-  const { userPhone } = action.payload;
+  const { 
+    userPhone,
+    redirect,
+   } = action.payload;
 
   yield put(setUserPhone(userPhone));
   try {
     const { id, code } = yield call(signUp, userPhone);
     yield put(setUserSignUpData({ registrationCode: code, registrationId: id }));
-    yield put(routeTo(Pages.SIGNUP_VERIFY));
+    if (redirect) {
+      yield put(routeTo(Pages.SIGNUP_VERIFY));
+    }
   } catch (error) {
     console.error("Failed signUp, error: ", error);
     yield put(routeTo(Pages.HOME));
@@ -42,14 +47,20 @@ function* userSignUp(action) {
 }
 
 function* userVerify(action) {
-  const { registrationCode } = action.payload;
+  const {
+    registrationCode,
+    redirect,
+  } = action.payload;
   const { registrationId } = yield select(state => state);
 
   try {
-    const { sessionId } = yield call(signIn, {registrationCode, registrationId});
-    if (sessionId) {
-      yield put(setUserSession({ sessionId }));
-      yield put(routeTo(Pages.CONSENT_LOCATION));
+    const isLoggedIn = yield call(signIn, {registrationCode, registrationId});
+    console.log("isLoggedIn", isLoggedIn);
+    if (isLoggedIn) {
+      yield put(setUserSession({sessionId: "true"}));
+      if (redirect) {
+        yield put(routeTo(Pages.CONSENT_LOCATION));
+      }
     } else {
       // unable to validate code, send them back to try again
       console.error("unable to validate code");

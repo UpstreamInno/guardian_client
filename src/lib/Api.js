@@ -94,7 +94,7 @@ async function signIn({registrationId, registrationCode}) {
     })
     .then((response) => response.json())
     .then((data) => {
-      return resolve({ sessionId: data["user_id"] })
+      return resolve(data["status"] === "ok");
     })
     .catch((error) => reject(error));
   });

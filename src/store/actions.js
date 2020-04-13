@@ -18,21 +18,23 @@ export const RESET_STORE = "RESET_STORE";
  */
 
 // signup request
-export function userSignUp(userPhone) {
+export function userSignUp(userPhone, redirect = true) {
   return {
     type: USER_SIGNUP,
     payload: {
       userPhone,
+      redirect,
     },
   };
 }
 
 // signup verification request
-export function userSignUpVerify(registrationCode) {
+export function userSignUpVerify(registrationCode, redirect = true) {
   return {
     type: USER_SIGNUP_VERIFY,
     payload: {
       registrationCode,
+      redirect,
     },
   };
 }
@@ -103,7 +105,7 @@ export function markNotificationRead(notificationId) {
   };
 }
 
-export function setUserSession({ sessionId, sessionPhone }) {
+export function setUserSession({ sessionId }) {
   return {
     type: SET_USER_SESSION,
     payload: {
