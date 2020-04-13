@@ -1,7 +1,7 @@
 import React from "react";
 import { t } from "Lib/i18n";
 import { routeTo } from "Store/actions";
-import { Pages } from "Components/GuardianContainer";
+import { Pages } from "Lib/Pages";
 import {
   ScrollView,
   StyleSheet,
