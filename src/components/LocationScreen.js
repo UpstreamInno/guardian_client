@@ -58,14 +58,24 @@ const styles = StyleSheet.create({
 
 const TASK_GUARDIAN_LOCATION = "guardian_location";
 
-TaskManager.defineTask(TASK_GUARDIAN_LOCATION, ({ data, error }) => {
+TaskManager.defineTask(TASK_GUARDIAN_LOCATION, async({ data, error }) => {
+  console.log("enter TASK_GUARDIAN_LOCATION", data);
   if (error) {
+    alert(error);
     return;
   }
   if (data) {
     const { locations } = data;
-    // TODO: AsyncStorage
-    // TODO: SecureStorage
+    if(locations.length > 0){
+      for(var i = 0; i < locations.length; i++){
+        var location = locations[i];
+        let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
+        var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
+        await addLocationToDatabase(locationObject); // add location to db
+      }
+      var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
+      // console.log("most recent - locations updates", JSON.stringify(locationsInDb));
+    }
   }
 });
 
@@ -96,18 +106,15 @@ class LocationScreen extends Component {
   watchLocation = async () => {
     // alert("watchLocation");
     let location = await Location.getCurrentPositionAsync({});
-    console.log(location);
     // alert(JSON.stringify(location));
     this.setState({ location });
+    
     let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
-    var locationObject = [JSON.stringify(location.coords.latitude), 
-    JSON.stringify(location.coords.longitude), date];
-
-    console.log(locationObject);
-    await addLocationToDatabase(locationObject); // add location to db
-    var locations = await getMostRecentLocations(10); //get most recent 10 locations
-    console.log("most recent", JSON.stringify(locations));
-    //store location
+    var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
+    await addLocationToDatabase(locationObject);
+    // console.log(locationObject);
+    // var locations = await getMostRecentLocations(10); //get most recent 10 locations
+    // console.log("most recent", JSON.stringify(locations));
   };
 
   onPress = async () => {
@@ -127,7 +134,7 @@ class LocationScreen extends Component {
         deferredUpdatesDistance: "20", //meters
         pausesUpdatesAutomatically: true,
       });
-    }
+    } 
   };
 
 

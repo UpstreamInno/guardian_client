@@ -105,10 +105,8 @@ export const setKey = async () => {
 export const load = async (STORAGE_KEY) => {
     try {
       const result = await AsyncStorage.getItem(STORAGE_KEY);
-      console.log("load",result);
       if(result != null ){
         var key = await getKey();
-        console.log("load key", key);
         let bytes  = CryptoJS.AES.decrypt(result, key);
         let originalResult = bytes.toString(CryptoJS.enc.Utf8);
         return originalResult;
@@ -147,7 +145,7 @@ export const remove = async (STORAGE_KEY) => {
 }
 
 export const sortLocationByTime =  async (locations) => {
-    console.log("before sort", locations);
+    // console.log("before sort", locations);
     for(var i = 0; i < locations.length - 1; i++){
       for(var j = i + 1; j < locations.length; j++){
           if(moment(locations[i][2]).format("x") < moment(locations[j][2]).format("x")){
@@ -157,7 +155,7 @@ export const sortLocationByTime =  async (locations) => {
           }
       }
     }
-    console.log("sorted", locations);
+    // console.log("sorted", locations);
     return locations;
 }
 
