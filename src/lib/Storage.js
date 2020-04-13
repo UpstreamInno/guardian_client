@@ -72,19 +72,13 @@ export const getKey = async () => {
     try {
       SecureStore.getItemAsync("keystore", secureStoreOptions)
       .then((itemValue) => {
-        // if(itemValue == null){
-        //   // itemValue = 'test-key'//todo fix bug -> key not fetched from storer
-        // }
         resolve(itemValue);
       }).catch((error) => {
           console.log("SecureStore: An error occurred while loading the item...", error);
-          // return null;
-          resolve(null);//todo remove this
+          resolve(null);
       });
     } catch (e) {
-       // return null;
-      resolve(null);//todo remove this
-      // console.log(e);
+      resolve(null);
     }
   });
 };
@@ -111,15 +105,17 @@ export const setKey = async () => {
 export const load = async (STORAGE_KEY) => {
     try {
       const result = await AsyncStorage.getItem(STORAGE_KEY);
-      console.log(result);
+      console.log("load",result);
       if(result != null ){
         var key = await getKey();
         console.log("load key", key);
         let bytes  = CryptoJS.AES.decrypt(result, key);
         let originalResult = bytes.toString(CryptoJS.enc.Utf8);
+        return originalResult;
+      } else {
+        return result;
       }
   
-      return result;
     } catch (e) {
       console.error('Failed to load .', e)
       return [];

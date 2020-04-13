@@ -16,6 +16,12 @@ import * as WebBrowser from "expo-web-browser";
 import React, { Component } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { t } from 'Lib/i18n';
+import {
+  getMostRecentLocations,
+  addLocationToDatabase,
+} from "Lib/Storage";
+import moment from 'moment';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -88,8 +94,20 @@ class LocationScreen extends Component {
   }
 
   watchLocation = async () => {
+    // alert("watchLocation");
     let location = await Location.getCurrentPositionAsync({});
+    console.log(location);
+    // alert(JSON.stringify(location));
     this.setState({ location });
+    let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
+    var locationObject = [JSON.stringify(location.coords.latitude), 
+    JSON.stringify(location.coords.longitude), date];
+
+    console.log(locationObject);
+    await addLocationToDatabase(locationObject); // add location to db
+    var locations = await getMostRecentLocations(10); //get most recent 10 locations
+    console.log("most recent", JSON.stringify(locations));
+    //store location
   };
 
   onPress = async () => {
@@ -111,6 +129,7 @@ class LocationScreen extends Component {
       });
     }
   };
+
 
   render() {
     let text = "Waiting..";

@@ -27,11 +27,11 @@ import {
   signUp, 
 } from "Lib/Api";
 import {
-  getKey,
   getMostRecentLocations,
+  getLocationsWithinDays,
   addLocationToDatabase,
-  saveArray,
-  remove
+  deleteLocationsAfterTime,
+  deleteLocationsAfterDate,
 } from "Lib/Storage";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -133,58 +133,6 @@ const DebugMenu = () => {
     console.log("navigate to ", page);
     dispatch(routeTo(page));
   }
-
-  useEffect(() => {
-
-  //   // var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
-  //   // alert(ciphertext.toString());
-
-  //   // get secret key from secure store
-  //   // let ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123').toString();
-  //   // // Decrypt
-  //   // let bytes  = CryptoJS.AES.decrsypt(ciphertext, 'secret key 123');
-  //   // let originalText = bytes.toString(CryptoJS.enc.Utf8);
-  //   // alert(originalText);
-
-    async function startUp() {
-      // var key = await getKey();
-      // alert(key);
-  //     // You can await here
-      // var addLocation = await addLocationToDatabase(["47.60", "-122.33", "2020-04-12T00:18:31Z"])
-      var locations = await getMostRecentLocations(9);
-
-      // var sds = remove('locations');
-
-  //     // await this.deleteLocationsAfterTime(1586114180640);
-  //     var keyStatus = await this.setKey();
-  //     // var key = await this.getKey();
-  //     // console.log("load key", key);
-  //     var locations = await load('locations');
-
-      // locations = JSON.parse(locations);
-  //     // // locations = await sortLocationByTime(locations);
-  //     // // for(var i = 0; i < locations.length; i++){
-  //     // //   // console.log(locations[i][2]);
-  //     // // }
-      console.log("locationsss", locations);
-    } 
-    startUp();
-
-  //   // console.log(load('locations'));
-  //   // alert(JSON.stringify(load('locations')));
-  //   // alert(moment("2020-04-02T00:18:31Z").format("x"));
-  //   // console.log(moment("2020-04-02T00:18:31Z").format("x"));
-
-  //   // alert("useEffect");
-  //   // this.remember();
-  //   // this.read();
-  //   // this.save('locations', JSON.stringify([
-  //   //   ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
-  //   //   ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
-  //   // ], null, 2))
-  //   // this.load('locations');
-  })
-
 
   return (
     <View style={styles.container}>
