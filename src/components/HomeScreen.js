@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { t } from 'Lib/i18n';
 import { routeTo } from "Store/actions";
-import { Pages } from "Components/GuardianContainer"
+import { Pages } from "Lib/Pages";
 
 const styles = StyleSheet.create({
   container: {

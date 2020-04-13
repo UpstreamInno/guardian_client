@@ -26,7 +26,7 @@ import {
 } from "Lib/Api";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Pages } from "Components/GuardianContainer"
+import { Pages } from "Lib/Pages";
 
 const DebugMenu = () => {
   const state = useSelector(state => state);
@@ -243,16 +243,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   keyContainer: {
-    flex: 0.3,
+    flex: 0.5,
     borderWidth: 1,
     borderColor: "#CECECE",
-    paddingLeft: 10,
+    paddingLeft: 5,
   },
   valueContainer: {
-    flex: 0.7,
+    flex: 0.5,
     borderWidth: 1,
     borderColor: "#CECECE",
-    paddingLeft: 10,
+    paddingLeft: 5,
   },
   input: {
     height: 40,

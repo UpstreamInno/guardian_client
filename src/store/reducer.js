@@ -9,7 +9,7 @@ import {
   RESET_STORE,
 } from "./actions"
 
-import { Pages } from "Components/GuardianContainer"
+import { Pages } from "Lib/Pages";
 
 export const initialState = {
   userPhone: null,

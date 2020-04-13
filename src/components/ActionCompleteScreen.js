@@ -7,7 +7,7 @@ import {
 import React from "react";
 import Constants from "expo-constants";
 import { t } from 'Lib/i18n';
-import { Pages } from "Components/GuardianContainer";
+import { Pages } from "Lib/Pages";;
 import { useDispatch, useSelector } from "react-redux";
 import { routeTo } from "Store/actions";
 

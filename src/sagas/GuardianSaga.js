@@ -1,5 +1,5 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects'
-import { Pages } from "Components/GuardianContainer"
+import { Pages } from "Lib/Pages";
 import { Paths } from "Lib/Paths"
 import { epochToDisplayString, distanceToDisplay } from "Lib/PathHelpers"
 import { t } from 'Lib/i18n';
@@ -57,7 +57,7 @@ function* userVerify(action) {
     const isLoggedIn = yield call(signIn, {registrationCode, registrationId});
     console.log("isLoggedIn", isLoggedIn);
     if (isLoggedIn) {
-      yield put(setUserSession({sessionId: "true"}));
+      yield put(setUserSession({sessionId: isLoggedIn}));
       if (redirect) {
         yield put(routeTo(Pages.CONSENT_LOCATION));
       }
