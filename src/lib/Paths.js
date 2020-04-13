@@ -2,7 +2,7 @@ import { distance, fuzzyEqual } from "./PathHelpers";
 import { Path } from "./Path";
 
 export const DEFAULT_TIME_IMPRECISON = 30; // integer seconds
-export const DEFAULT_LOCATION_IMPRECISON = 0; // decimal degrees: 1.0° ~ 111km, 0.01° ~ 1.11km, 0.00001° ~ 1.11m
+export const DEFAULT_LOCATION_IMPRECISON = 0.0001; // decimal degrees: 1.0° ~ 111km, 0.01° ~ 1.11km, 0.00001° ~ 1.11m
 
 export class Paths {
 
@@ -50,7 +50,7 @@ export class Paths {
             intersections.push(intersection)
 
             // keep track of closest intersection
-            if (closestIntersection.time === undefined || closestIntersection.time <= intersections.time ) {
+            if (closestIntersection.distance === undefined || closestIntersection.distance <= intersections.distance ) {
               closestIntersection = intersection;
             }
 

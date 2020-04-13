@@ -151,7 +151,7 @@ async function reportTestResults(pathId) {
   });
 
   return new Promise((resolve, reject)=>{
-    fetch(`${CONFIG.API_ENDPOINT}/users/report_test_results`, {
+    fetch(`${CONFIG.API_ENDPOINT}/users/report_test`, {
       method: 'POST',
       headers: DEFAULT_HEADERS,
       body,

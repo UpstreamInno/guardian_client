@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ScrollView,
 } from "react-native";
 
 import { t } from 'Lib/i18n';
@@ -106,57 +107,64 @@ const DebugMenu = () => {
     dispatch(fetchMessages());
   }
 
-  return (
-    <View style={styles.container}>
+  const inputs = () => {
+    return (
+      <>
+        <Text>User/Device Inputs</Text>
+  
+        <View style={styles.row}>
+          <View style={styles.keyContainer} >
+            <Text>(Registration) User Phone </Text>
+          </View>
+          <View style={styles.valueContainer} >
+            <TextInput
+              style={styles.input}
+              onChangeText={setInputPhone}
+              value={inputPhone}
+            />
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.keyContainer} >
+            <Text>Region Path</Text>
+          </View>
+          <View style={styles.valueContainer} >
+            <TextInput
+              multiline={true}
+              numberOfLines={6}
+              style={styles.textArea}
+              onChangeText={setInputRegionPath}
+              value={inputRegionPath}
+            />
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.keyContainer} >
+            <Text>(Device) Device Path</Text>
+          </View>
+          <View style={styles.valueContainer} >
+            <TextInput
+              multiline={true}
+              numberOfLines={6}
+              style={styles.textArea}
+              onChangeText={setinputPrecisePath}
+              value={inputPrecisePath}
+            />
+          </View>
+        </View>
+      </>
+    );
+  };
 
-      <Button
+  return (
+    <ScrollView style={styles.container}>
+
+      <Button style={styles.button}
           title="Start App"
           onPress={() => dispatch(routeTo(Pages.HOME))}
       />
 
       <Text>{t('debug_menu')}</Text>
-      <Text>User/Device Inputs</Text>
-
-      <View style={styles.row}>
-        <View style={styles.keyContainer} >
-          <Text>(Registration) User Phone </Text>
-        </View>
-        <View style={styles.valueContainer} >
-          <TextInput
-            style={styles.input}
-            onChangeText={setInputPhone}
-            value={inputPhone}
-          />
-        </View>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.keyContainer} >
-          <Text>Region Path</Text>
-        </View>
-        <View style={styles.valueContainer} >
-          <TextInput
-            multiline={true}
-            numberOfLines={6}
-            style={styles.textArea}
-            onChangeText={setInputRegionPath}
-            value={inputRegionPath}
-          />
-        </View>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.keyContainer} >
-          <Text>(Device) Device Path</Text>
-        </View>
-        <View style={styles.valueContainer} >
-          <TextInput
-            multiline={true}
-            numberOfLines={6}
-            style={styles.textArea}
-            onChangeText={setinputPrecisePath}
-            value={inputPrecisePath}
-          />
-        </View>
-      </View>
 
       <Text>Actions</Text>
       {actionRow("1. signUp", "POST /sign_up", onSignUp)}
@@ -173,7 +181,10 @@ const DebugMenu = () => {
       {
         Object.keys(state).map((key) => row({key, value: state[key]}))
       }
-    </View>
+
+      {inputs()}
+
+    </ScrollView>
   );
 };
 
@@ -223,17 +234,20 @@ function routeToRow(key, onSelect){
 }
 
 const styles = StyleSheet.create({
+  button: {
+    width: 20,
+  },
   container: {
-    paddingLeft: 40,
-    paddingTop: 20,
     flex: 1,
     backgroundColor: "#fff",
+    paddingHorizontal: 16,
+    paddingVertical: 16,
   },
   row: {
     flexDirection: "row",
   },
   keyContainer: {
-    flex: 0.2,
+    flex: 0.3,
     borderWidth: 1,
     borderColor: "#CECECE",
     paddingLeft: 10,
