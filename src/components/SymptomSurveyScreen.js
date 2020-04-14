@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
+import { FlatList } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
@@ -68,10 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
   },
-  switchBorder: {
-    backgroundColor: "#3e3e3e",
-    borderRadius: 17,
-  },
   switchBorderOff: {
     backgroundColor: null,
   },
@@ -113,30 +110,32 @@ const ReportScreen = () => {
         )}
       </Text>
       <View style={styles.switchContainer}>
-        <SwitchRow
-          symptom="lossOfSenseOfSmell"
-          userFriendlyText="Loss of Sense of Smell"
-        />
-        <SwitchRow symptom="cough" userFriendlyText="Cough" />
-        <SwitchRow symptom="fever" userFriendlyText="Fever" />
-        <SwitchRow symptom="tiredness" userFriendlyText="Tiredness" />
-        <SwitchRow
-          symptom="shortnessOfBreath"
-          userFriendlyText="Shortness of Breath"
-        />
-        <SwitchRow
-          symptom="pressureInChest"
-          userFriendlyText="Pressure in Chest"
-        />
-        <SwitchRow symptom="soreThroat" userFriendlyText="Sore Throat" />
-        <SwitchRow symptom="runnyNose" userFriendlyText="Runny Nose" />
-        <SwitchRow symptom="vomiting" userFriendlyText="Vomiting" />
-        <SwitchRow symptom="nausea" userFriendlyText="Nausea" />
-        <SwitchRow symptom="diarrhoea" userFriendlyText="Diarrhoea" />
-        <SwitchRow
-          symptom="testedPositive"
-          userFriendlyText="I Have Tested Positive for COVID-19"
-        />
+        <ScrollView indicatorStyle="white">
+          <SwitchRow
+            symptom="lossOfSenseOfSmell"
+            userFriendlyText="Loss of Sense of Smell"
+          />
+          <SwitchRow symptom="cough" userFriendlyText="Cough" />
+          <SwitchRow symptom="fever" userFriendlyText="Fever" />
+          <SwitchRow symptom="tiredness" userFriendlyText="Tiredness" />
+          <SwitchRow
+            symptom="shortnessOfBreath"
+            userFriendlyText="Shortness of Breath"
+          />
+          <SwitchRow
+            symptom="pressureInChest"
+            userFriendlyText="Pressure in Chest"
+          />
+          <SwitchRow symptom="soreThroat" userFriendlyText="Sore Throat" />
+          <SwitchRow symptom="runnyNose" userFriendlyText="Runny Nose" />
+          <SwitchRow symptom="vomiting" userFriendlyText="Vomiting" />
+          <SwitchRow symptom="nausea" userFriendlyText="Nausea" />
+          <SwitchRow symptom="diarrhoea" userFriendlyText="Diarrhoea" />
+          <SwitchRow
+            symptom="testedPositive"
+            userFriendlyText="I Have Tested Positive for COVID-19"
+          />
+        </ScrollView>
       </View>
       <View style={styles.submitContainer}>
         <TouchableOpacity onPress={onSubmit}>
