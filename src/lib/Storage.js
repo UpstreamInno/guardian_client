@@ -84,54 +84,64 @@ export const getKey = async () => {
 };
 
 export const setKey = async () => {
-    const secureStoreOptions = {
-        keychainService: "credentials",
-        keychainAccessible: SecureStore.ALWAYS // iOS only
-    };
-    try {
-      SecureStore.setItemAsync("keystore", 'test-key', secureStoreOptions) //todo set key
-      .then(() => {
-          console.log("SecureStore: Successfully stored item!");
-          return "SecureStore: Successfully stored item!";
-      }).catch((error) => {
-          console.log("SecureStore: An error occurred while storing the item...", error);
-          return "SecureStore: An error occurred while storing the item...;";
-      });
-    } catch (e) {
-      // console.log(e);
-    }
+  const secureStoreOptions = {
+      keychainService: "credentials",
+      keychainAccessible: SecureStore.ALWAYS // iOS only
   };
-
-export const load = async (STORAGE_KEY) => {
-    try {
-      const result = await AsyncStorage.getItem(STORAGE_KEY);
-      if(result != null ){
-        var key = await getKey();
-        let bytes  = CryptoJS.AES.decrypt(result, key);
-        let originalResult = bytes.toString(CryptoJS.enc.Utf8);
-        return originalResult;
-      } else {
-        return result;
-      }
-  
-    } catch (e) {
-      console.error('Failed to load .', e)
-      return [];
-    }
+  try {
+    SecureStore.setItemAsync("keystore", 'test-key', secureStoreOptions) //todo set key
+    .then(() => {
+        console.log("SecureStore: Successfully stored item!");
+        return "SecureStore: Successfully stored item!";
+    }).catch((error) => {
+        console.log("SecureStore: An error occurred while storing the item...", error);
+        return "SecureStore: An error occurred while storing the item...;";
+    });
+  } catch (e) {
+    // console.log(e);
   }
+}
+
+//load from database using STORAGE_KEY
+export const load = async (STORAGE_KEY) => {
+  try {
+    const result = await AsyncStorage.getItem(STORAGE_KEY);
+    if(result != null ){
+      var key = await getKey();
+      if(key == null){
+        await setKey();
+        key = await getKey();
+      }
+      let bytes  = CryptoJS.AES.decrypt(result, key);
+      let originalResult = bytes.toString(CryptoJS.enc.Utf8);
+      return originalResult;
+    } else {
+      return result;
+    }
+
+  } catch (e) {
+    console.error('Failed to load .', e)
+    return [];
+  }
+}
+
+//save to database using STORAGE_KEY
 
 export const saveArray = async (STORAGE_KEY, array) => {
-    try {
-      var string = JSON.stringify(array, null, array.length);
-      const key = await getKey()
-      await AsyncStorage.setItem(STORAGE_KEY, CryptoJS.AES.encrypt(string, key).toString())
-      // await AsyncStorage.setItem(STORAGE_KEY, string);
-      // this.setState({name})
-      return 'Object saved';
-    } catch (e) {
-      console.error('Failed to save object.');
-      return 'Failed to save object.';
+  try {
+    var string = JSON.stringify(array, null, array.length);
+    var key = await getKey();
+    if(key == null){
+      await setKey();
+      key = await getKey();
     }
+    await AsyncStorage.setItem(STORAGE_KEY, CryptoJS.AES.encrypt(string, key).toString())
+    // await AsyncStorage.setItem(STORAGE_KEY, string);
+    return 'Object saved';
+  } catch (e) {
+    console.error(e);
+    return 'Failed to save object.';
+  }
 }
 
 export const remove = async (STORAGE_KEY) => {
