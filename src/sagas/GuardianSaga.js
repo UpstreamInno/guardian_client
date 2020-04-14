@@ -55,7 +55,6 @@ function* userVerify(action) {
 
   try {
     const isLoggedIn = yield call(signIn, {registrationCode, registrationId});
-    console.log("isLoggedIn", isLoggedIn);
     if (isLoggedIn) {
       yield put(setUserSession({sessionId: isLoggedIn}));
       if (redirect) {

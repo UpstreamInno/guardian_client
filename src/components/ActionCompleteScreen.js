@@ -5,7 +5,6 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import Constants from "expo-constants";
 import { t } from 'Lib/i18n';
 import { Pages } from "Lib/Pages";;
 import { useDispatch, useSelector } from "react-redux";
@@ -64,10 +63,10 @@ const ActionCompleteScreen = () => {
   const dispatch = useDispatch();
   let header, body, button, nextScreen;
   if (currentPage == Pages.SIGNUP_COMPLETE){
-    header = t("Signup successful!");
+    header = t("Setup successful!");
     body = t("Thank you for signing up. Remember, you are in control of your data, and your health. Stay safe!");
-    button = t("Ok, use my location");
-    nextScreen = () => dispatch(routeTo(Pages.CONSENT_LOCATION));
+    button = t("Continue");
+    nextScreen = () => dispatch(routeTo(Pages.HOME));
   } else if (currentPage == Pages.SURVEY_COMPLETE){
     header = t("Survey Complete!");
     body = t("Thank you for completing the survey. Remember, you are in control of your data, and your health. Stay safe!");
