@@ -4,6 +4,11 @@ import Constants from 'expo-constants';
 import {t} from 'Lib/i18n';
 import {Platform} from "react-native";
 
+const status = {
+  RECEIVED: 'received',
+  CLICKED: 'selected'
+};
+
 const registerForPush = async () => {
   if (Constants.isDevice) {
     const {status: existingStatus} = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -33,9 +38,9 @@ const registerForPush = async () => {
 };
 
 const handleNotification = (notification) => {
-  if (notification.origin === 'received') {
+  if (notification.origin === status.RECEIVED) {
     console.log("Notification received - server or local")
-  } else if (notification.origin === 'selected') {
+  } else if (notification.origin === status.CLICKED) {
     console.log("Notification clicked")
   }
 };
