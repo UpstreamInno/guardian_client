@@ -121,13 +121,18 @@ const ReportScreen = () => {
         <SwitchRow symptom="fever" userFriendlyText="Fever" />
         <SwitchRow symptom="tiredness" userFriendlyText="Tiredness" />
         <SwitchRow
-          symptom="difficultyBreathing"
-          userFriendlyText="Difficulty Breathing"
+          symptom="shortnessOfBreath"
+          userFriendlyText="Shortness of Breath"
         />
         <SwitchRow
           symptom="pressureInChest"
           userFriendlyText="Pressure in Chest"
         />
+        <SwitchRow symptom="soreThroat" userFriendlyText="Sore Throat" />
+        <SwitchRow symptom="runnyNose" userFriendlyText="Runny Nose" />
+        <SwitchRow symptom="vomiting" userFriendlyText="Vomiting" />
+        <SwitchRow symptom="nausea" userFriendlyText="Nausea" />
+        <SwitchRow symptom="diarrhoea" userFriendlyText="Diarrhoea" />
         <SwitchRow
           symptom="testedPositive"
           userFriendlyText="I Have Tested Positive for COVID-19"
