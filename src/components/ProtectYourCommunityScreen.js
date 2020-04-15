@@ -65,15 +65,16 @@ const styles = StyleSheet.create({
   linkLabel: {
     color: "#000",
     fontSize: 18,
-    // flex: 1,
-    flexDirection: "column",
-    alignContent: "space-between",
+    textAlign: "center",
+  },
+  icons: {
+    alignSelf: "center",
   },
 });
 
 function ProtectYourCommunityScreen() {
   return (
-    <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
+    <LinearGradient colors={["#f4c166", "#f5ab78"]} style={styles.container}>
       {/* <Ionicons name="md-checkmark-circle" size={100} color="white" /> */}
       <Text style={styles.header1}>Protect Your Community</Text>
       <Text style={styles.paragraph}>
@@ -81,40 +82,50 @@ function ProtectYourCommunityScreen() {
         hospital or at home, until they are better and no longer pose a risk of
         infecting others.
       </Text>
-      <View style={styles.textBlock}>
+      <TouchableOpacity
+        onPress={() => {
+          alert("I have no function");
+        }}
+        style={styles.textBlock}
+      >
+        <FontAwesome5
+          name="notes-medical"
+          size={35}
+          color="black"
+          style={styles.icons}
+        />
+        <Text style={styles.linkLabel}>What to do if You are Sick</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          alert("I have no function");
+        }}
+        style={styles.textBlock}
+      >
+        <Ionicons
+          name="md-person"
+          size={40}
+          color="black"
+          style={styles.icons}
+        />
+        <Text style={styles.linkLabel}>Caring for Yourself at Home</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          alert("I have no function");
+        }}
+        style={styles.textBlock}
+      >
+        <Ionicons
+          name="ios-home"
+          size={40}
+          color="black"
+          style={styles.icons}
+        />
         <Text style={styles.linkLabel}>
-          <FontAwesome5
-            name="notes-medical"
-            size={30}
-            color="black"
-            style={{ marginRight: 10 }}
-          />
-          {"  "}
-          What to do if You are Sick
+          Disinfecting Your Home if Someone is Sick
         </Text>
-      </View>
-      <View style={styles.textBlock}>
-        <Text style={styles.linkLabel}>
-          <Ionicons
-            name="md-person"
-            size={35}
-            color="black"
-            style={{ marginRight: 10 }}
-          />
-          {"  "}Caring for Yourself at Home
-        </Text>
-      </View>
-      <View style={styles.textBlock}>
-        <Text style={styles.linkLabel}>
-          <Ionicons
-            name="ios-home"
-            size={30}
-            color="black"
-            style={styles.icons}
-          />
-          {"  "}Disinfecting Your Home if Someone is Sick
-        </Text>
-      </View>
+      </TouchableOpacity>
       {/* <View
         style={{
           marginTop: 15,
