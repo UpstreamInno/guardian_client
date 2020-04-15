@@ -4,16 +4,15 @@ import {
     Image,
     Button,
     KeyboardAvoidingView,
+    TouchableOpacity,
 } from "react-native";
 import Constants from "expo-constants";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { 
-  userSignUp,
-} from "Store/actions";
+import { userSignUp } from "Store/actions";
 import { LinearGradient } from "expo-linear-gradient";
-import { t } from 'Lib/i18n';
-import UserPhoneInput from "Components/UserPhoneInput"
+import { t } from "Lib/i18n";
+import UserPhoneInput from "Components/UserPhoneInput";
 
 const styles = StyleSheet.create({
   container: {
@@ -49,9 +48,14 @@ const styles = StyleSheet.create({
     margin: 10,
     color: "#ffffff",
   },
+
+  buttonText: {
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 20,
+  },
 });
 
-// TODO: convert to functional component!
 export default function SignupScreen() {
   const dispatch = useDispatch();
   const [phone, setPhone] = useState("");
@@ -59,6 +63,7 @@ export default function SignupScreen() {
   const onSignUp = () => dispatch(userSignUp(phone));
 
   return (
+<<<<<<< HEAD
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
@@ -76,5 +81,18 @@ export default function SignupScreen() {
         />
       </LinearGradient>
     </KeyboardAvoidingView>
+=======
+    <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
+      <Text style={styles.title}>{t("guardian")}</Text>
+      <Image
+        source={require("../../images/logo.png")}
+        style={{ width: 200, height: 200, marginBottom: 50 }}
+      />
+      <UserPhoneInput onChange={setPhone} phoneNumber={phone} />
+      <TouchableOpacity onPress={onSignUp} style={styles.button}>
+        <Text style={styles.buttonText}>{t("register")}</Text>
+      </TouchableOpacity>
+    </LinearGradient>
+>>>>>>> 1ddb9d13... Fixed issue with translation on the button breaking the content
   );
-};
+}
