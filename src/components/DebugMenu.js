@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+
 import {
   Button,
-  Picker,
+  Picker, 
   StyleSheet,
   Text,
   TextInput,
@@ -24,6 +25,14 @@ import {
   getPath,
   sendRegionPath,
 } from "Lib/Api";
+import {
+  getMostRecentLocations,
+  getLocationsWithinDays,
+  addLocationToDatabase,
+  deleteLocationsAfterTime,
+  deleteLocationsAfterDate,
+} from "Lib/Storage";
+
 import { useDispatch, useSelector } from "react-redux";
 import {registerForPush} from 'Lib/Notifications';
 

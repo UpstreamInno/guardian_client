@@ -15,16 +15,32 @@ import { t } from 'Lib/i18n';
 import { routeTo } from "Store/actions";
 import { Pages } from "Lib/Pages";
 
+import {
+  getMostRecentLocations,
+  addLocationToDatabase,
+} from "Lib/Storage";
+import moment from 'moment';
+
 const TASK_GUARDIAN_LOCATION = "guardian_location";
 
-TaskManager.defineTask(TASK_GUARDIAN_LOCATION, ({ data, error }) => {
+TaskManager.defineTask(TASK_GUARDIAN_LOCATION, async({ data, error }) => {
+  console.log("enter TASK_GUARDIAN_LOCATION", data);
   if (error) {
+    alert(error);
     return;
   }
   if (data) {
     const { locations } = data;
-    // TODO: AsyncStorage
-    // TODO: SecureStorage
+    if(locations.length > 0){
+      for(var i = 0; i < locations.length; i++){
+        var location = locations[i];
+        let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
+        var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
+        await addLocationToDatabase(locationObject); // add location to db
+      }
+      var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
+      // console.log("most recent - locations updates", JSON.stringify(locationsInDb));
+    }
   }
 });
 
@@ -35,12 +51,26 @@ const LocationScreen = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    watchLocation();
+    console.log("watch", location);
+    if(location == null){
+         watchLocation(); 
+    }
+ 
   });
 
-  const watchLocation = async () => {
+  watchLocation = async () => {
+    // alert("watchLocation");
     let location = await Location.getCurrentPositionAsync({});
+    // alert(JSON.stringify(location));
     setLocation(location);
+    this.setState({ location });
+    
+    let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
+    var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
+    await addLocationToDatabase(locationObject);
+    // console.log(locationObject);
+    // var locations = await getMostRecentLocations(10); //get most recent 10 locations
+    // console.log("most recent", JSON.stringify(locations));
   };
 
   const onPress = async () => {
@@ -58,7 +88,7 @@ const LocationScreen = () => {
         deferredUpdatesDistance: "20", //meters
         pausesUpdatesAutomatically: true,
       });
-    }
+    } 
   };
 
   const onContinue = () => {
