@@ -1,18 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  Image,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import Constants from "expo-constants";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { 
-  userSignUp,
-} from "Store/actions";
+import { userSignUp } from "Store/actions";
 import { LinearGradient } from "expo-linear-gradient";
-import { t } from 'Lib/i18n';
-import UserPhoneInput from "Components/UserPhoneInput"
+import { t } from "Lib/i18n";
+import UserPhoneInput from "Components/UserPhoneInput";
 
 const styles = StyleSheet.create({
   container: {
@@ -45,9 +38,14 @@ const styles = StyleSheet.create({
     margin: 10,
     color: "#ffffff",
   },
+
+  buttonText: {
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 20,
+  },
 });
 
-// TODO: convert to functional component!
 export default function SignupScreen() {
   const dispatch = useDispatch();
   const [phone, setPhone] = useState("");
@@ -62,10 +60,9 @@ export default function SignupScreen() {
         style={{ width: 200, height: 200, marginBottom: 50 }}
       />
       <UserPhoneInput onChange={setPhone} phoneNumber={phone} />
-      <Button
-          title={t("register")}
-          onPress={onSignUp}
-      />
+      <TouchableOpacity onPress={onSignUp} style={styles.button}>
+        <Text style={styles.buttonText}>{t("register")}</Text>
+      </TouchableOpacity>
     </LinearGradient>
   );
-};
+}
