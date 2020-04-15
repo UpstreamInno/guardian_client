@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 import {
   Button,
   Picker, 
@@ -35,12 +34,18 @@ import {
 } from "Lib/Storage";
 
 import { useDispatch, useSelector } from "react-redux";
+import {registerForPush} from 'Lib/Notifications';
 
 import { Pages } from "Lib/Pages";
 
 const DebugMenu = () => {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
+
+  //todo move to background task that polls the server for messages
+  useEffect(() => {
+    registerForPush();
+  }, []);
 
   // input states, used only for this page to simulate UI input
   const [inputPhone, setInputPhone] = useState('1123456789');
@@ -107,7 +112,7 @@ const DebugMenu = () => {
     return (
       <>
         <Text>User/Device Inputs</Text>
-  
+
         <View style={styles.row}>
           <View style={styles.keyContainer} >
             <Text>(Registration) User Phone </Text>
@@ -205,9 +210,9 @@ function storeValueText(value) {
   } else if (typeof value == "boolean") {
     return value.toString();
   }
-  
+
   return value
-} 
+}
 
 function actionRow(action, description, onPress) {
   return row({key: action, value: description, onPress})

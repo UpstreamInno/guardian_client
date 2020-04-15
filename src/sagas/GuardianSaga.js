@@ -3,6 +3,7 @@ import { Pages } from "Lib/Pages";
 import { Paths } from "Lib/Paths"
 import { epochToDisplayString, distanceToDisplay } from "Lib/PathHelpers"
 import { t } from 'Lib/i18n';
+import {sendLocalPush} from 'Lib/Notifications';
 
 import {
   getMessages,
@@ -28,7 +29,7 @@ import {
 } from "../store/actions"
 
 function* userSignUp(action) {
-  const { 
+  const {
     userPhone,
     redirect,
    } = action.payload;
@@ -72,6 +73,9 @@ function* userVerify(action) {
 }
 
 function* fetchMessages(action) {
+  //todo only for tests, remove after testing phase
+  sendLocalPush(t('proximity_alert_title'), "test notification");
+
   try {
     const message = yield call(getMessages);
     const messageId = message["message_id"];
@@ -106,8 +110,8 @@ function* fetchMessages(action) {
       // store the notification for display in-app
       yield put(saveNotification(notification));
 
-      // send a local push nontification
-      console.log("*** TODO: send push notification here: ", notification.displayMessage);
+      // send a local push notification
+      sendLocalPush(t('proximity_alert_title'), notification.displayMessage);
     }
   } catch (error) {
     console.error("Failed fetching messages, error: ", error);
@@ -119,11 +123,11 @@ function* onReportPrecisePath(action) {
   try {
     const { path } = action.payload;
     const { pathId } = yield call(reportPath, {points: path});
-    
+
     yield put(setUserLastReportedPath({ pathId, time: Date.now() }));
     yield call(reportTestResults, pathId);
     yield call(reportSurvey, pathId);
-    
+
   } catch (error) {
     console.error("Failed reportin path, error: ", error);
     yield put(routeTo(Pages.HOME));
