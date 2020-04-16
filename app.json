@@ -20,7 +20,8 @@
         ],
         "NSLocationAlwaysAndWhenInUseUsageDescription": "",
         "NSLocationWhenInUseUsageDescription": ""
-      }
+      },
+      "bundleIdentifier": "com.covidguardianclient"
     },
     "android": {
       "package": "com.covidguardianclient",

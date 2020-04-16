@@ -5083,6 +5083,13 @@ expo-task-manager@^8.1.0:
   resolved "https://registry.yarnpkg.com/expo-task-manager/-/expo-task-manager-8.1.0.tgz#54ffb17bfe8d337a39e99b0a079ecc1b8cd8e8d0"
   integrity sha512-rhlf5RN8NNHUnQTLnqAKGbEKiWg3WO7Xr3CLSxClFaG0CEkqwlXnlBpeKRkDRe3OcdjBvvJDuCwZlNlc4S1/hw==
 
+expo-updates@~0.1.0:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.1.2.tgz#d3241a55cd2f282dc5941a59b47a595c3bb4003c"
+  integrity sha512-RasaaxMBSjw7Sy9VDP6EceBnUPGt86IysGj7Mc6LNKLsmUwd6DbA03SyTqJd8R2e+T2dDM82BMWIJq+8TD6e6Q==
+  dependencies:
+    fbemitter "^2.1.1"
+
 expo-web-browser@~8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-8.1.0.tgz#1b4ca25e4dd600fac9ad16e32d81be47778c2667"
@@ -10029,7 +10036,7 @@ react-native-web@~0.11.7:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-react-native@~0.61.4:
+react-native@~0.61.5:
   version "0.61.5"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.61.5.tgz#6e21acb56cbd75a3baeb1f70201a66f42600bba8"
   integrity sha512-MXqE3NoGO0T3dUKIKkIppijBhRRMpfN6ANbhMXHDuyfA+fSilRWgCwYgR/YNCC7ntECoJYikKaNTUBB0DeQy6Q==
