@@ -13,6 +13,7 @@
 #import <UMCore/UMModuleRegistry.h>
 #import <UMReactNativeAdapter/UMNativeModulesProxy.h>
 #import <UMReactNativeAdapter/UMModuleRegistryAdapter.h>
+#import <TSBackgroundFetch/TSBackgroundFetch.h>
 
 @interface AppDelegate ()
 
@@ -37,7 +38,7 @@
   controller.delegate = self;
   [controller startAndShowLaunchScreen:self.window];
 #endif
-
+  [[TSBackgroundFetch sharedInstance] didFinishLaunching];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
 
   return YES;

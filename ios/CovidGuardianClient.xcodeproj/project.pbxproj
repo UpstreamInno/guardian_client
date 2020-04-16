@@ -20,9 +20,9 @@
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		0731D3B524204D62009CAE85 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Expo.plist; path = CovidGuardianClient/Supporting/Expo.plist; sourceTree = "<group>"; };
-		07C2E6E3243282B30028AF0A /* app.manifest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = app.manifest; path = "CovidGuardianClient/Supporting/app.manifest"; sourceTree = "<group>"; };
-		07C2E6E4243282B30028AF0A /* app.bundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = app.bundle; path = "CovidGuardianClient/Supporting/app.bundle"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* CovidGuardianClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidGuardianClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07C2E6E3243282B30028AF0A /* app.manifest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = app.manifest; path = CovidGuardianClient/Supporting/app.manifest; sourceTree = "<group>"; };
+		07C2E6E4243282B30028AF0A /* app.bundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = app.bundle; path = CovidGuardianClient/Supporting/app.bundle; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* covidguardianclient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = covidguardianclient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CovidGuardianClient/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = CovidGuardianClient/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* CovidGuardianClient.app */,
+				13B07F961A680F5B00A75B9A /* covidguardianclient.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,7 +135,7 @@
 			);
 			name = CovidGuardianClient;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* CovidGuardianClient.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* covidguardianclient.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -149,10 +149,9 @@
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "CovidGuardianClient" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -269,6 +268,7 @@
 			baseConfigurationReference = 3B47C5AFCB8BDE514B7D1AC6 /* Pods-CovidGuardianClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CovidGuardianClient/covidguardianclient.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = CovidGuardianClient/Info.plist;
@@ -278,10 +278,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.covidguardianclient";
+				PRODUCT_BUNDLE_IDENTIFIER = com.covidguardianclient;
 				PRODUCT_NAME = covidguardianclient;
 				VERSIONING_SYSTEM = "apple-generic";
-				CODE_SIGN_ENTITLEMENTS = CovidGuardianClient/covidguardianclient.entitlements;
 			};
 			name = Debug;
 		};
@@ -290,7 +289,9 @@
 			baseConfigurationReference = 8AC623DBF3A3E2CB072F81F2 /* Pods-CovidGuardianClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CovidGuardianClient/covidguardianclient.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CovidGuardianClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -298,10 +299,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.covidguardianclient";
+				PRODUCT_BUNDLE_IDENTIFIER = com.covidguardianclient;
 				PRODUCT_NAME = covidguardianclient;
 				VERSIONING_SYSTEM = "apple-generic";
-				CODE_SIGN_ENTITLEMENTS = CovidGuardianClient/covidguardianclient.entitlements;
 			};
 			name = Release;
 		};
@@ -332,6 +332,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = CovidGuardianClient/covidguardianclient.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -354,10 +355,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.covidguardianclient";
+				PRODUCT_BUNDLE_IDENTIFIER = com.covidguardianclient;
 				PRODUCT_NAME = covidguardianclient;
-				CODE_SIGN_ENTITLEMENTS = CovidGuardianClient/covidguardianclient.entitlements;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -388,6 +388,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = CovidGuardianClient/covidguardianclient.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -402,11 +403,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.covidguardianclient;
+				PRODUCT_NAME = covidguardianclient;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.covidguardianclient";
-				PRODUCT_NAME = covidguardianclient;
-				CODE_SIGN_ENTITLEMENTS = CovidGuardianClient/covidguardianclient.entitlements;
 			};
 			name = Release;
 		};
