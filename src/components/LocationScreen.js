@@ -53,8 +53,8 @@ const LocationScreen = () => {
 
   useEffect(() => {
     console.log("watch", location);
-
     if(location == null){
+         watchLocation();
 
                // This handler fires whenever bgGeo receives a location update.
           BackgroundGeolocation.onLocation(this.onLocation, this.onError);
