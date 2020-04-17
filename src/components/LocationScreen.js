@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
@@ -21,7 +22,25 @@ import {
 } from "Lib/Storage";
 import moment from 'moment';
 import BackgroundGeolocation from "react-native-background-geolocation";
+import BackgroundTask from 'react-native-background-task'
 
+BackgroundTask.define(async () => {
+  // Fetch some data over the network which we want the user to have an up-to-
+  // date copy of, even if they have no network when using the app
+  const response = await fetch('http://feeds.bbci.co.uk/news/rss.xml')
+  const text = await response.text()
+  
+  // Data persisted to AsyncStorage can later be accessed by the foreground app
+  var storage = await AsyncStorage.getItem('job');
+  if(storage == null){
+    storage = "";
+  }
+  storage = storage + text;
+  await AsyncStorage.setItem('job', text)
+  
+  // Remember to call finish()
+  BackgroundTask.finish()
+})
 // const TASK_GUARDIAN_LOCATION = "guardian_location";
 
 // TaskManager.defineTask(TASK_GUARDIAN_LOCATION, async({ data, error }) => {
@@ -55,6 +74,7 @@ const LocationScreen = () => {
     console.log("watch", location);
     if(location == null){
          watchLocation();
+         
 
                // This handler fires whenever bgGeo receives a location update.
           BackgroundGeolocation.onLocation(this.onLocation, this.onError);
@@ -141,9 +161,36 @@ const LocationScreen = () => {
    
   };
 
+  checkStatus = async () => {
+    const status = await BackgroundTask.statusAsync()
+    
+    if (status.available) {
+      // Everything's fine
+      return
+    }
+    
+    const reason = status.unavailableReason
+    if (reason === BackgroundTask.UNAVAILABLE_DENIED) {
+      Alert.alert('Denied', 'Please enable background "Background App Refresh" for this app')
+    } else if (reason === BackgroundTask.UNAVAILABLE_RESTRICTED) {
+      Alert.alert('Restricted', 'Background tasks are restricted on your device')
+    }
+  }
   const onPress = async () => {
      var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
       console.log("most recent - locations updates", JSON.stringify(locationsInDb));
+      BackgroundTask.schedule({
+          period: 900, // Aim to run every 30 mins - more conservative on battery
+        })
+
+      this.checkStatus();
+
+      var storage = await AsyncStorage.getItem('job');
+      if(storage == null){
+        storage = "";
+      }
+      console.log("storage",storage);
+
     // const { status, ios } = await Location.requestPermissionsAsync();
     // if (status !== "granted") {
     //   setErrorMessage("Permission to access location was denied");
@@ -156,7 +203,7 @@ const LocationScreen = () => {
     //     distanceInterval: "20", // meters
     //     deferredUpdatesInterval: "200", //ms
     //     deferredUpdatesDistance: "20", //meters
-    //     pausesUpdatesAutomatically: true,
+    //       pausesUpdatesAutomatically: true,
     //   });
     // } 
   };
