@@ -1,0 +1,29 @@
+User Journey
+
+
+Installation & Sign Up
+1.	User Installs Application.
+2.	[Welcome Screen] User is told what the purpose of application is- 10 words of privacy.
+3.	[Sign-Up Mobile Number] User enters their mobile phone number.
+4.	[OTP Verification] User enters the OTP.
+5.	[Sign Up Complete] Congratulations, you’re now signed up with Guardian.
+6.	[Privacy Explanation] Explain what we are doing with GPS, Bluetooth, and User Data
+7.	[Privacy Selection] Choose your level of accuracy: 50m, 25m, 5m- with each nodule being selected in accordance to a feature turned on. 
+8.	[Privacy Selection Cont.] Optional would you like to enter your details? 
+9.	[Privacy Selection Complete] Congratulations- You’re now protected; we will alert you if we detect you might have been exposed. 
+Daily Experience
+10.	[Alert] User continues with daily life, gets a push notification from Guardian app that alerts them that someone they crossed paths with two days ago has been reporting symptoms similar to COVID-19. 
+11.	[Alert Continued] Guardian app asks user to report how they’re feeling.
+12.	[Report] User reports that they’re feeling fine.  
+13.	[Response] Guardian app suggests to remain home and watch for any symptom developments.
+14.	[Report 2] User begins to feel symptoms three days later and opens Health Report portal to report updated symptoms.
+15.	[Report 2a] Guardian server asks if user would like to alert their past path. 
+16.	User agrees and an alert is sent out to the people the user has passed over the past X number of days. 
+17.	Guardian server responds: Thank you for your openness- we’ve alerted your path. You’re helping save lives… 
+18.	Process repeats from step 10. 
+
+1.	Install 
+2.	Sign Up
+3.	Continue With Normal Life
+4.	Report
+5.	Save Lives
