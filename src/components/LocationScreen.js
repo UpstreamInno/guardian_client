@@ -50,11 +50,11 @@ const LocationScreen = () => {
 
   const [location, setLocation] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-
+  const [locationEnabled, setLocationEnabled] = useState(false);
   useEffect(() => {
-    console.log("watch", location);
-    if(location == null){
-         watchLocation();
+    // console.log("watch", location);
+    if(locationEnabled == false){
+         // watchLocation();
 
                // This handler fires whenever bgGeo receives a location update.
           BackgroundGeolocation.onLocation(this.onLocation, this.onError);
@@ -95,15 +95,17 @@ const LocationScreen = () => {
           }, (state) => {
             console.log("- BackgroundGeolocation is configured and ready: ", state.enabled);
 
-            // if (!state.enabled) {
+          if (!state.enabled) {
             //   ////
             //   // 3. Start tracking!
             //   //
               BackgroundGeolocation.start(function() {
                 console.log("- Start success");
               });
-            
+            }
           }); 
+
+          setLocationEnabled(true);
     }
  
   });
@@ -129,14 +131,14 @@ const LocationScreen = () => {
 
   watchLocation = async () => {
     // alert("watchLocation");
-    let location = await Location.getCurrentPositionAsync({});
-    // alert(JSON.stringify(location));
-    setLocation(location);
-    this.setState({ location });
+    // let location = await Location.getCurrentPositionAsync({});
+    // // alert(JSON.stringify(location));
+    setLocation("dss");
+    // // this.setState({ location });
     
-    let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
-    var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
-    await addLocationToDatabase(locationObject);
+    // let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
+    // var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
+    // await addLocationToDatabase(locationObject);
     // console.log(locationObject);
    
   };
