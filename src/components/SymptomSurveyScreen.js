@@ -114,7 +114,7 @@ const SymptomSurveyScreen = () => {
           "Please check any of the following symptoms you have experianced in the last 5 days"
         )}
       </Text>
-      <ScrollView style={styles.switchContainer}>
+      <ScrollView contentContainerStyle={styles.switchContainer}>
         <SwitchRow
           symptom="lossOfSenseOfSmell"
           userFriendlyText="Loss of Sense of Smell"
