@@ -1,18 +1,17 @@
 import React from "react";
 import { t } from "Lib/i18n";
 import { routeTo } from "Store/actions";
-import { Pages } from "Components/GuardianContainer";
+import { Pages } from "Lib/Pages";
 import {
-  ScrollView,
   StyleSheet,
   Switch,
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
-import { FlatList } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
@@ -81,11 +80,14 @@ const TRACK_COLOR = { false: "#696969", true: "#32cd32" };
 const THUMB_COLOR = "#fff";
 const IOS_SWITCH_BG_COLOR = "#696969";
 
-const ReportScreen = () => {
+const SymptomSurveyScreen = () => {
+  const dispatch = useDispatch();
+
   const [symptoms, setSymptoms] = React.useState({});
 
   const onSubmit = () => {
-    () => useDispatch({ symptoms });
+    console.log("reported symptoms", symptoms);
+    dispatch(routeTo(Pages.SURVEY_COMPLETE));
   };
 
   const SwitchRow = ({ symptom, userFriendlyText }) => {
@@ -109,13 +111,10 @@ const ReportScreen = () => {
     <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
       <Text style={styles.title}>
         {t(
-          "Please check any of the following symptoms you have experianced since your exposure"
+          "Please check any of the following symptoms you have experianced in the last 5 days"
         )}
       </Text>
-      <ScrollView
-        contentContainerStyle={styles.switchContainer}
-        indicatorStyle="white"
-      >
+      <ScrollView style={styles.switchContainer}>
         <SwitchRow
           symptom="lossOfSenseOfSmell"
           userFriendlyText="Loss of Sense of Smell"
@@ -152,8 +151,4 @@ const ReportScreen = () => {
   );
 };
 
-ReportScreen.navigationOptions = {
-  title: "Report",
-};
-
-export default ReportScreen;
+export default SymptomSurveyScreen;

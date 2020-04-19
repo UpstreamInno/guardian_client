@@ -1,7 +1,8 @@
-import { distance, fuzzyEqual } from "./PathHelpers"
+import { distance, fuzzyEqual } from "./PathHelpers";
+import { Path } from "./Path";
 
-export const DEFAULT_TIME_IMPRECISON = 0; // integer seconds
-export const DEFAULT_LOCATION_IMPRECISON = 0; // decimal degrees: 1.0° ~ 111km, 0.01° ~ 1.11km, 0.00001° ~ 1.11m
+export const DEFAULT_TIME_IMPRECISON = 30; // integer seconds
+export const DEFAULT_LOCATION_IMPRECISON = 0.0001; // decimal degrees: 1.0° ~ 111km, 0.01° ~ 1.11km, 0.00001° ~ 1.11m
 
 export class Paths {
 
@@ -30,34 +31,47 @@ export class Paths {
     let pi = 0;
     let oi = 0;
     let search = true;
+    let closestIntersection = {}
 
     while(search) {
       
       let p = path.data[pi];
       let o = otherPath.data[oi];
-      let intersection = false;
+      let intersectionFound = false;
 
       // check time and location intersection
       if (fuzzyEqual(o.time, p.time, timePadding) &&
           fuzzyEqual(o.lat,  p.lat,  locationPadding) &&
           fuzzyEqual(o.long, p.long, locationPadding)) {
-            intersections.push({ 
+            let intersection = { 
               time: p.time,
               distance: distance(p.lat, p.long, o.lat, o.long),
-            })
-            intersection = true
+            }
+            intersections.push(intersection)
+
+            // keep track of closest intersection
+            if (closestIntersection.distance === undefined || closestIntersection.distance <= intersections.distance ) {
+              closestIntersection = intersection;
+            }
+
+            intersectionFound = true;
           }
 
       // advance o when o.time < p.time - padding OR when there is an intersection
       // advance p when p.time + padding < o.time
       // stop when either p[pi] or o[oi] would go out of bounds
-      if(p.time + timePadding < o.time && !intersection) {
+      if(p.time + timePadding < o.time && !intersectionFound) {
         (pi >= path.data.length - 1) ? search = false : pi++;
       } else {
         (oi >= otherPath.data.length - 1) ? search = false : oi++;
       }
     }
 
-    return { intersections };
+    return { intersections, closestIntersection };
+  }
+
+  // Same as intersctions, but accepts points instead of Path objects
+  static intersectionsFromPoints(points, otherPoints, options) {
+    return Paths.intersections(Path.fromPoints(points), Path.fromPoints(otherPoints), options);
   }
 }

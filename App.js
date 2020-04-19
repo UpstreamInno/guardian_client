@@ -5,10 +5,17 @@ import React, { useState } from "react";
 import { Platform, StatusBar, StyleSheet, View, I18nManager as RNI18nManager } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
+<<<<<<< HEAD
+import AppNavigator from "./src/navigation/AppNavigator";
+import { store } from "Store";
+import { LinearGradient } from "expo-linear-gradient";
+import LocationScreen from "./src/screens/LocationScreen.js";
+=======
 import GuardianContainer from "Components/GuardianContainer"
 import { configureStore } from "Store";
 
 import i18n from 'Lib/i18n';
+>>>>>>> 2d85f2a69ef397f3678fae08b08ea2b49e7a1d70
 
 const styles = StyleSheet.create({
   container: {
@@ -78,6 +85,19 @@ const App = props => {
     );
   }
   return (
+<<<<<<< HEAD
+    <LinearGradient
+      colors={["#4c669f", "#3b5998", "#192f6a"]}
+      style={{ padding: 15, alignItems: "center", borderRadius: 5 }}
+    >
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+          <AppNavigator />
+        </View>
+      </Provider>
+    </LinearGradient>
+=======
     <Provider store={store}>
       <React.Suspense fallback="loading">
         <View style={styles.container}>
@@ -86,6 +106,7 @@ const App = props => {
         </View>
       </React.Suspense>
     </Provider>
+>>>>>>> 2d85f2a69ef397f3678fae08b08ea2b49e7a1d70
   );
 };
 

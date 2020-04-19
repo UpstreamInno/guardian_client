@@ -10,22 +10,8 @@ import SignupScreen from "Components/SignupScreen";
 import LocationScreen from "Components/LocationScreen";
 import AlertScreen from "Components/AlertScreen";
 import ReportScreen from "Components/SymptomSurveyScreen.js";
-
-export const Pages = {
-  SIGNUP: "SIGNUP",
-  SIGNUP_VERIFY: "SIGNUP_VERIFY",
-  SIGNUP_COMPLETE: "SIGNUP_COMPLETE",
-  CONSENT_LOCATION: "CONSENT_LOCATION",
-  CONSENT_NOTIFICATION: "CONSENT_NOTIFICATION",
-  HOME: "HOME",
-  MESSAGE_DETAILS: "MESSAGE_DETAILS",
-  SYMPTOM_SURVEY: "SYMPTOM_SURVEY",
-  SURVEY_COMPLETE: "SURVEY_COMPLETE",
-  ALERT_NOTIFICATION: "ALERT_NOTIFICATION",
-
-  // TODO: hide these debug pages in release builds
-  DEBUG_MENU: "DEBUG_MENU",
-};
+import ActionCompleteScreen from "Components/ActionCompleteScreen";
+import { Pages } from "Lib/Pages";
 
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
@@ -56,12 +42,15 @@ export default function GuardianContainer() {
     case Pages.CONSENT_LOCATION:
       return <LocationScreen />;
     case Pages.SIGNUP_COMPLETE:
+      return <ActionCompleteScreen />;
     case Pages.CONSENT_NOTIFICATION:
+      return placeholder();
     case Pages.MESSAGE_DETAILS:
+      return placeholder();
     case Pages.SYMPTOM_SURVEY:
       return <ReportScreen />;
     case Pages.SURVEY_COMPLETE:
-      return placeholder(currentPage);
+      return <ActionCompleteScreen />;
     case Pages.DEBUG_MENU:
       return <DebugMenu />;
     default:
