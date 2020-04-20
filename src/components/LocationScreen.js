@@ -198,7 +198,7 @@ const LocationScreen = () => {
             message={"Username require for location testing"}
             hintInput ={"justinbieber"}
             submitInput={ (inputText) => saveUsername(inputText) }
-            closeDialog={ () => {this.showDialog(false)}}>
+            closeDialog={ () => console.log("close dialog")}>
       </DialogInput>
       <TouchableOpacity onPress={onPress}>
         <Text>{t('enable_background_location')}</Text>
