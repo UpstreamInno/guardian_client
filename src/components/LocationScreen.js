@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
@@ -20,98 +21,112 @@ import {
   addLocationToDatabase,
 } from "Lib/Storage";
 import moment from 'moment';
-import BackgroundGeolocation from "react-native-background-geolocation";
+import BackgroundGeolocation, {
+  MotionChangeEvent,
+  MotionActivityEvent,
+  ProviderChangeEvent,
+  TransistorAuthorizationToken
+} from "react-native-background-geolocation";
 
-// const TASK_GUARDIAN_LOCATION = "guardian_location";
+import {registerTransistorAuthorizationListener} from '../lib/Authorization';
+import DialogInput from 'react-native-dialog-input';
 
-// TaskManager.defineTask(TASK_GUARDIAN_LOCATION, async({ data, error }) => {
-//   console.log("enter TASK_GUARDIAN_LOCATION", data);
-//   if (error) {
-//     alert(error);
-//     return;
-//   }
-//   if (data) {
-//     const { locations } = data;
-//     if(locations.length > 0){
-//       for(var i = 0; i < locations.length; i++){
-//         var location = locations[i];
-//         let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
-//         var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
-//         await addLocationToDatabase(locationObject); // add location to db
-//       }
-//       var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
-//       // console.log("most recent - locations updates", JSON.stringify(locationsInDb));
-//     }
-//   }
-// });
+const locationConsoleUrl = "http://tracker.transistorsoft.com";
 
 const LocationScreen = () => {
   const dispatch = useDispatch();
 
   const [location, setLocation] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [locationEnabled, setLocationEnabled] = useState(false);
+  const [locationSetUp, setlocationSetUp] = useState(false);
+  const [showDialog, setDialogState] = useState(false);
   useEffect(() => {
-    // console.log("watch", location);
-    if(locationEnabled == false){
-         // watchLocation();
-
-               // This handler fires whenever bgGeo receives a location update.
-          BackgroundGeolocation.onLocation(this.onLocation, this.onError);
-
-          // This handler fires when movement states changes (stationary->moving; moving->stationary)
-          BackgroundGeolocation.onMotionChange(this.onMotionChange);
-
-          // This event fires when a change in motion activity is detected
-          BackgroundGeolocation.onActivityChange(this.onActivityChange);
-
-          // This event fires when the user toggles location-services authorization
-          BackgroundGeolocation.onProviderChange(this.onProviderChange);
-
-          ////
-          // 2.  Execute #ready method (required)
-          //
-          BackgroundGeolocation.ready({
-            // Geolocation Config
-            desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
-            distanceFilter: 10,
-            // Activity Recognition
-            stopTimeout: 1,
-            // Application config
-            debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
-            logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
-            stopOnTerminate: false,   // <-- Allow the background-service to continue tracking when user closes the app.
-            startOnBoot: true,        // <-- Auto start tracking when device is powered-up.
-            // HTTP / SQLite config
-            url: 'http://yourserver.com/locations',
-            batchSync: false,       // <-- [Default: false] Set true to sync locations to server in a single HTTP request.
-            autoSync: true,         // <-- [Default: true] Set true to sync each location to server as it arrives.
-            headers: {              // <-- Optional HTTP headers
-              "X-FOO": "bar"
-            },
-            params: {               // <-- Optional HTTP params
-              "auth_token": "maybe_your_server_authenticates_via_token_YES?"
-            }
-          }, (state) => {
-            console.log("- BackgroundGeolocation is configured and ready: ", state.enabled);
-
-          if (!state.enabled) {
-            //   ////
-            //   // 3. Start tracking!
-            //   //
-              BackgroundGeolocation.start(function() {
-                console.log("- Start success");
-              });
-            }
-          }); 
-
-          setLocationEnabled(true);
+    if(locationSetUp == false){
+      async function setUp() {
+        let orgname = await AsyncStorage.getItem("orgname");
+        let username = await AsyncStorage.getItem("username");
+        if(orgname == null || username== null){
+          setDialogState(true)
+          if(orgname == null) {
+            await AsyncStorage.setItem("orgname", "guardian-test"); 
+          }
+        } else {
+          configureBackgroundLocation();
+          setlocationSetUp(true);
+        }
+      };
+      setUp();
     }
- 
   });
 
+  configureBackgroundLocation = async() => {
+    //   This handler fires whenever bgGeo receives a location updates.
+      await registerTransistorAuthorizationListener(null);
+
+      BackgroundGeolocation.onLocation(this.onLocation, this.onError);
+
+      // This handler fires when movement states changes (stationary->moving; moving->stationary)
+      BackgroundGeolocation.onMotionChange(this.onMotionChange);
+
+      // This event fires when a change in motion activity is detected
+      BackgroundGeolocation.onActivityChange(this.onActivityChange);
+
+      // This event fires when the user toggles location-services authorization
+      BackgroundGeolocation.onProviderChange(this.onProviderChange);
+
+      let isSet = await AsyncStorage.getItem('isSet');
+      if(isSet == null){
+       await BackgroundGeolocation.destroyTransistorAuthorizationToken(locationConsoleUrl);
+       await AsyncStorage.setItem('isSet', 'default');
+      }
+      
+      let orgname = await AsyncStorage.getItem("orgname");
+      let username = await AsyncStorage.getItem("username");
+      let token:TransistorAuthorizationToken = await BackgroundGeolocation.findOrCreateTransistorAuthorizationToken(orgname, username, locationConsoleUrl);
+        BackgroundGeolocation.setConfig({
+        transistorAuthorizationToken: token
+      });
+      console.log("token", JSON.stringify(token));
+      BackgroundGeolocation.ready({ 
+        // Geolocation Config
+        desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
+        distanceFilter: 30,
+        // Activity Recognition
+        stopTimeout: 1,
+        preventSuspend: true,
+        heartbeatInterval: 60,
+        // Application config
+        debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
+        logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
+        stopOnTerminate: false,   // <-- Allow the background-service to continue tracking when user closes the app.
+        startOnBoot: true,        // <-- Auto start tracking when device is powered-up.
+        // HTTP / SQLite config
+        url: locationConsoleUrl + '/api/locations',
+        authorization: {
+          strategy: "JWT",
+          accessToken: token.accessToken,
+          refreshToken: token.refreshToken,
+          refreshUrl: locationConsoleUrl + "/v2/refresh_token",
+          refreshPayload: {
+            refresh_token: "{refreshToken}"
+          },    
+          expires: token.expires
+        },
+        autoSync: true,         // <-- [Default: true] Set true to sync each location to se`rver as it arrives.
+        batchSync: true
+      }, (state) => {
+        console.log("- BackgroundGeolocation is configured and ready: ", state.enabled);
+
+      if (!state.enabled) {
+          BackgroundGeolocation.start(function() {
+            console.log("- Start success");
+          });
+        }
+      });
+  }
   onLocation = async (location) => {
     console.log('[location] -', location);
+    setLocation(location);
     var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), location.timestamp];
     await addLocationToDatabase(locationObject);
   }
@@ -127,40 +142,21 @@ const LocationScreen = () => {
   }
   onMotionChange  = async (event) => {
     console.log('[motionchange] -', event.isMoving, event.location);
+    var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), location.timestamp];
+    await addLocationToDatabase(locationObject);
   }
 
-  watchLocation = async () => {
-    // alert("watchLocation");
-    // let location = await Location.getCurrentPositionAsync({});
-    // // alert(JSON.stringify(location));
-    setLocation("dss");
-    // // this.setState({ location });
-    
-    // let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
-    // var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
-    // await addLocationToDatabase(locationObject);
-    // console.log(locationObject);
-   
-  };
+  const saveUsername = async(inputText) => {
+    console.log('inputText', inputText);
+    await AsyncStorage.setItem('username', inputText);
+    setDialogState(false);
+    configureBackgroundLocation();
+  }
 
   const onPress = async () => {
-     var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
-      console.log("most recent - locations updates", JSON.stringify(locationsInDb));
-    // const { status, ios } = await Location.requestPermissionsAsync();
-    // if (status !== "granted") {
-    //   setErrorMessage("Permission to access location was denied");
-    // }
-    // if (status === "granted") {
-    //   await Location.startLocationUpdatesAsync(TASK_GUARDIAN_LOCATION, {
-    //     accuracy: 4,
-    //     showsBackgroundLocationIndicator: true,
-    //     //timeInterval: 0,
-    //     distanceInterval: "20", // meters
-    //     deferredUpdatesInterval: "200", //ms
-    //     deferredUpdatesDistance: "20", //meters
-    //     pausesUpdatesAutomatically: true,
-    //   });
-    // } 
+    var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
+    console.log("most recent - locations updates", JSON.stringify(locationsInDb));
+    alert(JSON.stringify(locationsInDb));
   };
 
   const onContinue = () => {
@@ -197,6 +193,13 @@ const LocationScreen = () => {
         style={{ width: 200, height: 200, marginBottom: 50 }}
       />
       {locationStatus()}
+      <DialogInput isDialogVisible={showDialog}
+            title={"Type your username"}
+            message={"Username require for location testing"}
+            hintInput ={"justinbieber"}
+            submitInput={ (inputText) => saveUsername(inputText) }
+            closeDialog={ () => {this.showDialog(false)}}>
+      </DialogInput>
       <TouchableOpacity onPress={onPress}>
         <Text>{t('enable_background_location')}</Text>
       </TouchableOpacity>
@@ -213,7 +216,7 @@ const LocationScreen = () => {
     backgroundColor: "#ecf0f1",
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 20,   
     textAlign: "center",
     margin: 10,
   },
