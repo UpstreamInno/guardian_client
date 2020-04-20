@@ -142,7 +142,7 @@ const LocationScreen = () => {
   }
   onMotionChange  = async (event) => {
     console.log('[motionchange] -', event.isMoving, event.location);
-    var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), location.timestamp];
+    var locationObject = [JSON.stringify(event.location.coords.latitude), JSON.stringify(event.location.coords.longitude), event.location.timestamp];
     await addLocationToDatabase(locationObject);
   }
 
