@@ -1,8 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import Constants from "expo-constants";
+import { t } from "Lib/i18n";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
   container: {
@@ -33,9 +34,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 40,
     marginTop: 10,
+    color: "#000",
+  },
+  header4: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 5,
+    color: "#4bade3",
+  },
+  textBlock: {
+    width: 350,
     padding: 10,
     borderRadius: 5,
-    margin: 10,
+    margin: 20,
     backgroundColor: "#fff",
   },
   continueButton: {
@@ -53,14 +65,14 @@ const styles = StyleSheet.create({
   },
 });
 
-function ProtectYourCommunityScreen() {
+function ConsentReportPath() {
   return (
     <LinearGradient colors={["#f4c166", "#f5ab78"]} style={styles.container}>
-      <Text style={styles.header1}>Protect Your Community</Text>
+      <Text style={styles.header1}>{t("Anonymously Report Symptoms?")}</Text>
       <Text style={styles.paragraph}>
-        The WHO recommends that at-risk patients be isolated, either in the
-        hospital or at home, until they are better and no longer pose a risk of
-        infecting others.
+        {t(
+          "We will warn community members you crossed paths with of possible exposure.\nYour symptoms, location data, and personal information will not be shared."
+        )}
       </Text>
       <TouchableOpacity
         onPress={() => {
@@ -68,13 +80,13 @@ function ProtectYourCommunityScreen() {
         }}
         style={styles.textBlock}
       >
-        <FontAwesome5
-          name="notes-medical"
+        <Ionicons
+          name="ios-people"
           size={35}
           color="black"
           style={styles.icons}
         />
-        <Text style={styles.linkLabel}>What to do if You are Sick</Text>
+        <Text style={styles.linkLabel}>{t("Protect Your Community")}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
@@ -82,32 +94,16 @@ function ProtectYourCommunityScreen() {
         }}
         style={styles.textBlock}
       >
-        <Ionicons
-          name="md-person"
+        <MaterialIcons
+          name="not-interested"
           size={40}
           color="black"
           style={styles.icons}
         />
-        <Text style={styles.linkLabel}>Caring for Yourself at Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          alert("I have no function");
-        }}
-        style={styles.textBlock}
-      >
-        <Ionicons
-          name="ios-home"
-          size={40}
-          color="black"
-          style={styles.icons}
-        />
-        <Text style={styles.linkLabel}>
-          Disinfecting Your Home if Someone is Sick
-        </Text>
+        <Text style={styles.linkLabel}>{t("Do not alert others")}</Text>
       </TouchableOpacity>
     </LinearGradient>
   );
 }
 
-export default ProtectYourCommunityScreen;
+export default ConsentReportPath;
