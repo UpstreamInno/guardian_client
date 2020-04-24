@@ -90,7 +90,11 @@ const SymptomSurveyScreen = () => {
     dispatch(routeTo(Pages.SURVEY_COMPLETE));
   };
 
-  const SwitchRow = ({ symptom, userFriendlyText }) => {
+  const switchHandler = (switchState, points) => {
+    return switchState ? points : 0;
+  };
+
+  const SwitchRow = ({ symptom, userFriendlyText, points }) => {
     return (
       <View style={styles.row}>
         <Switch
@@ -98,7 +102,12 @@ const SymptomSurveyScreen = () => {
           thumbColor={THUMB_COLOR}
           //I left the IOS background color here becasue I do not have an iphone to test this on, but I think it may be redundant given the style
           ios_backgroundColor={IOS_SWITCH_BG_COLOR}
-          onValueChange={(v) => setSymptoms({ ...symptoms, [symptom]: v })}
+          onValueChange={(switchState) =>
+            setSymptoms({
+              ...symptoms,
+              [symptom]: switchHandler(switchState, points),
+            })
+          }
           value={symptoms[symptom]}
           style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
         />
@@ -118,26 +127,51 @@ const SymptomSurveyScreen = () => {
         <SwitchRow
           symptom="lossOfSenseOfSmell"
           userFriendlyText="Loss of Sense of Smell"
+          points={1}
         />
-        <SwitchRow symptom="cough" userFriendlyText="Cough" />
-        <SwitchRow symptom="fever" userFriendlyText="Fever" />
-        <SwitchRow symptom="tiredness" userFriendlyText="Tiredness" />
+        <SwitchRow symptom="cough" userFriendlyText="Cough" points={1} />
+        <SwitchRow symptom="fever" userFriendlyText="Fever" points={1} />
+        <SwitchRow
+          symptom="tiredness"
+          userFriendlyText="Tiredness"
+          points={1}
+        />
         <SwitchRow
           symptom="shortnessOfBreath"
           userFriendlyText="Shortness of Breath"
+          points={1}
         />
         <SwitchRow
           symptom="pressureInChest"
           userFriendlyText="Pressure in Chest"
+          points={1}
         />
-        <SwitchRow symptom="soreThroat" userFriendlyText="Sore Throat" />
-        <SwitchRow symptom="runnyNose" userFriendlyText="Runny Nose" />
-        <SwitchRow symptom="vomiting" userFriendlyText="Vomiting" />
-        <SwitchRow symptom="nausea" userFriendlyText="Nausea" />
-        <SwitchRow symptom="diarrhoea" userFriendlyText="Diarrhoea" />
+        <SwitchRow
+          symptom="soreThroat"
+          userFriendlyText="Sore Throat"
+          points={1}
+        />
+        <SwitchRow
+          symptom="runnyNose"
+          userFriendlyText="Runny Nose"
+          points={1}
+        />
+        <SwitchRow symptom="vomiting" userFriendlyText="Vomiting" points={1} />
+        <SwitchRow symptom="nausea" userFriendlyText="Nausea" points={1} />
+        <SwitchRow
+          symptom="diarrhoea"
+          userFriendlyText="Diarrhoea"
+          points={1}
+        />
+        <SwitchRow
+          symptom="closeContact"
+          userFriendlyText="I have come in close contact with someone who is sick"
+          points={1}
+        />
         <SwitchRow
           symptom="testedPositive"
           userFriendlyText="I Have Tested Positive for COVID-19"
+          points={1}
         />
       </ScrollView>
       <View style={styles.submitContainer}>
