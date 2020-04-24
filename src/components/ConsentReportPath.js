@@ -71,7 +71,7 @@ function ConsentReportPath() {
       <Text style={styles.header1}>{t("Anonymously Report Symptoms?")}</Text>
       <Text style={styles.paragraph}>
         {t(
-          "We will warn community members you crossed paths with of possible exposure.\nYour symptoms, location data, and personal information will not be shared."
+          "We will warn community members you crossed paths with of possible exposure.\nYour symptoms, location data, and personal information will not be shared with other users."
         )}
       </Text>
       <TouchableOpacity
