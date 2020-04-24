@@ -55,9 +55,9 @@ function* userVerify(action) {
   const { registrationId } = yield select(state => state);
 
   try {
-    const isLoggedIn = yield call(signIn, {registrationCode, registrationId});
-    if (isLoggedIn) {
-      yield put(setUserSession({sessionId: isLoggedIn}));
+    const { accessToken, refreshToken } = yield call(signIn, {registrationCode, registrationId});
+    if (accessToken) {
+      yield put(setUserSession({accessToken, refreshToken}));
       if (redirect) {
         yield put(routeTo(Pages.CONSENT_LOCATION));
       }
@@ -73,11 +73,13 @@ function* userVerify(action) {
 }
 
 function* fetchMessages(action) {
+  const { accessToken } = yield select(state => state);
+
   //todo only for tests, remove after testing phase
   sendLocalPush(t('proximity_alert_title'), "test notification");
 
   try {
-    const message = yield call(getMessages);
+    const message = yield call(getMessages, {accessToken});
     const messageId = message["message_id"];
 
     if (!messageId) {
@@ -94,7 +96,7 @@ function* fetchMessages(action) {
     let { closestIntersection } = Paths.intersectionsFromPoints(devicePoints, message.points);
 
     // ack the message
-    yield call(ackMessage, message["message_id"]);
+    yield call(ackMessage, {messageId: message["message_id"], accessToken});
 
     if (closestIntersection) {
 
@@ -120,13 +122,15 @@ function* fetchMessages(action) {
 }
 
 function* onReportPrecisePath(action) {
+  const { accessToken } = yield select(state => state);
+
   try {
     const { path } = action.payload;
-    const { pathId } = yield call(reportPath, {points: path});
+    const { pathId } = yield call(reportPath, {points: path, accessToken});
 
     yield put(setUserLastReportedPath({ pathId, time: Date.now() }));
-    yield call(reportTestResults, pathId);
-    yield call(reportSurvey, pathId);
+    yield call(reportTestResults, {pathId, accessToken});
+    yield call(reportSurvey, {pathId, accessToken});
 
   } catch (error) {
     console.error("Failed reportin path, error: ", error);

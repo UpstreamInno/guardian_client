@@ -78,7 +78,7 @@ const DebugMenu = () => {
     // however to enable user input on the debug page, we stringify the json.
     const pathData = JSON.parse(inputRegionPath);
 
-    sendRegionPath(pathData).then((data) =>{
+    sendRegionPath({path: pathData, accessToken: state.accessToken}).then((data) =>{
       // dont need to do anything with the response for now
       console.log("sendRegionPath response, ignoring...", data)
 
@@ -94,7 +94,7 @@ const DebugMenu = () => {
   }
 
   const onGetPath = () => {
-    getPath().then((data) =>{
+    getPath({accessToken: state.accessToken}).then((data) =>{
       console.log("got path data", data);
     })
   }

@@ -4,31 +4,39 @@ const CONFIG = {
   API_ENDPOINT: "https://www.myguardian.world/api"
 }
 
-const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json; charset=utf-8'
+function defaultHeaders(tokenValue) {
+  let headers = {
+    'Content-Type': 'application/json; charset=utf-8'
+  }
+  if (tokenValue) {
+    headers.authorization = `Bearer ${tokenValue}`
+  }
+
+  return headers;
 }
 
 // User's imprecise region path
-async function sendRegionPath(path) {
+async function sendRegionPath({path, accessToken}) {
   const body = JSON.stringify({points: path});
 
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/path`, {
       method: 'POST',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(accessToken),
       body,
     })
+
     .then((response) => response.json())
     .then((data) => resolve(data))
     .catch((error) => reject(error));
   });
 };
 
-async function getPath() {
+async function getPath({accessToken}) {
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/path`, {
       method: 'GET',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(accessToken),
     })
     .then((response) => response.json())
     .then((data) => resolve(data))
@@ -36,11 +44,11 @@ async function getPath() {
   });
 };
 
-async function getMessages() {
+async function getMessages({accessToken}) {
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/messages`, {
       method: 'GET',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(accessToken),
     })
     .then((response) => response.json())
     .then((data) => resolve(data))
@@ -48,13 +56,13 @@ async function getMessages() {
   });
 };
 
-async function ackMessage(messageId) {
+async function ackMessage({messageId, accessToken}) {
   const body = JSON.stringify({ message_id: messageId });
 
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/messages/ack`, {
       method: 'POST',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(accessToken),
       body,
     })
     .then((response) => response.json())
@@ -71,7 +79,7 @@ async function signUp(phoneNumber) {
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/sign_up`, {
       method: 'POST',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(),
       body,
     })
     .then((response) => response.json())
@@ -89,19 +97,27 @@ async function signIn({registrationId, registrationCode}) {
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/sign_in`, {
       method: 'POST',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(),
       body,
     })
     .then((response) => response.json())
     .then((data) => {
-      return resolve(data["status"] === "ok");
+      if (data["status"] !== "ok") {
+        return reject(data.errors)
+      } else {
+        return resolve({
+          accessToken: data["access_token"],
+          refreshToken: data["refresh_token"],
+        });
+      }
+      
     })
     .catch((error) => reject(error));
   });
 };
 
 // User's precise path
-async function reportPath({pathId, points}) {
+async function reportPath({pathId, points, accessToken}) {
   let body = { points };
 
   if (pathId) {
@@ -113,7 +129,7 @@ async function reportPath({pathId, points}) {
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/report_path`, {
       method: 'POST',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(accessToken),
       body,
     })
     .then((response) => response.json())
@@ -128,7 +144,7 @@ async function reportPath({pathId, points}) {
   });
 };
 
-async function reportSurvey(pathId) {
+async function reportSurvey({pathId, accessToken}) {
   const body = JSON.stringify({
     path_id: pathId
   });
@@ -136,7 +152,7 @@ async function reportSurvey(pathId) {
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/report_survey`, {
       method: 'POST',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(accessToken),
       body,
     })
     .then((response) => response.json())
@@ -145,7 +161,7 @@ async function reportSurvey(pathId) {
   });
 };
 
-async function reportTestResults(pathId) {
+async function reportTestResults({pathId, accessToken }) {
   const body = JSON.stringify({ 
     path_id: pathId
   });
@@ -153,7 +169,7 @@ async function reportTestResults(pathId) {
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/report_test`, {
       method: 'POST',
-      headers: DEFAULT_HEADERS,
+      headers: defaultHeaders(accessToken),
       body,
     })
     .then((response) => response.json())
