@@ -1,7 +1,7 @@
 import { rootReducer as reducer, initialState } from "../reducer";
 
 import {
-  setUserLastPathSentTime,
+  setUserLastRegionPathSentTime,
   setUserSignUpData,
   setUserPhone,
   setUserSession,
@@ -35,10 +35,10 @@ describe("rootReducer", () => {
     expect(state.sessionId).toEqual(sessionId);
   });
 
-  it(`handles setUserLastPathSentTime`, () => {
+  it(`handles setUserLastRegionPathSentTime`, () => {
     let date = new Date();
-    const state = reducer(undefined, setUserLastPathSentTime({ time: date }));
-    expect(state.lastPathSentTime).toEqual(date);
+    const state = reducer(undefined, setUserLastRegionPathSentTime({ time: date }));
+    expect(state.lastRegionPathSentTime).toEqual(date);
   });
 
   it(`handles setUserPhone`, () => {

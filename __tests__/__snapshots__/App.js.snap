@@ -17,6 +17,1286 @@ exports[`App renders the root without loading screen 1`] = `
     }
   }
 >
-  <AppNavigator />
+  <RCTScrollView
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "paddingHorizontal": 16,
+        "paddingVertical": 16,
+      }
+    }
+  >
+    <View>
+      <View
+        accessibilityRole="button"
+        accessibilityStates={Array []}
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {},
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#007AFF",
+                  "fontSize": 18,
+                  "padding": 8,
+                  "textAlign": "center",
+                },
+              ]
+            }
+          >
+            Start App
+          </Text>
+        </View>
+      </View>
+      <Text>
+        debug_menu
+      </Text>
+      <Text>
+        Actions
+      </Text>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              Sign Up
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              POST /sign_up
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              Sign In
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              POST /sign_in
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              Send Region Change
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              POST /path
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              Report Full Path
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              POST /report_path
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              Get/Process Messages
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              GET /messages
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              [DEBUG] Get path
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              GET /path
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              [DEBUG] Route to
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "height": 50,
+                  "width": 150,
+                }
+              }
+            >
+              <RCTPicker
+                items={
+                  Array [
+                    Object {
+                      "label": "SIGNUP",
+                      "textColor": undefined,
+                      "value": "SIGNUP",
+                    },
+                    Object {
+                      "label": "SIGNUP_VERIFY",
+                      "textColor": undefined,
+                      "value": "SIGNUP_VERIFY",
+                    },
+                    Object {
+                      "label": "SIGNUP_COMPLETE",
+                      "textColor": undefined,
+                      "value": "SIGNUP_COMPLETE",
+                    },
+                    Object {
+                      "label": "CONSENT_LOCATION",
+                      "textColor": undefined,
+                      "value": "CONSENT_LOCATION",
+                    },
+                    Object {
+                      "label": "CONSENT_NOTIFICATION",
+                      "textColor": undefined,
+                      "value": "CONSENT_NOTIFICATION",
+                    },
+                    Object {
+                      "label": "HOME",
+                      "textColor": undefined,
+                      "value": "HOME",
+                    },
+                    Object {
+                      "label": "MESSAGE_DETAILS",
+                      "textColor": undefined,
+                      "value": "MESSAGE_DETAILS",
+                    },
+                    Object {
+                      "label": "SYMPTOM_SURVEY",
+                      "textColor": undefined,
+                      "value": "SYMPTOM_SURVEY",
+                    },
+                    Object {
+                      "label": "SURVEY_COMPLETE",
+                      "textColor": undefined,
+                      "value": "SURVEY_COMPLETE",
+                    },
+                    Object {
+                      "label": "ALERT_NOTIFICATION",
+                      "textColor": undefined,
+                      "value": "ALERT_NOTIFICATION",
+                    },
+                    Object {
+                      "label": "DEBUG_MENU",
+                      "textColor": undefined,
+                      "value": "DEBUG_MENU",
+                    },
+                  ]
+                }
+                onChange={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                selectedIndex={10}
+                style={
+                  Array [
+                    Object {
+                      "height": 216,
+                    },
+                    undefined,
+                  ]
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              resetStore
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              resets the store to initial values
+            </Text>
+          </View>
+        </View>
+      </View>
+      <Text>
+        Redux Store (in memory)
+      </Text>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              userPhone
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              null
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              registrationCode
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              null
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              registrationId
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              null
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              sessionId
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              null
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              lastRegionPathSentTime
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              null
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              lastReportPathSentTime
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              null
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              lastReportPathId
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              null
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              currentPage
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text />
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              previousPage
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              null
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessible={true}
+        focusable={false}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              notifications
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderColor": "#CECECE",
+                "borderWidth": 1,
+                "flex": 0.5,
+                "paddingLeft": 5,
+              }
+            }
+          >
+            <Text>
+              []
+            </Text>
+          </View>
+        </View>
+      </View>
+      <Text>
+        User/Device Inputs
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "borderColor": "#CECECE",
+              "borderWidth": 1,
+              "flex": 0.5,
+              "paddingLeft": 5,
+            }
+          }
+        >
+          <Text>
+            (Registration) User Phone 
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "borderColor": "#CECECE",
+              "borderWidth": 1,
+              "flex": 0.5,
+              "paddingLeft": 5,
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            onChangeText={[Function]}
+            rejectResponderTermination={true}
+            style={
+              Object {
+                "borderColor": "gray",
+                "borderWidth": 1,
+                "height": 40,
+              }
+            }
+            underlineColorAndroid="transparent"
+            value="1123456789"
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "borderColor": "#CECECE",
+              "borderWidth": 1,
+              "flex": 0.5,
+              "paddingLeft": 5,
+            }
+          }
+        >
+          <Text>
+            Region Path
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "borderColor": "#CECECE",
+              "borderWidth": 1,
+              "flex": 0.5,
+              "paddingLeft": 5,
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            multiline={true}
+            numberOfLines={6}
+            onChangeText={[Function]}
+            rejectResponderTermination={true}
+            style={
+              Object {
+                "borderColor": "gray",
+                "borderWidth": 1,
+              }
+            }
+            underlineColorAndroid="transparent"
+            value="[
+  [
+    \\"47.60\\",
+    \\"-122.33\\",
+    \\"2020-04-02T00:18:31Z\\"
+  ],
+  [
+    \\"47.60\\",
+    \\"-122.33\\",
+    \\"2020-04-02T00:23:31Z\\"
+  ]
+]"
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "borderColor": "#CECECE",
+              "borderWidth": 1,
+              "flex": 0.5,
+              "paddingLeft": 5,
+            }
+          }
+        >
+          <Text>
+            (Device) Device Path
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "borderColor": "#CECECE",
+              "borderWidth": 1,
+              "flex": 0.5,
+              "paddingLeft": 5,
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            multiline={true}
+            numberOfLines={6}
+            onChangeText={[Function]}
+            rejectResponderTermination={true}
+            style={
+              Object {
+                "borderColor": "gray",
+                "borderWidth": 1,
+              }
+            }
+            underlineColorAndroid="transparent"
+            value="[
+  [
+    \\"47.609755\\",
+    \\"-122.337793\\",
+    \\"2020-04-02T00:18:31Z\\"
+  ],
+  [
+    \\"47.609750\\",
+    \\"-122.339900\\",
+    \\"2020-04-02T00:23:31Z\\"
+  ]
+]"
+          />
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
 </View>
 `;

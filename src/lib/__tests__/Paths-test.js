@@ -7,7 +7,7 @@ describe("Paths", () => {
   let path2;
 
   describe("intersections", () => {
-    
+
     it(`returns no intersections when no time overlap`, () => {
       path1 = new Path([
         { time: 800, lat: 44.0000, long:  -93.0000 },
@@ -17,7 +17,7 @@ describe("Paths", () => {
         { time: 200, lat: 44.0000, long:  -93.0000 },
         { time: 900, lat: 44.0000, long:  -91.0000 },
       ]);
-      expect(Paths.intersections(path1, path2)).toEqual({intersections: []});
+      expect(Paths.intersections(path1, path2)).toEqual({closestIntersection: {}, intersections: []});
     });
 
     it(`returns intersections for exact location/time matches`, () => {
@@ -31,9 +31,11 @@ describe("Paths", () => {
         { time: 300, lat: 44.0000, long:  -97.0000 },
         { time: 400, lat: 44.0000, long:  -93.0000 },
       ]);
-      expect(Paths.intersections(path1, path2)).toEqual({intersections: [
-        { time: 300, distance: 0 },
-        { time: 400, distance: 0 },
+      expect(Paths.intersections(path1, path2)).toEqual({
+        closestIntersection: { "distance": 0, "time": 300 },
+        intersections: [
+          { time: 300, distance: 0 },
+          { time: 400, distance: 0 },
       ]});
     });
 
@@ -52,14 +54,16 @@ describe("Paths", () => {
         { time: 19, lat: 44.0000, long: -97.0000 }, // wrong time
         { time: 21, lat: 44.0000, long: -97.0000 },
       ]);
-      expect(Paths.intersections(path1, path2, {timePadding: 5, locationPadding: 3})).toEqual({intersections: [
-        { time: 10, distance: 0 },
-        { time: 10, distance: distance(path1.data[0].lat, path1.data[0].long, path2.data[2].lat, path2.data[2].long) },
-        { time: 10, distance: 0 },
-        { time: 25, distance: 0 },
+      expect(Paths.intersections(path1, path2, {timePadding: 5, locationPadding: 3})).toEqual({
+          closestIntersection: { "distance": 0, "time": 10 },
+          intersections: [
+            { time: 10, distance: 0 },
+            { time: 10, distance: distance(path1.data[0].lat, path1.data[0].long, path2.data[2].lat, path2.data[2].long) },
+            { time: 10, distance: 0 },
+            { time: 25, distance: 0 },
       ]});
     });
-    
+
   });
 
 });
