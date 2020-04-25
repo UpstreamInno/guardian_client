@@ -1,8 +1,9 @@
 import {
-  StyleSheet,
-  Text,
-  Image,
-  Button,
+    StyleSheet,
+    Text,
+    Image,
+    Button,
+    KeyboardAvoidingView,
 } from "react-native";
 import Constants from "expo-constants";
 import React, { useState } from "react";
@@ -16,6 +17,9 @@ import UserPhoneInput from "Components/UserPhoneInput"
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  wrapper: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -55,17 +59,22 @@ export default function SignupScreen() {
   const onSignUp = () => dispatch(userSignUp(phone));
 
   return (
-    <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
-      <Text style={styles.title}>{t("guardian")}</Text>
-      <Image
-        source={require("../../images/logo.png")}
-        style={{ width: 200, height: 200, marginBottom: 50 }}
-      />
-      <UserPhoneInput onChange={setPhone} phoneNumber={phone} />
-      <Button
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.wrapper}>
+        <Text style={styles.title}>{t("guardian")}</Text>
+        <Image
+          source={require("../../images/logo.png")}
+          style={{ width: 200, height: 200, marginBottom: 50 }}
+        />
+        <UserPhoneInput onChange={setPhone} phoneNumber={phone} />
+        <Button
           title={t("register")}
           onPress={onSignUp}
-      />
-    </LinearGradient>
+        />
+      </LinearGradient>
+    </KeyboardAvoidingView>
   );
 };
