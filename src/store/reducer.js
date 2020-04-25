@@ -15,7 +15,8 @@ export const initialState = {
   userPhone: null,
   registrationCode: null,
   registrationId: null,
-  sessionId: null,
+  accessToken: null,
+  refreshToken: null,
   lastRegionPathSentTime: null,
   lastReportPathSentTime: null,
   lastReportPathId: null,
@@ -40,7 +41,8 @@ export const rootReducer = (state = initialState, action) => {
     case SET_USER_SESSION:
       return {
         ...state,
-        sessionId: (action.payload && action.payload.sessionId) || null,
+        accessToken: (action.payload && action.payload.accessToken) || null,
+        refreshToken: (action.payload && action.payload.refreshToken) || null,
       };
     case SAVE_NOTIFICATION:
       const notification = (action.payload && action.payload.notification) || null;

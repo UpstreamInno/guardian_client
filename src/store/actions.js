@@ -105,11 +105,12 @@ export function markNotificationRead(notificationId) {
   };
 }
 
-export function setUserSession({ sessionId }) {
+export function setUserSession({ accessToken, refreshToken }) {
   return {
     type: SET_USER_SESSION,
     payload: {
-      sessionId,
+      accessToken,
+      refreshToken,
     },
   };
 }
