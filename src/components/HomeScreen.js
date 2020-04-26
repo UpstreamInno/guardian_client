@@ -8,18 +8,18 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { t } from 'Lib/i18n';
-import { routeTo } from "Store/actions";
+import { 
+  sessionNotFound, 
+  routeTo,
+} from "Store/actions";
 import { Pages } from "Lib/Pages";
 
-
 const HomeScreen = () => {
-
-  // Route to signin if there is no session.
-  const { sessionId } = useSelector(state => state);
+  const { accessToken } = useSelector(state => state);
   const dispatch = useDispatch();
 
-  if (!sessionId) {
-    dispatch(routeTo(Pages.SIGNUP));
+  if (!accessToken) {
+    dispatch(sessionNotFound());
     return <></>;
   }
 

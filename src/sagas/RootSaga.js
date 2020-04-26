@@ -3,6 +3,7 @@ import {
   watchUserVerify,
   watchFetchMessages,
   watchReportPrecisePath,
+  watchSessionNotFound,
 } from './GuardianSaga'
 import { all } from 'redux-saga/effects'
 
@@ -13,5 +14,6 @@ export function* rootSaga() {
     watchUserVerify(),
     watchFetchMessages(),
     watchReportPrecisePath(),
+    watchSessionNotFound(),
   ]);
 }

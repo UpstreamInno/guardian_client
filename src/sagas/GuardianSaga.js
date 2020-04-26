@@ -1,6 +1,7 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects'
 import { Pages } from "Lib/Pages";
 import { Paths } from "Lib/Paths"
+import Session from "Lib/models/Session";
 import { epochToDisplayString, distanceToDisplay } from "Lib/PathHelpers"
 import { t } from 'Lib/i18n';
 import {sendLocalPush} from 'Lib/Notifications';
@@ -20,6 +21,7 @@ import {
   USER_SIGNUP_VERIFY,
   FETCH_MESSAGES,
   REPORT_PRECISE_PATH,
+  SESSION_NOT_FOUND,
   saveNotification,
   setUserPhone,
   setUserSession,
@@ -57,7 +59,12 @@ function* userVerify(action) {
   try {
     const { accessToken, refreshToken } = yield call(signIn, {registrationCode, registrationId});
     if (accessToken) {
+      // send session to redux store
       yield put(setUserSession({accessToken, refreshToken}));
+
+      // send session to local storage
+      yield call(Session.write, {accessToken, refreshToken});
+
       if (redirect) {
         yield put(routeTo(Pages.CONSENT_LOCATION));
       }
@@ -138,6 +145,22 @@ function* onReportPrecisePath(action) {
   }
 }
 
+function* onSessionNotFound(action) {
+  // attempt to load session from device storage
+  const session = yield call(Session.read);
+
+  if (session && (session.accessToken || session.accessToken)) {
+        // send session to redux store
+        yield put(setUserSession({
+          accessToken: session.accessToken,
+          refreshToken: session.refreshToken,
+        }));
+  } else {
+    // still no session, route to signup
+    yield put(routeTo(Pages.SIGNUP));
+  }
+}
+
 export function* watchUserRegister() {
   yield takeLatest(USER_SIGNUP, userSignUp);
 }
@@ -152,4 +175,8 @@ export function* watchFetchMessages() {
 
 export function* watchReportPrecisePath() {
   yield takeLatest(REPORT_PRECISE_PATH, onReportPrecisePath);
+}
+
+export function* watchSessionNotFound() {
+  yield takeLatest(SESSION_NOT_FOUND, onSessionNotFound);
 }

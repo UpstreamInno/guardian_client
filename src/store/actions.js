@@ -2,6 +2,7 @@ export const USER_SIGNUP = "USER_SIGNUP";
 export const USER_SIGNUP_VERIFY = "USER_SIGNUP_VERIFY";
 export const REPORT_PRECISE_PATH = "REPORT_PRECISE_PATH";
 export const FETCH_MESSAGES = "FETCH_MESSAGES";
+export const SESSION_NOT_FOUND = "SESSION_NOT_FOUND";
 
 export const ROUTE_TO = "ROUTE_TO";
 export const SAVE_NOTIFICATION = "SAVE_NOTIFICATION";
@@ -43,6 +44,13 @@ export function userSignUpVerify(registrationCode, redirect = true) {
 export function fetchMessages() {
   return {
     type: FETCH_MESSAGES,
+  };
+}
+
+// attempts to load session from storage, otherwise redirect to signup
+export function sessionNotFound() {
+  return {
+    type: SESSION_NOT_FOUND,
   };
 }
 

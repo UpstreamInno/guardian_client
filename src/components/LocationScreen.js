@@ -7,7 +7,7 @@ import {
   AsyncStorage
 } from "react-native";
 import Constants from "expo-constants";
-import * as Location from "expo-location";
+import * as ExpoLocation from "expo-location";
 import * as TaskManager from "expo-task-manager";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -15,11 +15,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { t } from 'Lib/i18n';
 import { routeTo } from "Store/actions";
 import { Pages } from "Lib/Pages";
+import Location from "Lib/models/Location";
 
-import {
-  getMostRecentLocations,
-  addLocationToDatabase,
-} from "Lib/Storage";
 import moment from 'moment';
 import BackgroundGeolocation, {
   MotionChangeEvent,
@@ -127,8 +124,8 @@ const LocationScreen = () => {
   onLocation = async (location) => {
     console.log('[location] -', location);
     setLocation(location);
-    var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), location.timestamp];
-    await addLocationToDatabase(locationObject);
+    await Location.insert([location.coords.latitude, location.coords.longitude, location.timestamp]);
+    return
   }
 
   onError  = async (error) => {
@@ -142,8 +139,7 @@ const LocationScreen = () => {
   }
   onMotionChange  = async (event) => {
     console.log('[motionchange] -', event.isMoving, event.location);
-    var locationObject = [JSON.stringify(event.location.coords.latitude), JSON.stringify(event.location.coords.longitude), event.location.timestamp];
-    await addLocationToDatabase(locationObject);
+    await Location.insert([location.coords.latitude, location.coords.longitude, location.timestamp]);
   }
 
   const saveUsername = async(inputText) => {
@@ -154,9 +150,9 @@ const LocationScreen = () => {
   }
 
   const onPress = async () => {
-    var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
-    console.log("most recent - locations updates", JSON.stringify(locationsInDb));
-    alert(JSON.stringify(locationsInDb));
+    var locationsInDb = (await Location.read({limit: 10})).history; //get most recent 10 locations
+    console.log("most recent - locations updates", locationsInDb);
+    alert(locationsInDb);
   };
 
   const onContinue = () => {

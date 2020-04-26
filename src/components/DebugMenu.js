@@ -25,13 +25,8 @@ import {
   getPath,
   sendRegionPath,
 } from "Lib/Api";
-import {
-  getMostRecentLocations,
-  getLocationsWithinDays,
-  addLocationToDatabase,
-  deleteLocationsAfterTime,
-  deleteLocationsAfterDate,
-} from "Lib/Storage";
+import Storage from "Lib/Storage";
+import Location from "Lib/models/Location";
 
 import { useDispatch, useSelector } from "react-redux";
 import {registerForPush} from 'Lib/Notifications';
@@ -49,6 +44,9 @@ const DebugMenu = () => {
 
   // input states, used only for this page to simulate UI input
   const [inputPhone, setInputPhone] = useState('1123456789');
+
+  // input states, used only for this page to simulate UI input
+  const [deviceStore, setdeviceStore] = useState({});
 
   // TODO: this should be computed from precise path!
   const [inputRegionPath, setInputRegionPath] = useState(JSON.stringify([
@@ -108,10 +106,23 @@ const DebugMenu = () => {
     dispatch(fetchMessages());
   }
 
+  const printStore = () => {
+    Storage.readAll().then((result) => setdeviceStore((result)));
+  }
+
+  const wipeStore = () => {
+    Storage.wipeAll().then((result) => printStore());
+  }
+
+  const addLocationToStore = () => {
+    const sampleLocation = ["47.609755", "-122.337793", "2020-05-01T00:18:31Z"]
+    Location.insert(sampleLocation).then((result) => printStore());
+  }
+
   const inputs = () => {
     return (
       <>
-        <Text>User/Device Inputs</Text>
+        <Text style={styles.header}>User/Device Inputs</Text>
 
         <View style={styles.row}>
           <View style={styles.keyContainer} >
@@ -167,7 +178,7 @@ const DebugMenu = () => {
 
       <Text>{t('debug_menu')}</Text>
 
-      <Text>Actions</Text>
+      <Text style={styles.header}>Actions</Text>
       {actionRow("Sign Up", "POST /sign_up", onSignUp)}
       {actionRow("Sign In", "POST /sign_in", onSignIn)}
       {actionRow("Send Region Change", "POST /path", onSendRegionPath)}
@@ -175,12 +186,19 @@ const DebugMenu = () => {
       {actionRow("Get/Process Messages", "GET /messages", onGetMessages)}
       {actionRow("[DEBUG] Get path", "GET /path", onGetPath)}
       {routeToRow("[DEBUG] Route to", onRouteTo)}
+      {actionRow("resetStore", "resets the in-memory store to initial values", () => dispatch(resetStore()))}
+      {actionRow("[Device Storage] Print device storage", "calling this too quickly will cause an exception", printStore)}
+      {actionRow("[Device Storage] Erase all keys", "delete everything!", wipeStore)}
+      {actionRow("[Device Storage] Add location to history", "add a test location", addLocationToStore)}
 
-      {actionRow("resetStore", "resets the store to initial values", () => dispatch(resetStore()))}
-
-      <Text>Redux Store (in memory)</Text>
+      <Text style={styles.header}>Redux Store (in memory)</Text>
       {
         Object.keys(state).map((key) => row({key, value: state[key]}))
+      }
+      
+      <Text style={styles.header}>Device Store (persisted)</Text>
+      {
+        Object.keys(deviceStore).map((key) => row({key, value: deviceStore[key]}))
       }
 
       {inputs()}
@@ -256,6 +274,11 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
+  },
+  header: {
+    paddingVertical : 20,
+    fontSize: 20,
+    fontWeight: "bold",
   },
   keyContainer: {
     flex: 0.5,
