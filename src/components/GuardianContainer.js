@@ -54,6 +54,6 @@ export default function GuardianContainer() {
     case Pages.DEBUG_MENU:
       return <DebugMenu />;
     default:
-      return <LocationScreen />;
+      return <DebugMenu />;
   }
 }
