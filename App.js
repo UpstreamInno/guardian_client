@@ -33,23 +33,23 @@ export const scheduleTask = async (name) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
-  }
+    backgroundColor: "#fff",
+  },
 });
 
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
       require("./assets/images/robot-dev.png"),
-      require("./assets/images/robot-prod.png")
+      require("./assets/images/robot-prod.png"),
     ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
       ...Ionicons.font,
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
-      "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
-    })
+      "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+    }),
   ]);
 }
 
@@ -65,7 +65,7 @@ function handleFinishLoading(setLoadingComplete) {
 
 const store = configureStore();
 
-const App = props => {
+const App = (props) => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const [isI18nInitialized, setIsI18nInitialized] = useState(false);
   const [enabled, setEnabled] = useState(false);
@@ -109,6 +109,7 @@ const App = props => {
     BackgroundFetch.finish(taskId);
   };
 
+<<<<<<< HEAD
   /// Configure BackgroundFetch
   ///
   const init = async () => {
@@ -139,18 +140,25 @@ const App = props => {
     i18n.init()
         .then(() => {
           const RNDir = RNI18nManager.isRTL ? 'RTL' : 'LTR';
+=======
+  React.useEffect(() => {
+    i18n
+      .init()
+      .then(() => {
+        const RNDir = RNI18nManager.isRTL ? "RTL" : "LTR";
+>>>>>>> 923052dc... cleaned a merge conflict
 
-          if (i18n.dir !== RNDir) {
-            const isLocaleRTL = i18n.dir === 'RTL';
+        if (i18n.dir !== RNDir) {
+          const isLocaleRTL = i18n.dir === "RTL";
 
-            RNI18nManager.forceRTL(isLocaleRTL);
+          RNI18nManager.forceRTL(isLocaleRTL);
 
-            Updates.reloadFromCache();
-          }
+          Updates.reloadFromCache();
+        }
 
-          setIsI18nInitialized(true);
-        })
-        .catch((error) => console.warn(error));
+        setIsI18nInitialized(true);
+      })
+      .catch((error) => console.warn(error));
   });
 
   // if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {  // AppLoading, temporary remove apploading -> not working on expo sdk
@@ -164,6 +172,7 @@ const App = props => {
   //   );
   // }
   return (
+<<<<<<< HEAD
     <Provider store={store}>
       <React.Suspense fallback="loading">
         <View style={styles.container}>
@@ -172,6 +181,19 @@ const App = props => {
         </View>
       </React.Suspense>
     </Provider>
+=======
+    <LinearGradient
+      colors={["#4c669f", "#3b5998", "#192f6a"]}
+      style={{ padding: 15, alignItems: "center", borderRadius: 5 }}
+    >
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+          <AppNavigator />
+        </View>
+      </Provider>
+    </LinearGradient>
+>>>>>>> 923052dc... cleaned a merge conflict
   );
 };
 
