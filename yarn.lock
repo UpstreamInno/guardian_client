@@ -1195,10 +1195,17 @@
   dependencies:
     cross-spawn "^6.0.5"
 
-"@expo/vector-icons@^10.0.2", "@expo/vector-icons@^10.0.6":
+"@expo/vector-icons@^10.0.2":
   version "10.0.6"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-10.0.6.tgz#5718953ff0b97827d11dae5787976fa8ce5caaed"
   integrity sha512-qNlKPNdf073LpeEpyClxAh0D3mmIK4TGAQzeKR0HVwf14RIEe17+mLW5Z6Ka5Ho/lUtKMRPDHumSllFyKvpeGg==
+  dependencies:
+    lodash "^4.17.4"
+
+"@expo/vector-icons@^10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-10.1.0.tgz#3fb2517924b031c1b98f86fa51a2032a257759b0"
+  integrity sha512-6ikFslHORJgsb8wKeSgXYfZNNXsiTb3yQf5xaNyGUCYg4zqE7VchdhnH9yZKTI3Lu16jna52pHQZl+3jcOSAbQ==
   dependencies:
     lodash "^4.17.4"
 
@@ -5168,13 +5175,6 @@ expo@~37.0.3:
     unimodules-sensors-interface "~5.1.0"
     unimodules-task-manager-interface "~5.1.0"
     uuid "^3.4.0"
-
-expokit@^37.0.0:
-  version "37.0.0"
-  resolved "https://registry.yarnpkg.com/expokit/-/expokit-37.0.0.tgz#7e0df3554778277d2c60a9fa4ec3ea8b2b0bf594"
-  integrity sha512-wWYJflw6OEsNAd7C8Rn8BVuHlIfGqHtEhdEow7C3Tu88DxafV6i4YTef3gPm+jhkyKz70lBeqLil5UgIRhGynw==
-  dependencies:
-    jsc-android "^245459.0.0"
 
 extend-shallow@^1.1.2:
   version "1.1.4"

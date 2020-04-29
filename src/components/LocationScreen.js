@@ -22,110 +22,15 @@ import {
 } from "Lib/Storage";
 import moment from 'moment';
 import BackgroundGeolocation from "react-native-background-geolocation";
-import BackgroundTask from 'react-native-background-task'
 
-BackgroundTask.define(async () => {
-  // Fetch some data over the network which we want the user to have an up-to-
-  // date copy of, even if they have no network when using the app
-  const response = await fetch('http://feeds.bbci.co.uk/news/rss.xml')
-  const text = await response.text()
-  
-  // Data persisted to AsyncStorage can later be accessed by the foreground app
-  var storage = await AsyncStorage.getItem('job');
-  if(storage == null){
-    storage = "";
-  }
-  storage = storage + text;
-  await AsyncStorage.setItem('job', text)
-  
-  // Remember to call finish()
-  BackgroundTask.finish()
-})
-// const TASK_GUARDIAN_LOCATION = "guardian_location";
-
-// TaskManager.defineTask(TASK_GUARDIAN_LOCATION, async({ data, error }) => {
-//   console.log("enter TASK_GUARDIAN_LOCATION", data);
-//   if (error) {
-//     alert(error);
-//     return;
-//   }
-//   if (data) {
-//     const { locations } = data;
-//     if(locations.length > 0){
-//       for(var i = 0; i < locations.length; i++){
-//         var location = locations[i];
-//         let date = moment(location.timestamp).format("YYYY-MM-DD[T]HH:mm:ss[Z]")
-//         var locationObject = [JSON.stringify(location.coords.latitude), JSON.stringify(location.coords.longitude), date];
-//         await addLocationToDatabase(locationObject); // add location to db
-//       }
-//       var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
-//       // console.log("most recent - locations updates", JSON.stringify(locationsInDb));
-//     }
-//   }
-// });
 
 const LocationScreen = () => {
   const dispatch = useDispatch();
 
   const [location, setLocation] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-
   useEffect(() => {
-    console.log("watch", location);
-    if(location == null){
-         watchLocation();
-         
-
-               // This handler fires whenever bgGeo receives a location update.
-          BackgroundGeolocation.onLocation(this.onLocation, this.onError);
-
-          // This handler fires when movement states changes (stationary->moving; moving->stationary)
-          BackgroundGeolocation.onMotionChange(this.onMotionChange);
-
-          // This event fires when a change in motion activity is detected
-          BackgroundGeolocation.onActivityChange(this.onActivityChange);
-
-          // This event fires when the user toggles location-services authorization
-          BackgroundGeolocation.onProviderChange(this.onProviderChange);
-
-          ////
-          // 2.  Execute #ready method (required)
-          //
-          BackgroundGeolocation.ready({
-            // Geolocation Config
-            desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
-            distanceFilter: 10,
-            // Activity Recognition
-            stopTimeout: 1,
-            // Application config
-            debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
-            logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
-            stopOnTerminate: false,   // <-- Allow the background-service to continue tracking when user closes the app.
-            startOnBoot: true,        // <-- Auto start tracking when device is powered-up.
-            // HTTP / SQLite config
-            url: 'http://yourserver.com/locations',
-            batchSync: false,       // <-- [Default: false] Set true to sync locations to server in a single HTTP request.
-            autoSync: true,         // <-- [Default: true] Set true to sync each location to server as it arrives.
-            headers: {              // <-- Optional HTTP headers
-              "X-FOO": "bar"
-            },
-            params: {               // <-- Optional HTTP params
-              "auth_token": "maybe_your_server_authenticates_via_token_YES?"
-            }
-          }, (state) => {
-            console.log("- BackgroundGeolocation is configured and ready: ", state.enabled);
-
-            // if (!state.enabled) {
-            //   ////
-            //   // 3. Start tracking!
-            //   //
-              BackgroundGeolocation.start(function() {
-                console.log("- Start success");
-              });
-            
-          }); 
-    }
- 
+    console.log("watch", location); 
   });
 
   onLocation = async (location) => {
@@ -161,51 +66,9 @@ const LocationScreen = () => {
    
   };
 
-  checkStatus = async () => {
-    const status = await BackgroundTask.statusAsync()
-    
-    if (status.available) {
-      // Everything's fine
-      return
-    }
-    
-    const reason = status.unavailableReason
-    if (reason === BackgroundTask.UNAVAILABLE_DENIED) {
-      Alert.alert('Denied', 'Please enable background "Background App Refresh" for this app')
-    } else if (reason === BackgroundTask.UNAVAILABLE_RESTRICTED) {
-      Alert.alert('Restricted', 'Background tasks are restricted on your device')
-    }
-  }
   const onPress = async () => {
-     var locationsInDb = await getMostRecentLocations(100); //get most recent 10 locations
-      console.log("most recent - locations updates", JSON.stringify(locationsInDb));
-      BackgroundTask.schedule({
-          period: 900, // Aim to run every 30 mins - more conservative on battery
-        })
-
-      this.checkStatus();
-
-      var storage = await AsyncStorage.getItem('job');
-      if(storage == null){
-        storage = "";
-      }
-      console.log("storage",storage);
-
-    // const { status, ios } = await Location.requestPermissionsAsync();
-    // if (status !== "granted") {
-    //   setErrorMessage("Permission to access location was denied");
-    // }
-    // if (status === "granted") {
-    //   await Location.startLocationUpdatesAsync(TASK_GUARDIAN_LOCATION, {
-    //     accuracy: 4,
-    //     showsBackgroundLocationIndicator: true,
-    //     //timeInterval: 0,
-    //     distanceInterval: "20", // meters
-    //     deferredUpdatesInterval: "200", //ms
-    //     deferredUpdatesDistance: "20", //meters
-    //       pausesUpdatesAutomatically: true,
-    //   });
-    // } 
+    var taskText = await AsyncStorage.getItem("task");
+    alert("Configure background-fetch" + taskText);
   };
 
   const onContinue = () => {

@@ -11,6 +11,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.covidguardianclient.generated.BasePackageList;
+import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
 
 import org.unimodules.adapters.react.ReactAdapterPackage;
 import org.unimodules.adapters.react.ModuleRegistryAdapter;
@@ -80,7 +81,7 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this); // Remove this line if you don't want Flipper enabled
-
+    BackgroundTaskPackage.useContext(this);
     if (!BuildConfig.DEBUG) {
       UpdatesController.initialize(this);
     }
