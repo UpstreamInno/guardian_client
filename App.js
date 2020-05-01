@@ -20,7 +20,7 @@ export const scheduleTask = async (name) => {
       stopOnTerminate: false,
       startOnBoot: true,
       enableHeadless: true,
-      delay: 10 * 60 * 1000,               // milliseconds (5min)
+      delay: 60 * 60 * 1000,               // milliseconds (5min)
       forceAlarmManager: true,
       forceReload:true,   // more precise timing with AlarmManager vs default JobScheduler
       periodic: true            // Fire once only.
