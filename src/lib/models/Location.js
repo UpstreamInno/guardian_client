@@ -3,7 +3,7 @@ import moment from 'moment';
 
 export default class Location {
 
-  static get NAMESPACE() { return Storage.modelName("location"); }
+  static get NAMESPACE() { return Storage.encryptedModelName("location"); }
 
   // returns location, an object with keys:
   //   history: time sorted array of points in the form [lat, long, time]

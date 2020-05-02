@@ -6,7 +6,7 @@ import * as SecureStore from 'expo-secure-store';
 export default class Storage {
   static get ENCRPYTION_PREFIX() { return "encrypted"; }
 
-  static modelName(name) { return `${Storage.ENCRPYTION_PREFIX}_${name}`; }
+  static encryptedModelName(name) { return `${Storage.ENCRPYTION_PREFIX}_${name}`; }
 
   // dump the store, decrypt/parse keys prefixed with encrypted
   static async readAll() {
@@ -29,7 +29,7 @@ export default class Storage {
   //   decrypt - boolean, when true decrypts the payload, default true
   //   parse - boolean, when true JSON parse's the payload, default true
   static async load(STORAGE_KEY, options = {}) {
-    const decrypt = options.hasOwnProperty('descrypt') ? options.decrypt : true;
+    const decrypt = options.hasOwnProperty('decrypt') ? options.decrypt : true;
     const parse = options.hasOwnProperty('parse') ? options.parse : true;
 
     try {
@@ -96,11 +96,11 @@ export default class Storage {
   static async wipeAll() {
     let keys = await AsyncStorage.getAllKeys();
   
-    async function fetchKey(key) {
+    async function removeKey(key) {
       await Storage.remove(key);
     }
   
-    await Promise.all(keys.map(fetchKey));
+    await Promise.all(keys.map(removeKey));
   }
 }
 

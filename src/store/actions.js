@@ -1,6 +1,7 @@
 export const USER_SIGNUP = "USER_SIGNUP";
 export const USER_SIGNUP_VERIFY = "USER_SIGNUP_VERIFY";
 export const REPORT_PRECISE_PATH = "REPORT_PRECISE_PATH";
+export const REPORT_SYMPTOMS = "REPORT_SYMPTOMS";
 export const FETCH_MESSAGES = "FETCH_MESSAGES";
 export const SESSION_NOT_FOUND = "SESSION_NOT_FOUND";
 
@@ -67,6 +68,16 @@ export function reportPrecisePath(path) {
     type: REPORT_PRECISE_PATH,
     payload: {
       path,
+    },
+  };
+}
+
+// report symptom survey results
+export function reportSymptoms(symptoms) {
+  return {
+    type: REPORT_SYMPTOMS,
+    payload: {
+      symptoms,
     },
   };
 }
