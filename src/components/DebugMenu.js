@@ -50,8 +50,7 @@ const DebugMenu = () => {
   const [deviceStore, setDeviceStore] = useState({});
 
   const [inputSymptoms, setInputSymptoms] = useState(JSON.stringify({
-    // Greyscale: "1.0", "Hawaiian Cat Flu": "9.9", plaid: null, Cooties: 0, Blorbs: "0.0"
-    Greyscale: "1.0", "Hawaiian Cat Flu": "9.9"
+    Greyscale: 1.0, "Hawaiian Cat Flu": 9.9, plaid: 1, Cooties: 0, Blorbs: 0.0
   }, null, 2));
 
   // TODO: this should be computed from precise path!

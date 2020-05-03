@@ -46,7 +46,9 @@ function* userSignUp(action) {
     }
   } catch (error) {
     console.error("Failed signUp, error: ", error);
-    yield put(routeTo(Pages.HOME));
+    if (redirect) {
+      yield put(routeTo(Pages.HOME));
+    }
   }
 }
 
@@ -73,11 +75,15 @@ function* userVerify(action) {
     } else {
       // unable to validate code, send them back to try again
       console.error("unable to validate code");
-      yield put(routeTo(Pages.SIGNUP));
+      if (redirect) {
+        yield put(routeTo(Pages.SIGNUP));
+      }
     }
   } catch (error) {
     console.error("Failed signUp, error: ", error);
-    yield put(routeTo(Pages.HOME));
+    if (redirect) {
+      yield put(routeTo(Pages.HOME));
+    }
   }
 }
 
