@@ -30,6 +30,7 @@ import DialogInput from 'react-native-dialog-input';
 
 const locationConsoleUrl = "http://tracker.transistorsoft.com";
 
+
 const LocationScreen = () => {
   const dispatch = useDispatch();
 
@@ -152,7 +153,9 @@ const LocationScreen = () => {
   const onPress = async () => {
     var locationsInDb = (await Location.read({limit: 10})).history; //get most recent 10 locations
     console.log("most recent - locations updates", locationsInDb);
-    alert(locationsInDb);
+    // alert(locationsInDb);
+    // var taskText = await AsyncStorage.getItem("task");
+    // alert("Configure background-fetch" + taskText);
   };
 
   const onContinue = () => {

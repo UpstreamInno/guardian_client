@@ -4,13 +4,31 @@ import {
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import React, { useState } from "react";
-import { Platform, StatusBar, StyleSheet, View, I18nManager as RNI18nManager } from "react-native";
+import { Platform, StatusBar, StyleSheet, View, AsyncStorage, I18nManager as RNI18nManager } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import GuardianContainer from "Components/GuardianContainer"
 import { configureStore } from "Store";
 
 import i18n from 'Lib/i18n';
+import BackgroundFetch from "react-native-background-fetch";
+
+export const scheduleTask = async (name) => {
+  try {
+    await BackgroundFetch.scheduleTask({
+      taskId: name,
+      stopOnTerminate: false,
+      startOnBoot: true,
+      enableHeadless: true,
+      delay: 60 * 60 * 1000,               // milliseconds (5min)
+      forceAlarmManager: true,
+      forceReload:true,   // more precise timing with AlarmManager vs default JobScheduler
+      periodic: true            // Fire once only.
+    });
+  } catch (e) {
+    console.warn('[BackgroundFetch] scheduleTask fail', e);
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -50,9 +68,74 @@ const store = configureStore();
 const App = props => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const [isI18nInitialized, setIsI18nInitialized] = useState(false);
+  const [enabled, setEnabled] = useState(false);
   const { skipLoadingScreen } = props;
+/// Switch handler in top-toolbar.
+  ///
+  const onToggleEnabled = async (value) => {
+    try {
+      if (value) {
+        await BackgroundFetch.start();
+      } else {
+        await BackgroundFetch.stop();
+      }
+      setEnabled(value);
+    } catch (e) {
+      console.warn(`[BackgroundFetch] ${value ? 'start' : 'stop'} falied`, e);
+    }
+  };
 
+  /// BackgroundFetch event-handler.
+  /// All events from the plugin arrive here, including #scheduleTask events.
+  ///
+  const onBackgroundFetchEvent = async (taskId) => {
+    console.log('[BackgroundFetch] Event received: ', taskId);
+
+    var taskText = await AsyncStorage.getItem("task");
+    taskText = taskText + "\n----------" +JSON.stringify(new Date());
+    var ss = await AsyncStorage.setItem("task", taskText);
+
+    if (taskId === 'react-native-background-fetch') {
+      // Test initiating a #scheduleTask when the periodic fetch event is received.
+      try {
+        await scheduleTask('com.transistorsoft.customtask');
+      } catch (e) {
+        console.warn('[BackgroundFetch] scheduleTask falied', e);
+      }
+    }
+    // Required: Signal completion of your task to native code
+    // If you fail to do this, the OS can terminate your app
+    // or assign battery-blame for consuming too much background-time
+    BackgroundFetch.finish(taskId);
+  };
+
+  /// Configure BackgroundFetch
+  ///
+  const init = async () => {
+    BackgroundFetch.configure({
+      minimumFetchInterval: 15,      // <-- minutes (15 is minimum allowed)
+      // Android options
+      forceAlarmManager: false,      // <-- Set true to bypass JobScheduler.
+      stopOnTerminate: false,
+      enableHeadless: true,
+      startOnBoot: true,
+      forceReload:true,
+      requiredNetworkType: BackgroundFetch.NETWORK_TYPE_NONE, // Default
+      requiresCharging: false,       // Default
+      requiresDeviceIdle: false,     // Default
+      requiresBatteryNotLow: false,  // Default
+      requiresStorageNotLow: false,  // Default
+    }, onBackgroundFetchEvent, async (status) => {
+      // setDefaultStatus(statusToString(status))
+    });
+    // Turn on the enabled switch.
+    onToggleEnabled(true);
+    // Load the list with persisted events.
+    // const events = await loadEvents<Event[]>();
+    // events && setEvents(events);
+  };
   React.useEffect(()=>{
+    init();
     i18n.init()
         .then(() => {
           const RNDir = RNI18nManager.isRTL ? 'RTL' : 'LTR';
