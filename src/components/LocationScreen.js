@@ -126,7 +126,6 @@ const LocationScreen = () => {
     console.log('[location] -', location);
     setLocation(location);
     await Location.insert([location.coords.latitude, location.coords.longitude, location.timestamp]);
-    return
   }
 
   onError  = async (error) => {

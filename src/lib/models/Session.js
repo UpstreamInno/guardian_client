@@ -2,7 +2,7 @@ import Storage from 'Lib/Storage';
 
 export default class Session {
 
-  static get NAMESPACE() { return Storage.modelName("session"); }
+  static get NAMESPACE() { return Storage.encryptedModelName("session"); }
 
   static async read() {
       return Storage.load(Session.NAMESPACE);

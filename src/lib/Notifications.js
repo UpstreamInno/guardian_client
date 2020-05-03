@@ -10,7 +10,7 @@ const status = {
 };
 
 const registerForPush = async () => {
-  if (Constants.isDevice) {
+  // if (Constants.isDevice) {
     const {status: existingStatus} = await Permissions.getAsync(Permissions.NOTIFICATIONS);
     let finalStatus = existingStatus;
     if (existingStatus !== 'granted') {
@@ -21,9 +21,9 @@ const registerForPush = async () => {
       alert(t('permission_alert'));
       return;
     }
-  } else {
-    alert('Must use physical device for Push Notifications');
-  }
+  // } else {
+  //   alert('Must use physical device for Push Notifications');
+  // }
 
   if (Platform.OS === 'android') {
     Notifications.createChannelAndroidAsync('GuardianChannelId', {

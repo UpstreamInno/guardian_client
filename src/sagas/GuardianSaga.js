@@ -21,6 +21,7 @@ import {
   USER_SIGNUP_VERIFY,
   FETCH_MESSAGES,
   REPORT_PRECISE_PATH,
+  REPORT_SYMPTOMS,
   SESSION_NOT_FOUND,
   saveNotification,
   setUserPhone,
@@ -45,7 +46,9 @@ function* userSignUp(action) {
     }
   } catch (error) {
     console.error("Failed signUp, error: ", error);
-    yield put(routeTo(Pages.HOME));
+    if (redirect) {
+      yield put(routeTo(Pages.HOME));
+    }
   }
 }
 
@@ -54,6 +57,7 @@ function* userVerify(action) {
     registrationCode,
     redirect,
   } = action.payload;
+
   const { registrationId } = yield select(state => state);
 
   try {
@@ -71,11 +75,15 @@ function* userVerify(action) {
     } else {
       // unable to validate code, send them back to try again
       console.error("unable to validate code");
-      yield put(routeTo(Pages.SIGNUP));
+      if (redirect) {
+        yield put(routeTo(Pages.SIGNUP));
+      }
     }
   } catch (error) {
     console.error("Failed signUp, error: ", error);
-    yield put(routeTo(Pages.HOME));
+    if (redirect) {
+      yield put(routeTo(Pages.HOME));
+    }
   }
 }
 
@@ -83,11 +91,13 @@ function* fetchMessages(action) {
   const { accessToken } = yield select(state => state);
 
   //todo only for tests, remove after testing phase
-  sendLocalPush(t('proximity_alert_title'), "test notification");
+  // sendLocalPush(t('proximity_alert_title'), "test notification");
 
   try {
     const message = yield call(getMessages, {accessToken});
     const messageId = message["message_id"];
+
+    console.log("message", message)
 
     if (!messageId) {
       return;
@@ -123,6 +133,7 @@ function* fetchMessages(action) {
       sendLocalPush(t('proximity_alert_title'), notification.displayMessage);
     }
   } catch (error) {
+    // throw(error);
     console.error("Failed fetching messages, error: ", error);
     yield put(routeTo(Pages.HOME));
   }
@@ -137,10 +148,23 @@ function* onReportPrecisePath(action) {
 
     yield put(setUserLastReportedPath({ pathId, time: Date.now() }));
     yield call(reportTestResults, {pathId, accessToken});
-    yield call(reportSurvey, {pathId, accessToken});
 
   } catch (error) {
-    console.error("Failed reportin path, error: ", error);
+    console.error("Failed reporting path, error: ", error);
+    yield put(routeTo(Pages.HOME));
+  }
+}
+
+function* onReportSymptoms(action) {
+  const { accessToken } = yield select(state => state);
+
+  try {
+    const { symptoms } = action.payload;
+    yield call(reportSurvey, {symptoms, accessToken});
+    
+    // TODO: save symptoms locally?
+  } catch (error) {
+    console.error("Failed repoting symptoms, error: ", error);
     yield put(routeTo(Pages.HOME));
   }
 }
@@ -149,7 +173,7 @@ function* onSessionNotFound(action) {
   // attempt to load session from device storage
   const session = yield call(Session.read);
 
-  if (session && (session.accessToken || session.accessToken)) {
+  if (session && (session.accessToken || session.refreshToken)) {
         // send session to redux store
         yield put(setUserSession({
           accessToken: session.accessToken,
@@ -175,6 +199,10 @@ export function* watchFetchMessages() {
 
 export function* watchReportPrecisePath() {
   yield takeLatest(REPORT_PRECISE_PATH, onReportPrecisePath);
+}
+
+export function* watchReportSymptoms() {
+  yield takeLatest(REPORT_SYMPTOMS, onReportSymptoms);
 }
 
 export function* watchSessionNotFound() {

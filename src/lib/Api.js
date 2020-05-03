@@ -144,10 +144,8 @@ async function reportPath({pathId, points, accessToken}) {
   });
 };
 
-async function reportSurvey({pathId, accessToken}) {
-  const body = JSON.stringify({
-    path_id: pathId
-  });
+async function reportSurvey({symptoms, accessToken}) {
+  const body = JSON.stringify({ symptoms });
 
   return new Promise((resolve, reject)=>{
     fetch(`${CONFIG.API_ENDPOINT}/users/report_survey`, {

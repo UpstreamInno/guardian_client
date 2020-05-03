@@ -15,6 +15,7 @@ import { t } from 'Lib/i18n';
 import {
   setUserLastRegionPathSentTime,
   reportPrecisePath,
+  reportSymptoms,
   fetchMessages,
   userSignUp,
   userSignUpVerify,
@@ -43,16 +44,21 @@ const DebugMenu = () => {
   }, []);
 
   // input states, used only for this page to simulate UI input
-  const [inputPhone, setInputPhone] = useState('1123456789');
+  const [inputPhone, setInputPhone] = useState('+15009999999');
 
   // input states, used only for this page to simulate UI input
-  const [deviceStore, setdeviceStore] = useState({});
+  const [deviceStore, setDeviceStore] = useState({});
+
+  const [inputSymptoms, setInputSymptoms] = useState(JSON.stringify({
+    Greyscale: 1.0, "Hawaiian Cat Flu": 9.9, plaid: 1, Cooties: 0, Blorbs: 0.0
+  }, null, 2));
 
   // TODO: this should be computed from precise path!
   const [inputRegionPath, setInputRegionPath] = useState(JSON.stringify([
     ["47.60", "-122.33", "2020-04-02T00:18:31Z"],
     ["47.60", "-122.33", "2020-04-02T00:23:31Z"],
   ], null, 2));
+
   const [inputPrecisePath, setinputPrecisePath] = useState(JSON.stringify([
     ["47.609755", "-122.337793", "2020-04-02T00:18:31Z"],
     ["47.609750", "-122.339900", "2020-04-02T00:23:31Z"],
@@ -91,6 +97,10 @@ const DebugMenu = () => {
     dispatch(reportPrecisePath(JSON.parse(inputPrecisePath)));
   }
 
+  const onReportSymptoms = () => {
+    dispatch(reportSymptoms(JSON.parse(inputSymptoms)));
+  }
+
   const onGetPath = () => {
     getPath({accessToken: state.accessToken}).then((data) =>{
       console.log("got path data", data);
@@ -107,16 +117,16 @@ const DebugMenu = () => {
   }
 
   const printStore = () => {
-    Storage.readAll().then((result) => setdeviceStore((result)));
+    Storage.readAll().then((result) => setDeviceStore((result)));
   }
 
   const wipeStore = () => {
-    Storage.wipeAll().then((result) => printStore());
+    Storage.wipeAll().then(() => printStore());
   }
 
   const addLocationToStore = () => {
     const sampleLocation = ["47.609755", "-122.337793", "2020-05-01T00:18:31Z"]
-    Location.insert(sampleLocation).then((result) => printStore());
+    Location.insert(sampleLocation).then(() => printStore());
   }
 
   const inputs = () => {
@@ -164,6 +174,20 @@ const DebugMenu = () => {
             />
           </View>
         </View>
+        <View style={styles.row}>
+          <View style={styles.keyContainer} >
+            <Text>Symptoms Path</Text>
+          </View>
+          <View style={styles.valueContainer} >
+            <TextInput
+              multiline={true}
+              numberOfLines={6}
+              style={styles.textArea}
+              onChangeText={setInputSymptoms}
+              value={inputSymptoms}
+            />
+          </View>
+        </View>
       </>
     );
   };
@@ -183,6 +207,7 @@ const DebugMenu = () => {
       {actionRow("Sign In", "POST /sign_in", onSignIn)}
       {actionRow("Send Region Change", "POST /path", onSendRegionPath)}
       {actionRow("Report Full Path", "POST /report_path", onReportPath)}
+      {actionRow("Report Symptoms", "", onReportSymptoms)}
       {actionRow("Get/Process Messages", "GET /messages", onGetMessages)}
       {actionRow("[DEBUG] Get path", "GET /path", onGetPath)}
       {routeToRow("[DEBUG] Route to", onRouteTo)}
