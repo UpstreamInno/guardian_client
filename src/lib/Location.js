@@ -12,6 +12,11 @@ import Location from "Lib/models/Location";
 
 const locationConsoleUrl = "http://tracker.transistorsoft.com";
 
+const configureBackgroundLocationIfNecessary = async() => {
+  console.log("configureBackgroundLocationIfNecessary");
+  configureBackgroundLocation();
+}
+
 const configureBackgroundLocation = async() => {
   // alert("configureBackgroundLocation");
   // This handler fires whenever bgGeo receives a location updates.
@@ -105,4 +110,5 @@ const onMotionChange  = async (event) => {
 
 export {
   configureBackgroundLocation,
+  configureBackgroundLocationIfNecessary
 }
