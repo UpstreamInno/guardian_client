@@ -8,6 +8,7 @@ import HomeScreen from "Components/HomeScreen";
 import OtpScreen from "Components/OtpScreen";
 import SignupScreen from "Components/SignupScreen";
 import LocationScreen from "Components/LocationScreen";
+import NotificationScreen from "Components/NotificationScreen";
 import AlertScreen from "Components/AlertScreen";
 import ReportScreen from "Components/SymptomSurveyScreen.js";
 import ActionCompleteScreen from "Components/ActionCompleteScreen";
@@ -44,7 +45,7 @@ export default function GuardianContainer() {
     case Pages.SIGNUP_COMPLETE:
       return <ActionCompleteScreen />;
     case Pages.CONSENT_NOTIFICATION:
-      return placeholder();
+      return <NotificationScreen/>;
     case Pages.MESSAGE_DETAILS:
       return placeholder();
     case Pages.SYMPTOM_SURVEY:
