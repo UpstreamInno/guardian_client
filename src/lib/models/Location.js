@@ -38,10 +38,35 @@ export default class Location {
     return Storage.remove(Location.NAMESPACE);
   }
 
+
+  static async locationDataCleanup(){
+    let locationData = await Location.read();
+    let history = locationData.history ? locationData.history : [];
+
+    // sort history before write
+    history = await sortLocationByTime(history);
+    history = await removeOldLocations(history);
+    
+    locationData.history = history;
+    return Storage.write(Location.NAMESPACE, locationData);
+  }
+
 }
 
 function sortLocationByTime(locations) {
   return locations.sort((a, b) => moment(a[2]).format("x") - moment(b[2]).format("x"));
 }
 
+function removeOldLocations(history){
+  let locationMaximumTimeInStore = Date.now() - 20 * 24 * 3600 * 1000;
+  var result = [];
+
+  for(var i = 0; i < history.length; i++){
+    if(locationMaximumTimeInStore >  moment(history[i][2]).format("x")){
+      result.push(history[i]);
+    }
+  }
+
+  return result;
+}
 
