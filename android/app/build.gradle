@@ -206,4 +206,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
+apply plugin: 'com.android.application' // apply after this line
+apply plugin: 'io.fabric'
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

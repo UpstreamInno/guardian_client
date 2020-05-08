@@ -12,6 +12,8 @@ import { configureStore } from "Store";
 
 import i18n from 'Lib/i18n';
 import BackgroundFetch from "react-native-background-fetch";
+import crashlytics from '@react-native-firebase/crashlytics';
+
 
 export const scheduleTask = async (name) => {
   try {
@@ -70,6 +72,8 @@ const App = props => {
   const [isI18nInitialized, setIsI18nInitialized] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const { skipLoadingScreen } = props;
+  const [userCounts, setUserCounts] = useState(null);
+
 /// Switch handler in top-toolbar.
   ///
   const onToggleEnabled = async (value) => {
@@ -84,6 +88,20 @@ const App = props => {
       console.warn(`[BackgroundFetch] ${value ? 'start' : 'stop'} falied`, e);
     }
   };
+
+  function updateUserCounts() {
+    crashlytics().log('Updating user count.');
+    try {
+      if (users) {
+        // An empty array is truthy, but not actually true.
+        // Therefore the array was never initialised.
+        setUserCounts(userCounts.push(users.length));
+      }
+    } catch (error) {
+      crashlytics().recordError(error);
+      console.log(error);
+    }
+}
 
   /// BackgroundFetch event-handler.
   /// All events from the plugin arrive here, including #scheduleTask events.
@@ -135,6 +153,9 @@ const App = props => {
     // events && setEvents(events);
   };
   React.useEffect(()=>{
+    crashlytics().log('App mounted.');
+    if (users == true) setUserCounts([]);
+    updateUserCounts();
     init();
     i18n.init()
         .then(() => {
