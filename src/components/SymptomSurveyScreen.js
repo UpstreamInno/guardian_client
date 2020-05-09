@@ -12,14 +12,12 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
-import { FlatList } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
     backgroundColor: "#fff",
-    paddingLeft: 30,
     paddingBottom: 50,
     maxHeight: "100%",
   },
@@ -88,17 +86,20 @@ const ReportScreen = () => {
     () => useDispatch({ symptoms });
   };
 
-  const switchHandler = (switchState, points) => {
-    return switchState ? points : 0;
-  };
-
   const SwitchRow = ({ symptom, userFriendlyText, points }) => {
+
+    const switchHandler = (switchState, points) => {
+      return switchState ? points : 0;
+    };
+
+    const getSwitchValue = (symptom) => symptom != null && symptom !== 0;
+
     return (
       <View style={styles.row}>
         <Switch
           trackColor={TRACK_COLOR}
           thumbColor={THUMB_COLOR}
-          //I left the IOS background color here becasue I do not have an iphone to test this on, but I think it may be redundant given the style
+          //I left the IOS background color here because I do not have an iphone to test this on, but I think it may be redundant given the style
           ios_backgroundColor={IOS_SWITCH_BG_COLOR}
           onValueChange={(switchState) =>
             setSymptoms({
@@ -106,7 +107,7 @@ const ReportScreen = () => {
               [symptom]: switchHandler(switchState, points),
             })
           }
-          value={symptoms[symptom]}
+          value={getSwitchValue(symptoms[symptom])}
           style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
         />
         <Text style={styles.label}>{t(userFriendlyText)}</Text>
@@ -118,7 +119,7 @@ const ReportScreen = () => {
     <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
       <Text style={styles.title}>
         {t(
-          "Please check any of the following symptoms you have experianced since your exposure"
+          "Please check any of the following symptoms you have experienced since your exposure"
         )}
       </Text>
       <ScrollView

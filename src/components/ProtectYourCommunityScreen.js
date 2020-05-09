@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 18,
-    textAlign: "center",
     color: "#000",
     textAlign: "center",
     margin: 50,
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     textAlign: "center",
-    margin: 40,
     marginTop: 10,
     padding: 10,
     borderRadius: 5,

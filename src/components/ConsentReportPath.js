@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 18,
-    textAlign: "center",
     color: "#000",
     textAlign: "center",
     margin: 50,
