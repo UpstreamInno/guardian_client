@@ -39,6 +39,7 @@
     "react-native-deck-swiper": "^1.6.7",
     "react-native-dialog-input": "^1.0.7",
     "react-native-gesture-handler": "~1.6.1",
+    "react-native-push-notification": "~3.3.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-reanimated": "~1.7.1",
     "react-native-screens": "2.2.0",

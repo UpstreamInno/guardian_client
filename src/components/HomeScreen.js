@@ -16,6 +16,8 @@ import {
 } from "Store/actions";
 import {Pages} from "Lib/Pages";
 import Swiper from "react-native-deck-swiper";
+import * as Permissions from "expo-permissions";
+import {doPermissionCheck} from "Lib/PermissionsHelper";
 
 const HomeScreen = () => {
   const {accessToken} = useSelector(state => state);
@@ -33,6 +35,12 @@ const HomeScreen = () => {
     dispatch(sessionNotFound());
     return <></>;
   }
+
+  useEffect(() => {
+    doPermissionCheck(Permissions.LOCATION, "We need your location to check if you have been exposed!\nPlease go to settings and grant the permission");
+    doPermissionCheck(Permissions.NOTIFICATIONS, "We need your permission to alert you in case you have been exposed!\nPlease go to settings and grant the permission");
+  }, []);
+
 
   const renderCard = notification => {
     return (
