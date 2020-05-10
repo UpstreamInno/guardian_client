@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -6,6 +6,7 @@ import {
   View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { configureBackgroundLocationIfNecessary } from "Lib/Location";
 
 import { t } from 'Lib/i18n';
 import { 
@@ -17,6 +18,10 @@ import { Pages } from "Lib/Pages";
 const HomeScreen = () => {
   const { accessToken } = useSelector(state => state);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    configureBackgroundLocationIfNecessary();
+  });
 
   if (!accessToken) {
     dispatch(sessionNotFound());

@@ -1,6 +1,8 @@
 import Storage from 'Lib/Storage';
 import moment from 'moment';
-
+import {
+  AsyncStorage
+} from "react-native";
 export default class Location {
 
   static get NAMESPACE() { return Storage.encryptedModelName("location"); }
