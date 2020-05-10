@@ -14,8 +14,7 @@ const status = {
 
 const registerForPush = async () => {
   if (Constants.isDevice) {
-    let message = t('permission_notification');
-    if(!doPermissionCheck(Permissions.NOTIFICATIONS, message)) {
+    if(!doPermissionCheck(Permissions.NOTIFICATIONS, "We need your permission to alert you in case you have been exposed!\nPlease go to settings and grant the permission")) {
       return;
     }
   } else {
