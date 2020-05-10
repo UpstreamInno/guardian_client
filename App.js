@@ -9,8 +9,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import GuardianContainer from "Components/GuardianContainer"
 import { configureStore } from "Store";
-
 import i18n from 'Lib/i18n';
+import Job from "Lib/Job";
 import BackgroundFetch from "react-native-background-fetch";
 
 export const scheduleTask = async (name) => {
@@ -20,7 +20,8 @@ export const scheduleTask = async (name) => {
       stopOnTerminate: false,
       startOnBoot: true,
       enableHeadless: true,
-      delay: 60 * 60 * 1000,               // milliseconds (5min)
+      // delay: 60 * 60 * 1000,               // milliseconds (60min)
+      delay: 5000,
       forceAlarmManager: true,
       forceReload:true,   // more precise timing with AlarmManager vs default JobScheduler
       periodic: true            // Fire once only.
@@ -127,6 +128,7 @@ const App = props => {
       requiresStorageNotLow: false,  // Default
     }, onBackgroundFetchEvent, async (status) => {
       // setDefaultStatus(statusToString(status))
+      Job.executeTasks();
     });
     // Turn on the enabled switch.
     onToggleEnabled(true);
