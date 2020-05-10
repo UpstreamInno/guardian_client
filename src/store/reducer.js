@@ -7,6 +7,7 @@ import {
   SET_USER_SESSION,
   SET_USER_SIGNUP_DATA,
   RESET_STORE,
+  MARK_NOTIFICATION_READ,
 } from "./actions"
 
 import { Pages } from "Lib/Pages";
@@ -23,7 +24,7 @@ export const initialState = {
   currentPage: Pages.DebugMenu,
   previousPage: null,
   notifications: [],
-}
+};
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -53,6 +54,12 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         notifications: [...state.notifications, notification]
+      };
+    case MARK_NOTIFICATION_READ:
+      //TODO: mark them as read
+
+      return {
+        ...state
       };
     case ROUTE_TO:
       let previousPage = (action.payload && action.payload.previousPage) || state.page
