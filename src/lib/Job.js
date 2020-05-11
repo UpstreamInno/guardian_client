@@ -1,52 +1,45 @@
-import {AsyncStorage} from 'react-native';
-import { fromPoints } from "Lib/PathHelpers"
+import { Path } from "./Path";
+import Location from 'Lib/models/Location';
+import Session from "Lib/models/Session";
 
-import { 
-  locationDataCleanup, 
-  updateLocation
-} from 'Lib/models/Location'; //todo is it right?
-import {  
-  setUserLastRegionPathSentTime,
-  fetchMessages 
-} from "Store/actions";
 import {
   sendRegionPath,
 } from "Lib/Api";
-import { useDispatch, useSelector } from "react-redux";
 
 export default class Job {
 
   static async executeTasks() {
     console.log("executeTasks");
-    const dispatch = useDispatch();
+
     // send region locations every 60 min
-    onSendRegionPath();
+    await onSendRegionPath();
     //polling for “messages” updates every 60 min 
-    dispatch(fetchMessages());
+    // dispatch(fetchMessages());
 
     //data cleanup: delete location data older than 20 days locally -  tested(working)
-    locationDataCleanup();
+    await Location.locationDataCleanup();
     return;
   }
 }
 
-const onSendRegionPath = () => {
-  // TODO: this should be computed from precise path!
-  var points = Location.read();
-  var inputRegionPath = fromPoints(points);
-  const state = useSelector(state => state);
+const onSendRegionPath = async () => {
 
-  // however to enable user input on the debug page, we stringify the json.
-  const pathData = JSON.parse(inputRegionPath);
+  // attempt to load session from device storage
+  const session = await Session.read();
+  if (!session || !session.accessToken) {
+    throw 'session not found';
+  }
 
+  var points = await Location.read();
 
-  sendRegionPath({path: pathData, accessToken: state.accessToken}).then((data) =>{
-    // dont need to do anything with the response for now
+  if (!points || !points.history.length > 0) {
+    console.log("no location data yet, skipping onSendRegionPath");
+    return;
+  }
+
+  var pathData = Path.regionPathFromPoints(points.history, { imprecise: true });
+  sendRegionPath({path: pathData, accessToken: session.accessToken}).then((data) =>{
     console.log("sendRegionPath response, ignoring...", data)
-    updateLocation();
-    // store the last sent path time
-    // if (data.errors.length === 0) {
-    //   // dispatch(setUserLastRegionPathSentTime({ time: Date.now() }));
-    // }
+    // updateLocation();
   })
 }

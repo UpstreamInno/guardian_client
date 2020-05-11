@@ -9,7 +9,6 @@ export default class Location {
   //   history: time sorted array of points in the form [lat, long, time]
   static async read(options = {}) {
     const limit = options.limit || 0;
-    
     let result = await Storage.load(Location.NAMESPACE);
 
     if (limit > 0) {
@@ -41,11 +40,12 @@ export default class Location {
 
   static async locationDataCleanup(){
     let locationData = await Location.read();
+    locationData = locationData || {};
     let history = locationData.history ? locationData.history : [];
 
     // sort history before write
-    history = await sortLocationByTime(history);
-    history = await removeOldLocations(history);
+    history = sortLocationByTime(history);
+    history = removeOldLocations(history);
     
     locationData.history = history;
     return Storage.write(Location.NAMESPACE, locationData);
