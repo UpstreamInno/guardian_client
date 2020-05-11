@@ -92,10 +92,6 @@ const App = props => {
   const onBackgroundFetchEvent = async (taskId) => {
     console.log('[BackgroundFetch] Event received: ', taskId);
 
-    var taskText = await AsyncStorage.getItem("task");
-    taskText = taskText + "\n----------" +JSON.stringify(new Date());
-    var ss = await AsyncStorage.setItem("task", taskText);
-
     if (taskId === 'react-native-background-fetch') {
       // Test initiating a #scheduleTask when the periodic fetch event is received.
       try {
@@ -113,6 +109,7 @@ const App = props => {
   /// Configure BackgroundFetch
   ///
   const init = async () => {
+      
     BackgroundFetch.configure({
       minimumFetchInterval: 15,      // <-- minutes (15 is minimum allowed)
       // Android options
@@ -153,7 +150,7 @@ const App = props => {
           setIsI18nInitialized(true);
         })
         .catch((error) => console.warn(error));
-  });
+  },[]);
 
   // if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {  // AppLoading, temporary remove apploading -> not working on expo sdk
 
