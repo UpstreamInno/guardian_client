@@ -11,7 +11,6 @@ export default class Location {
   //   history: time sorted array of points in the form [lat, long, time]
   static async read(options = {}) {
     const limit = options.limit || 0;
-    
     let result = await Storage.load(Location.NAMESPACE);
 
     if (limit > 0) {
@@ -40,10 +39,36 @@ export default class Location {
     return Storage.remove(Location.NAMESPACE);
   }
 
+
+  static async locationDataCleanup(){
+    let locationData = await Location.read();
+    locationData = locationData || {};
+    let history = locationData.history ? locationData.history : [];
+
+    // sort history before write
+    history = sortLocationByTime(history);
+    history = removeOldLocations(history);
+    
+    locationData.history = history;
+    return Storage.write(Location.NAMESPACE, locationData);
+  }
+
 }
 
 function sortLocationByTime(locations) {
   return locations.sort((a, b) => moment(a[2]).format("x") - moment(b[2]).format("x"));
 }
 
+function removeOldLocations(history){
+  let locationMaximumTimeInStore = Date.now() - 20 * 24 * 3600 * 1000;
+  var result = [];
+
+  for(var i = 0; i < history.length; i++){
+    if(locationMaximumTimeInStore >  moment(history[i][2]).format("x")){
+      result.push(history[i]);
+    }
+  }
+
+  return result;
+}
 

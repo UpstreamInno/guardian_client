@@ -22,7 +22,11 @@ export function stringToEpoch(string) {
 };
 
 export function epochToDisplayString(number) {
-  return moment.unix(number).format(('dddd, MMMM Do, YYYY hh:mm'));
+  return moment.unix(number).format('dddd, MMMM Do, YYYY hh:mm');
+}
+
+export function toIsoTime(string) {
+  return moment(string).format('YYYY-MM-DDTHH:mm:ss[Z]');
 }
 
 // TODO: localize, and support non-metric
@@ -39,6 +43,13 @@ export function distanceToDisplay(distance) {
   }
 
   return `${round(distance / 1000, 0)} meters`
+}
+
+// truncate the given string to decimalPrecision, without rounding
+// credit to https://stackoverflow.com/a/4187164
+export function toFixed(string, decimalPrecision = 2) {
+  decimalPrecision = decimalPrecision < 1 ? -1 : decimalPrecision;
+  return ((string || "").toString().match(`^-?\\d+(?:\\.\\d{0,${decimalPrecision}})?`) || [])[0]
 }
 
 export function round(n, decimalPrecision = 2) {

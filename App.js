@@ -17,8 +17,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import GuardianContainer from "Components/GuardianContainer";
 import { configureStore } from "Store";
-
-import i18n from "Lib/i18n";
+import i18n from 'Lib/i18n';
+import Job from "Lib/Job";
 import BackgroundFetch from "react-native-background-fetch";
 
 export const scheduleTask = async (name) => {
@@ -99,11 +99,7 @@ const App = (props) => {
   const onBackgroundFetchEvent = async (taskId) => {
     console.log("[BackgroundFetch] Event received: ", taskId);
 
-    var taskText = await AsyncStorage.getItem("task");
-    taskText = taskText + "\n----------" + JSON.stringify(new Date());
-    var ss = await AsyncStorage.setItem("task", taskText);
-
-    if (taskId === "react-native-background-fetch") {
+    if (taskId === 'react-native-background-fetch') {
       // Test initiating a #scheduleTask when the periodic fetch event is received.
       try {
         await scheduleTask("com.transistorsoft.customtask");
@@ -120,26 +116,24 @@ const App = (props) => {
   /// Configure BackgroundFetch
   ///
   const init = async () => {
-    BackgroundFetch.configure(
-      {
-        minimumFetchInterval: 15, // <-- minutes (15 is minimum allowed)
-        // Android options
-        forceAlarmManager: false, // <-- Set true to bypass JobScheduler.
-        stopOnTerminate: false,
-        enableHeadless: true,
-        startOnBoot: true,
-        forceReload: true,
-        requiredNetworkType: BackgroundFetch.NETWORK_TYPE_NONE, // Default
-        requiresCharging: false, // Default
-        requiresDeviceIdle: false, // Default
-        requiresBatteryNotLow: false, // Default
-        requiresStorageNotLow: false, // Default
-      },
-      onBackgroundFetchEvent,
-      async (status) => {
-        // setDefaultStatus(statusToString(status))
-      }
-    );
+      
+    BackgroundFetch.configure({
+      minimumFetchInterval: 15,      // <-- minutes (15 is minimum allowed)
+      // Android options
+      forceAlarmManager: false,      // <-- Set true to bypass JobScheduler.
+      stopOnTerminate: false,
+      enableHeadless: true,
+      startOnBoot: true,
+      forceReload:true,
+      requiredNetworkType: BackgroundFetch.NETWORK_TYPE_NONE, // Default
+      requiresCharging: false,       // Default
+      requiresDeviceIdle: false,     // Default
+      requiresBatteryNotLow: false,  // Default
+      requiresStorageNotLow: false,  // Default
+    }, onBackgroundFetchEvent, async (status) => {
+      // setDefaultStatus(statusToString(status))
+      Job.executeTasks();
+    });
     // Turn on the enabled switch.
     onToggleEnabled(true);
     // Load the list with persisted events.
@@ -161,11 +155,11 @@ const App = (props) => {
           Updates.reloadFromCache();
         }
 
-        setIsI18nInitialized(true);
-      })
-      .catch((error) => console.warn(error));
-  });
-
+          setIsI18nInitialized(true);
+        })
+        .catch((error) => console.warn(error));
+  },[]);
+  
   // if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {  // AppLoading, temporary remove apploading -> not working on expo sdk
 
   //   return (

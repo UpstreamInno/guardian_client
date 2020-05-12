@@ -1,4 +1,4 @@
-import { stringToEpoch } from "Lib/PathHelpers"
+import { stringToEpoch, toIsoTime, toFixed } from "Lib/PathHelpers"
 
 export class Path {
 
@@ -23,4 +23,16 @@ export class Path {
 
     return new Path(pathData)
   }
+
+  // similar to fromPoints, but returns an imprecise path, and is formatted for sendRegionPath
+  static regionPathFromPoints(points) {
+    return points.map((point) => {
+      return ([
+        toFixed(point[0]),
+        toFixed(point[1]),
+        toIsoTime(point[2]),
+      ]);
+    });
+  }
+
 }
