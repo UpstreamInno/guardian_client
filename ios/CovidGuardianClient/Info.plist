@@ -62,7 +62,7 @@ CHANGEME: Location required when app is in use</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow CovidGuardianClient to access your microphone</string>
 	<key>NSMotionUsageDescription</key>
-	<string>Allow CovidGuardianClient to access your device&apos;s accelerometer</string>
+	<string>Allow CovidGuardianClient to access your device's accelerometer</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Give CovidGuardianClient periences permission to save photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -74,6 +74,7 @@ CHANGEME: Location required when app is in use</string>
 		<string>fetch</string>
 		<string>location</string>
 		<string>processing</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

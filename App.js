@@ -83,9 +83,11 @@ const App = (props) => {
   const onToggleEnabled = async (value) => {
     try {
       if (value) {
+        console.log("BackgroundFetch","start");
         await BackgroundFetch.start();
       } else {
         await BackgroundFetch.stop();
+        console.log("BackgroundFetch","stop");
       }
       setEnabled(value);
     } catch (e) {
@@ -98,7 +100,9 @@ const App = (props) => {
   ///
   const onBackgroundFetchEvent = async (taskId) => {
     console.log("[BackgroundFetch] Event received: ", taskId);
-
+    //   var taskText = await AsyncStorage.getItem("task");
+    // taskText = taskText + "\n----------s1" +JSON.stringify(new Date());
+    // var save = await AsyncStorage.setItem("task", taskText);
     if (taskId === 'react-native-background-fetch') {
       // Test initiating a #scheduleTask when the periodic fetch event is received.
       try {
@@ -116,7 +120,10 @@ const App = (props) => {
   /// Configure BackgroundFetch
   ///
   const init = async () => {
-      
+    
+    // var taskText = await AsyncStorage.getItem("task");
+    // alert(taskText);
+
     BackgroundFetch.configure({
       minimumFetchInterval: 15,      // <-- minutes (15 is minimum allowed)
       // Android options

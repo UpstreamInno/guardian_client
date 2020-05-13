@@ -21,11 +21,11 @@ let MyHeadlessTask = async (event) => {
   // Perform an example HTTP request.
   // Important:  await asychronous tasks when using HeadlessJS.
 
- //  if(taskId == "com.transistorsoft.customtask"){
- //  	var taskText = await AsyncStorage.getItem("task");
-	// taskText = taskText + "\n----------" +JSON.stringify(new Date());
-	// var save = await AsyncStorage.setItem("task", taskText);
- //  }
+  // if(taskId == "com.transistorsoft.customtask"){
+  // 	var taskText = await AsyncStorage.getItem("task");
+	 //  taskText = taskText + "\n----------" +JSON.stringify(new Date());
+  // 	var save = await AsyncStorage.setItem("task", taskText);
+  // }
  
   // Required:  Signal to native code that your task is complete.
   // If you don't do this, your app could be terminated and/or assigned
