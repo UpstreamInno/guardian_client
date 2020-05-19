@@ -4,10 +4,11 @@ import {
   TouchableOpacity,
   Text,
   View,
+  SafeAreaView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { configureBackgroundLocationIfNecessary } from "Lib/Location";
-
+import Carousel from 'react-native-snap-carousel';
 import {t} from 'Lib/i18n';
 import {
   sessionNotFound,
@@ -15,14 +16,12 @@ import {
   markNotificationRead,
 } from "Store/actions";
 import {Pages} from "Lib/Pages";
-import Swiper from "react-native-deck-swiper";
 import * as Permissions from "expo-permissions";
 import {doPermissionCheck} from "Lib/PermissionsHelper";
 
 const HomeScreen = () => {
   const {accessToken} = useSelector(state => state);
   const dispatch = useDispatch();
-  const [swipedAllCards, setSwipedAllCards] = useState(false);
   const [cardIndex, setCardIndex] = useState(0);
   const {notifications} = useSelector(state => state);
   let swiper;
@@ -42,83 +41,57 @@ const HomeScreen = () => {
   }, []);
 
 
-  const renderCard = notification => {
+  const renderCard = ({item}) => {
     return (
       <View style={styles.card}>
-        <Text style={styles.text}>{notification.displayMessage}</Text>
+        <Text style={styles.text}>{item.displayMessage}</Text>
       </View>
     )
-  };
-
-  const onSwiped = () => {
-    dispatch(markNotificationRead());
-    setCardIndex(cardIndex + 1)
-  };
-
-  const onSwipedAllCards = () => {
-    setSwipedAllCards(true)
-  };
-
-  const swipeLeft = () => {
-    swiper.swipeLeft()
   };
 
   const onSymptoms = () => {
     dispatch(routeTo(Pages.SYMPTOM_SURVEY));
   };
 
-  if (typeof notifications != "undefined" && notifications != null && notifications.length != null
-    && notifications.length > 0 && !swipedAllCards) {
+  if (notifications != null && notifications.length > 0) {
     return (
-      <View style={styles.outer}>
+      <SafeAreaView style={styles.outer}>
         <View style={styles.titleContainer}>
           <Text style={styles.welcome}> {t("Guardian")} </Text>
         </View>
         <View style={styles.textContainer}>
-          <Swiper
-            ref={swiperVal => {
-              swiper = swiperVal
-            }}
-            onSwiped={() => onSwiped()}
-            onSwipedLeft={() => onSwiped()}
-            onSwipedRight={() => onSwiped()}
-            onSwipedTop={() => onSwiped()}
-            onSwipedBottom={() => onSwiped()}
-            onTapCard={swipeLeft}
-            cardIndex={cardIndex}
-            cards={notifications}
-            renderCard={renderCard}
-            onSwipedAll={onSwipedAllCards}
-            backgroundColor={'#494949'}
-            stackSize={3}
-            stackSeparation={15}
-            animateOverlayLabelsOpacity
-            animateCardOpacity
-            swipeBackCard
-          >
-          </Swiper>
+          <Carousel
+            layout={"default"}
+            ref={ref => swiper = ref}
+            data={notifications}
+            sliderWidth={400}
+            itemWidth={300}
+            renderItem={renderCard}
+            onSnapToItem={index => setCardIndex(index)}/>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={onSymptoms}>
             <Text style={styles.buttonText}>{t("Report Symptoms")}</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
-  return (<View style={styles.outer}>
-    <View style={styles.titleContainer}>
-      <Text style={styles.welcome}> {t("Guardian")} </Text>
-    </View>
-    <View style={styles.textContainer}>
-      <Text style={styles.paragraph}>{t("No contacts ")}</Text>
-    </View>
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.button} onPress={onSymptoms}>
-        <Text style={styles.buttonText}>{t("Report Symptoms")}</Text>
-      </TouchableOpacity>
-    </View>
-  </View>);
+  return (
+    <SafeAreaView style={styles.outer}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.welcome}> {t("Guardian")} </Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.paragraph}>{t("You currently have no proximity alerts!")}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={onSymptoms}>
+          <Text style={styles.buttonText}>{t("Report Symptoms")}</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -132,17 +105,15 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textContainer: {
-    flexGrow: 7,
+    flexGrow: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
   card: {
-    height: "70%",
-    width: "100%",
+    flex: 1,
     borderRadius: 4,
     borderWidth: 2,
     borderColor: '#E8E8E8',
-    justifyContent: 'center',
     backgroundColor: 'white',
     padding: 20
   },
@@ -163,8 +134,8 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 20,
-    flex: 0.8,
-    width: "90%",
+    flex: 1,
+    width: 300,
     borderRadius: 4,
     borderWidth: 2,
     borderColor: '#E8E8E8',
