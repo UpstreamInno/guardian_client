@@ -1,8 +1,8 @@
 import React from "react";
-import { Text, Button } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import {Button, Text} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
 
-import { routeTo } from "Store/actions";
+import {routeTo} from "Store/actions";
 import DebugMenu from "Components/DebugMenu";
 import HomeScreen from "Components/HomeScreen";
 import OtpScreen from "Components/OtpScreen";
@@ -10,9 +10,14 @@ import SignupScreen from "Components/SignupScreen";
 import LocationScreen from "Components/LocationScreen";
 import NotificationScreen from "Components/NotificationScreen";
 import AlertScreen from "Components/AlertScreen";
-import ReportScreen from "Components/SymptomSurveyScreen.js";
+import ReportScreen from "Components/SymptomSurveyScreen";
 import ActionCompleteScreen from "Components/ActionCompleteScreen";
-import { Pages } from "Lib/Pages";
+import {Pages} from "Lib/Pages";
+import WelcomeScreen from "../views/WelcomeScreen";
+import LogoScreen from "../views/LogoScreen";
+import ContactTracingScreen from "../views/ContactTracingScreen";
+import LoginScreen from "../views/LoginScreen";
+import YourInformationScreen from "../views/YourInformationScreen";
 
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
@@ -54,6 +59,19 @@ export default function GuardianContainer() {
       return <ActionCompleteScreen />;
     case Pages.DEBUG_MENU:
       return <DebugMenu />;
+
+    // New UI
+    case Pages.LOGO_SCREEN:
+      return <LogoScreen/>;
+    case Pages.WELCOME_SCREEN:
+      return <WelcomeScreen/>;
+    case Pages.CONTACT_TRACING_SCREEN:
+      return <ContactTracingScreen/>;
+    case Pages.YOUR_INFORMATION_SCREEN:
+      return <YourInformationScreen/>;
+    case Pages.LOGIN_SCREEN:
+      return <LoginScreen/>;
+
     default:
       return <DebugMenu />;
   }

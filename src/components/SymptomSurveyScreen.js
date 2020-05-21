@@ -1,17 +1,8 @@
 import React from "react";
-import { t } from "Lib/i18n";
-import { routeTo } from "Store/actions";
-import { Pages } from "Components/GuardianContainer";
-import {
-  ScrollView,
-  StyleSheet,
-  Switch,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { useDispatch } from "react-redux";
+import {t} from "Lib/i18n";
+import {ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View,} from "react-native";
+import {LinearGradient} from "expo-linear-gradient";
+import {useDispatch} from "react-redux";
 
 const styles = StyleSheet.create({
   container: {

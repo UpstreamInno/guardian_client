@@ -197,7 +197,7 @@ const DebugMenu = () => {
 
       <Button style={styles.button}
           title="Start App"
-          onPress={() => dispatch(routeTo(Pages.HOME))}
+          onPress={() => dispatch(routeTo(Pages.LOGO_SCREEN))}
       />
 
       <Text>{t('debug_menu')}</Text>

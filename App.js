@@ -1,22 +1,12 @@
-import {
-  // AppLoading, temporary remove apploading -> not working on expo sdk
-  Updates,
-} from "expo";
-import { Asset } from "expo-asset";
+import {AppLoading, Updates,} from "expo";
+import {Asset} from "expo-asset";
 import * as Font from "expo-font";
-import React, { useState } from "react";
-import {
-  Platform,
-  StatusBar,
-  StyleSheet,
-  View,
-  AsyncStorage,
-  I18nManager as RNI18nManager,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { Provider } from "react-redux";
+import React, {useState} from "react";
+import {I18nManager as RNI18nManager, Platform, StatusBar, StyleSheet, View,} from "react-native";
+import {Ionicons} from "@expo/vector-icons";
+import {Provider} from "react-redux";
 import GuardianContainer from "Components/GuardianContainer";
-import { configureStore } from "Store";
+import {configureStore} from "Store";
 import i18n from 'Lib/i18n';
 import Job from "Lib/Job";
 import BackgroundFetch from "react-native-background-fetch";
@@ -47,16 +37,12 @@ const styles = StyleSheet.create({
 
 async function loadResourcesAsync() {
   await Promise.all([
-    Asset.loadAsync([
-      require("./assets/images/robot-dev.png"),
-      require("./assets/images/robot-prod.png"),
-    ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
       ...Ionicons.font,
-      // We include SpaceMono because we use it in HomeScreen.js. Feel free to
-      // remove this if you are not using it in your app
-      "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+      "noto-sans": require("./assets/fonts/NotoSans-Regular.ttf"),
+      "noto-sans-bold": require("./assets/fonts/NotoSans-Bold.ttf"),
+      "noto-sans-black": require("./assets/fonts/NotoSans-Black.ttf"),
     }),
   ]);
 }
@@ -120,7 +106,7 @@ const App = (props) => {
   /// Configure BackgroundFetch
   ///
   const init = async () => {
-    
+
     // var taskText = await AsyncStorage.getItem("task");
     // alert(taskText);
 
@@ -166,17 +152,16 @@ const App = (props) => {
         })
         .catch((error) => console.warn(error));
   },[]);
-  
-  // if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {  // AppLoading, temporary remove apploading -> not working on expo sdk
 
-  //   return (
-  //     <AppLoading
-  //       startAsync={loadResourcesAsync}
-  //       onError={handleLoadingError}
-  //       onFinish={() => handleFinishLoading(setLoadingComplete)}
-  //     />
-  //   );
-  // }
+  if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {
+    return (
+      <AppLoading
+        startAsync={loadResourcesAsync}
+        onError={handleLoadingError}
+        onFinish={() => handleFinishLoading(setLoadingComplete)}
+      />
+    );
+  }
   return (
     <Provider store={store}>
       <React.Suspense fallback="loading">
