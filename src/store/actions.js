@@ -14,6 +14,7 @@ export const SET_USER_SIGNUP_DATA = "SET_USER_SIGNUP_DATA";
 export const SET_USER_LAST_REGION_PATH_SENT_TIME = "SET_USER_LAST_REGION_PATH_SENT_TIME";
 export const SET_USER_LAST_REPORTED_PATH = "SET_USER_LAST_REPORTED_PATH";
 export const RESET_STORE = "RESET_STORE";
+export const SET_TUTORIAL_PAGE = "SET_TUTORIAL_PAGE";
 
 /*
  * These actions have side effects (sagas), and do not typically write to the redux store directly
@@ -159,6 +160,15 @@ export function setUserLastReportedPath({ time, pathId }) {
     payload: {
       time,
       pathId,
+    },
+  };
+}
+
+export function setTutorialPage(tutorialPage) {
+  return {
+    type: SET_TUTORIAL_PAGE,
+    payload: {
+      tutorialPage
     },
   };
 }

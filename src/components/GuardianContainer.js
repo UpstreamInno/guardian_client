@@ -18,6 +18,7 @@ import LogoScreen from "../views/LogoScreen";
 import ContactTracingScreen from "../views/ContactTracingScreen";
 import LoginScreen from "../views/LoginScreen";
 import YourInformationScreen from "../views/YourInformationScreen";
+import TutorialScreen from "./TutorialScreen";
 
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
@@ -64,7 +65,7 @@ export default function GuardianContainer() {
     case Pages.LOGO_SCREEN:
       return <LogoScreen/>;
     case Pages.WELCOME_SCREEN:
-      return <WelcomeScreen/>;
+      return <TutorialScreen/>;
     case Pages.CONTACT_TRACING_SCREEN:
       return <ContactTracingScreen/>;
     case Pages.YOUR_INFORMATION_SCREEN:

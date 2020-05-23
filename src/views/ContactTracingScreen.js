@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     bottom: {
-        flex: 2,
+        flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center'
     }
@@ -61,16 +61,11 @@ export default function ContactTracingScreen() {
             </View>
             <View style={styles.bottom}>
                 <TouchableOpacity
-                    onPress={() => dispatch(routeTo(Pages.YOUR_INFORMATION_SCREEN))}
+                    onPress={() => dispatch(setTutorialPage(Pages.YOUR_INFORMATION_SCREEN))}
                     style={{alignSelf: 'flex-end'}}
                 >
                     <Image
                         source={require("../../images/buttons/Button_Next.png")}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => dispatch(routeTo(Pages.LOGIN_SCREEN))}>
-                    <Image
-                        source={require("../../images/buttons/Button_Login.png")}
                     />
                 </TouchableOpacity>
             </View>

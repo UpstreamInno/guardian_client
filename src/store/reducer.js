@@ -24,6 +24,7 @@ export const initialState = {
   currentPage: Pages.DebugMenu,
   previousPage: null,
   notifications: [],
+  currentTutorialPage: null
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -78,6 +79,11 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         lastReportPathSentTime: (action.payload && action.payload.time) || null,
         lastReportPathId: (action.payload && action.payload.pathId) || null,
+      };
+    case SET_TUTORIAL_PAGE:
+      return {
+        ...state,
+        currentTutorialPage: (action.payload && action.payload.tutorialPage) || null,
       };
     case RESET_STORE:
       return initialState;

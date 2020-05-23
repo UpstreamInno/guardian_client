@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     bottom: {
-        flex: 2,
+        flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center'
     }
@@ -58,13 +58,6 @@ export default function YourInformationScreen() {
                         </BodyText>
                     </ScrollView>
                 </View>
-            </View>
-            <View style={styles.bottom}>
-                <TouchableOpacity onPress={() => dispatch(routeTo(Pages.LOGIN_SCREEN))}>
-                    <Image
-                        source={require("../../images/buttons/Button_Login.png")}
-                    />
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );

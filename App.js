@@ -1,4 +1,4 @@
-import {AppLoading, Updates,} from "expo";
+import {Updates} from "expo";
 import {Asset} from "expo-asset";
 import * as Font from "expo-font";
 import React, {useState} from "react";
@@ -153,15 +153,15 @@ const App = (props) => {
         .catch((error) => console.warn(error));
   },[]);
 
-  if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
-    );
-  }
+  // if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {
+  //   return (
+  //     <AppLoading
+  //       startAsync={loadResourcesAsync}
+  //       onError={handleLoadingError}
+  //       onFinish={() => handleFinishLoading(setLoadingComplete)}
+  //     />
+  //   );
+  // }
   return (
     <Provider store={store}>
       <React.Suspense fallback="loading">
