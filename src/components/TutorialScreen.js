@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Image, SafeAreaView, StyleSheet, TouchableOpacity, View} from "react-native";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import WelcomeScreen from "../views/WelcomeScreen";
 import ContactTracingScreen from "../views/ContactTracingScreen";
 import YourInformationScreen from "../views/YourInformationScreen";
@@ -8,13 +8,24 @@ import Carousel from "react-native-snap-carousel";
 import {Dimensions } from "react-native";
 import StepIndicator from 'react-native-step-indicator'
 import {Pages} from "../lib/Pages";
+import {routeTo, setTutorialPage} from "../store/actions";
+
+export const TUTORIAL_PAGE_WELCOME = 0
+export const TUTORIAL_PAGE_CONTACT_TRACING = 1
+export const TUTORIAL_PAGE_YOUR_INFORMATION = 2
 
 const TutorialScreen = () => {
   const dispatch = useDispatch();
-  const [cardIndex, setCardIndex] = useState(0);
+  const {currentTutorialPage} = useSelector(state => state);
   let swiper;
   let pages = [0, 1, 2];
   const screenWidth = Math.round(Dimensions.get('window').width);
+
+  useEffect(() => {
+    if(swiper.currentIndex !== currentTutorialPage) {
+      swiper.snapToItem(currentTutorialPage, true, false)
+    }
+  }, [currentTutorialPage]);
 
   const renderCard = ({item}) => {
     switch (item) {
@@ -32,13 +43,13 @@ const TutorialScreen = () => {
     currentStepIndicatorSize: 10,
     separatorStrokeWidth: 0,
     stepStrokeWidth: 2,
-    stepStrokeCurrentColor: '#A9A9A9',
-    stepStrokeFinishedColor: '#A9A9A9',
-    stepStrokeUnFinishedColor: '#A9A9A9',
     currentStepStrokeWidth: 2,
-    stepIndicatorFinishedColor: '#D3D3D3',
-    stepIndicatorUnFinishedColor: '#ffffff',
+    stepStrokeCurrentColor: '#A9A9A9',
     stepIndicatorCurrentColor: '#A9A9A9',
+    stepStrokeFinishedColor: '#D3D3D3',
+    stepStrokeUnFinishedColor: '#D3D3D3',
+    stepIndicatorFinishedColor: '#D3D3D3',
+    stepIndicatorUnFinishedColor: '#D3D3D3',
     stepIndicatorLabelFontSize: 0,
     currentStepIndicatorLabelFontSize: 0,
   }
@@ -52,11 +63,11 @@ const TutorialScreen = () => {
         sliderWidth={screenWidth}
         itemWidth={screenWidth}
         renderItem={renderCard}
-        onSnapToItem={index => setCardIndex(index)}/>
+        onSnapToItem={index => dispatch(setTutorialPage(index))}/>
       <StepIndicator
         stepCount={3}
         customStyles={firstIndicatorStyles}
-        currentPosition={cardIndex}
+        currentPosition={currentTutorialPage}
       />
       <View style={styles.bottom}>
         <TouchableOpacity onPress={() => dispatch(routeTo(Pages.LOGIN_SCREEN))}>

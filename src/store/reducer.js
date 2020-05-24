@@ -8,6 +8,7 @@ import {
   SET_USER_SIGNUP_DATA,
   RESET_STORE,
   MARK_NOTIFICATION_READ,
+  SET_TUTORIAL_PAGE,
 } from "./actions"
 
 import { Pages } from "Lib/Pages";
@@ -24,7 +25,7 @@ export const initialState = {
   currentPage: Pages.DebugMenu,
   previousPage: null,
   notifications: [],
-  currentTutorialPage: null
+  currentTutorialPage: 0
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -83,7 +84,7 @@ export const rootReducer = (state = initialState, action) => {
     case SET_TUTORIAL_PAGE:
       return {
         ...state,
-        currentTutorialPage: (action.payload && action.payload.tutorialPage) || null,
+        currentTutorialPage: (action.payload && action.payload.tutorialPage) || 0,
       };
     case RESET_STORE:
       return initialState;

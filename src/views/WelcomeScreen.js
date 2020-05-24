@@ -6,6 +6,8 @@ import {TitleText} from "../components/TitleText";
 import {Pages} from "../lib/Pages";
 import {SubtitleText} from "../components/SubtitleText";
 import {BodyText} from "../components/BodyText";
+import {setTutorialPage} from "../store/actions";
+import {TUTORIAL_PAGE_CONTACT_TRACING} from "../components/TutorialScreen";
 
 const styles = StyleSheet.create({
     root: {
@@ -63,7 +65,7 @@ export default function WelcomeScreen() {
             </View>
             <View style={styles.bottom}>
                 <TouchableOpacity
-                    onPress={() => dispatch(setTutorialPage(Pages.CONTACT_TRACING_SCREEN))}
+                    onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_CONTACT_TRACING))}
                     style={{alignSelf: 'flex-end'}}
                 >
                     <Image

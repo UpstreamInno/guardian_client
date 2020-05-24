@@ -5,6 +5,8 @@ import {routeTo,} from "Store/actions";
 import {TitleText} from "../components/TitleText";
 import {Pages} from "../lib/Pages";
 import {BodyText} from "../components/BodyText";
+import {TUTORIAL_PAGE_WELCOME, TUTORIAL_PAGE_YOUR_INFORMATION} from "../components/TutorialScreen";
+import {setTutorialPage} from "../store/actions";
 
 const styles = StyleSheet.create({
     root: {
@@ -37,7 +39,7 @@ export default function ContactTracingScreen() {
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
-                <TouchableOpacity onPress={() => dispatch(routeTo(Pages.WELCOME_SCREEN))}>
+                <TouchableOpacity onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_WELCOME))}>
                     <Image
                         source={require("../../images/buttons/Button_Back.png")}
                     />
@@ -61,7 +63,7 @@ export default function ContactTracingScreen() {
             </View>
             <View style={styles.bottom}>
                 <TouchableOpacity
-                    onPress={() => dispatch(setTutorialPage(Pages.YOUR_INFORMATION_SCREEN))}
+                    onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_YOUR_INFORMATION))}
                     style={{alignSelf: 'flex-end'}}
                 >
                     <Image

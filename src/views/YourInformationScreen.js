@@ -5,6 +5,8 @@ import {routeTo,} from "Store/actions";
 import {TitleText} from "../components/TitleText";
 import {Pages} from "../lib/Pages";
 import {BodyText} from "../components/BodyText";
+import {setTutorialPage} from "../store/actions";
+import {TUTORIAL_PAGE_CONTACT_TRACING} from "../components/TutorialScreen";
 
 const styles = StyleSheet.create({
     root: {
@@ -37,7 +39,7 @@ export default function YourInformationScreen() {
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
-                <TouchableOpacity onPress={() => dispatch(routeTo(Pages.CONTACT_TRACING_SCREEN))}>
+                <TouchableOpacity onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_CONTACT_TRACING))}>
                     <Image
                         source={require("../../images/buttons/Button_Back.png")}
                     />
