@@ -10,6 +10,7 @@ import {configureStore} from "Store";
 import i18n from 'Lib/i18n';
 import Job from "Lib/Job";
 import BackgroundFetch from "react-native-background-fetch";
+import SplashScreen from 'react-native-splash-screen'
 
 export const scheduleTask = async (name) => {
   try {
@@ -66,6 +67,7 @@ const App = (props) => {
   const { skipLoadingScreen } = props;
   /// Switch handler in top-toolbar.
   ///
+
   const onToggleEnabled = async (value) => {
     try {
       if (value) {
@@ -135,6 +137,7 @@ const App = (props) => {
   };
   React.useEffect(() => {
     init();
+    SplashScreen.hide();
     i18n
       .init()
       .then(() => {
@@ -153,15 +156,15 @@ const App = (props) => {
         .catch((error) => console.warn(error));
   },[]);
 
-  if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
-    );
-  }
+  // if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {
+  //   return (
+  //     <AppLoading
+  //       startAsync={loadResourcesAsync}
+  //       onError={handleLoadingError}
+  //       onFinish={() => handleFinishLoading(setLoadingComplete)}
+  //     />
+  //   );
+  // }
   return (
     <Provider store={store}>
       <React.Suspense fallback="loading">

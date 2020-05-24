@@ -43,4 +43,6 @@ target 'CovidGuardianClient' do
 
   # react-native-cli autolinking
   use_native_modules!
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
 end
