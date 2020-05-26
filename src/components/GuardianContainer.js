@@ -18,6 +18,7 @@ import LogoScreen from "../views/LogoScreen";
 import ContactTracingScreen from "../views/ContactTracingScreen";
 import LoginScreen from "../views/LoginScreen";
 import YourInformationScreen from "../views/YourInformationScreen";
+import LanguageScreen from "../views/LanguageScreen";
 
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
@@ -71,6 +72,8 @@ export default function GuardianContainer() {
       return <YourInformationScreen/>;
     case Pages.LOGIN_SCREEN:
       return <LoginScreen/>;
+    case Pages.LANGUAGE_SCREEN:
+      return <LanguageScreen/>;
 
     default:
       return <DebugMenu />;
