@@ -59,7 +59,7 @@ export default function GuardianContainer() {
     case Pages.SURVEY_COMPLETE:
       return <ActionCompleteScreen />;
     case Pages.DEBUG_MENU:
-      return <DebugMenu />;
+      return <HomeScreen />;
 
     // New UI
     case Pages.LOGO_SCREEN:
@@ -74,6 +74,6 @@ export default function GuardianContainer() {
       return <LoginScreen/>;
 
     default:
-      return <DebugMenu />;
+      return <HomeScreen />;
   }
 }
