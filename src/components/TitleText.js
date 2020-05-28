@@ -8,6 +8,7 @@ export const TitleText = props => {
         fontSize: 44,
         fontWeight: '900',
         lineHeight: 48,
+        color:"#2A79A7",
         borderBottomWidth: 4,
         borderBottomColor: '#000000',
         paddingBottom: 10,

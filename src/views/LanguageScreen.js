@@ -13,6 +13,7 @@ const lang = [
   { value: 'france', label: 'French' },
 ];
 const styles = StyleSheet.create({
+   
     root: {
         flex: 1,
         backgroundColor: '#F0F0F0',
