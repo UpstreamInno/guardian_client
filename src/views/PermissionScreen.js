@@ -53,11 +53,11 @@ const styles = StyleSheet.create({
 const DATA = [
   {
     id: '1',
-    title: 'Limpsum sit amet dolor',
+    title: 'Notification Permission',
   },
   {
     id: '2',
-    title: 'Limpsum sit amet dolor',
+    title: 'Location Permission',
   }
 ];
 
@@ -101,7 +101,7 @@ export default function PermissionScreen() {
              </View>
            
             <View style={styles.bottom}>
-            <LargeButton text={"Set permission"} onPress={() => dispatch(routeTo(Pages.LOCATION_CONSENT))}/>
+            <LargeButton text={"Set permission"} onPress={() => dispatch(routeTo(Pages.NOTIFICATION_CONSENT))}/>
             </View>
         </SafeAreaView>
     );
