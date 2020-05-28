@@ -7,7 +7,7 @@ import {Pages} from "../lib/Pages";
 import {SubtitleText} from "../components/SubtitleText";
 import {BodyText} from "../components/BodyText";
 import {LargeButton} from "../components/LargeButton"
-import {MenuButton} from "../components/MenuButton";
+import {NextButtonMedium} from "../components/NextButtonMedium";
 
 const styles = StyleSheet.create({
     root: {
