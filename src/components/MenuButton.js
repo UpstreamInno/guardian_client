@@ -17,11 +17,11 @@ export const MenuButton = props => {
 	const styles = StyleSheet.create({
 	    shadow: elevationShadowStyle(40),
 	    box: {
-	        borderRadius: 5,
-	        width:88,
-	        height:30,
-	        backgroundColor: 'white',
-	       borderWidth: 2,
+	      borderRadius: 5,
+	      width:88,
+	      height:30,
+	      backgroundColor: 'white',
+	      borderWidth: 2,
 		  borderColor: "white",
 		  borderTopLeftRadius: 5,
 		  borderTopRightRadius: 5,

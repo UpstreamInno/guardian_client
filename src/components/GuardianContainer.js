@@ -22,6 +22,7 @@ import LanguageScreen from "../views/LanguageScreen";
 import PermissionScreen from "../views/PermissionScreen";
 import ConsentLocationScreen from "../views/ConsentLocationScreen";
 import ConsentNotificationScreen from "../views/ConsentNotificationScreen";
+import MenuScreen from "../views/MenuScreen";
 
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
@@ -83,7 +84,8 @@ export default function GuardianContainer() {
       return <ConsentLocationScreen/>;  
     case Pages.NOTIFICATION_CONSENT:
       return <ConsentNotificationScreen/>;  
-
+    case Pages.MENU_SCREEN:
+      return <MenuScreen/>; 
     default:
       return <DebugMenu />;
   }

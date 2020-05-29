@@ -1,7 +1,7 @@
 import React from "react";
 import {Image, StyleSheet, TouchableOpacity, View, Text} from "react-native";
 
-export const MediumButton = props => {
+export const LargeButtonRectangle = props => {
     const {text} = props;
     function elevationShadowStyle(elevation) {
 	  return {
@@ -18,14 +18,16 @@ export const MediumButton = props => {
 	const styles = StyleSheet.create({
 	    shadow: elevationShadowStyle(40),
 	    box: {
-	        borderRadius: 30,
-	        width:150,
-	        height:30,
+	    	marginVertical: 10,
+	        borderRadius: 15,
+	        width:350,
+	        height:60,
 	        backgroundColor: 'white',
+	        padding: 24,
 	    },
 	    centerContent: {
 	        justifyContent: 'center',
-	        alignItems: 'center'
+	        alignItems: 'center',
 	    },
 	 	absoluteView: {
 	        flex: 1,
@@ -43,7 +45,7 @@ export const MediumButton = props => {
 	    }
 	});
     return <TouchableOpacity style={[styles.box, styles.centerContent, styles.shadow]} onPress={props.onPress}>
-        <Image source={require('../../images/buttons/medium_button.png')}  style={styles.img}/>
+        <Image source={require('../../images/buttons/large_button_rectangle.png')}  style={styles.img}/>
          <View style={styles.absoluteView}>
             <Text style={styles.textStyle}>{text}</Text>
         </View>
