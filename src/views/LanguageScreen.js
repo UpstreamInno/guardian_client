@@ -7,11 +7,11 @@ import {Pages} from "../lib/Pages";
 import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
 import { Chevron } from 'react-native-shapes';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-const lang = [
-  { value: 'english', label: 'English' },
-  { value: 'spanish', label: 'Spanish' },
-  { value: 'france', label: 'French' },
-];
+import {RoundedButton} from "../components/RoundedButton";
+import {ChooseLanguageButton} from "../components/ChooseLanguageButton";
+import ReactNativePickerModule from 'react-native-picker-module'
+
+
 const styles = StyleSheet.create({
    
     root: {
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     bottom: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 40
     },
     inputIOS: {
         fontSize: 16,
@@ -79,48 +80,31 @@ const pickerSelectStyles = StyleSheet.create({
 });
 
 export default function LanguageScreen() {
-    const [language, setLanguage] = useState("english");
+    const [languageIndex, setLanguageIndex] = useState(0);
     const dispatch = useDispatch();
-    
+    let pickerRef = null
+    const lang = [ "English", "Spanish", "French" ];
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.container}>
                 <View style={styles.center}>
                     <Image
-                        source={require("../../images/logo2.png")}
-                        style={{width: 73, height: 75, marginBottom: 15}}
+                        source={require("../../images/logo_blue.png")}
+                        style={{width: 75, height: 75, marginBottom: 15}}
                     />
                     <TitleText>Project{'\n'}Guardian</TitleText>
-                     <RNPickerSelect
-                        onValueChange={(value) => setLanguage(value)}
-                          placeholder={{
-                          label: 'Select a language...',
-                          value: null,
-                        }}
-                        style={{
-                          ...pickerSelectStyles,
-                          iconContainer: {
-                            top: 10,
-                            right: 12,
-                          },
-                        }}
-                        value={language}
-                        useNativeAndroidPickerStyle={false}
-                        textInputProps={{ underlineColor: 'yellow' }}
-                        items={[ {value: 'english', label: 'English' },
-                          { value: 'spanish', label: 'Spanish' },
-                          { value: 'france', label: 'French' }]}
-                         Icon={() => {
-                          return <MaterialCommunityIcons name="menu-down" size={24} color="black" />;
-                        }}
-                    />
+                    <ChooseLanguageButton text={lang[languageIndex]} onPress={() => pickerRef.show()}/>
+                    <ReactNativePickerModule
+                      pickerRef={e => (pickerRef = e)}
+                      selectedValue={languageIndex}
+                      title={"Select a language"}
+                      items={lang}
+                      onValueChange={(valueText, index) => {
+                        setLanguageIndex(index);
+                    }}/>
                 </View>
                 <View style={styles.bottom}>
-                    <TouchableOpacity onPress={() => dispatch(routeTo(Pages.WELCOME_SCREEN))}>
-                        <Image
-                            source={require("../../images/buttons/Button_NextArrow.png")}
-                        />
-                    </TouchableOpacity>
+                    <RoundedButton  onPress={() => dispatch(routeTo(Pages.WELCOME_SCREEN))}/>
                 </View>
             </View>
         </SafeAreaView>

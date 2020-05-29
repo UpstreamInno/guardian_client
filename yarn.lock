@@ -10317,6 +10317,11 @@ react-native-neomorph-shadows@^1.0.3:
     "@react-native-community/art" "^1.2.0"
     prop-types "^15.7.2"
 
+react-native-picker-module@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-picker-module/-/react-native-picker-module-1.3.1.tgz#6404f4c8515409c0816290b04bdd9cafa175cbf1"
+  integrity sha512-qhLynhQ1AaB1vrhGkzildxmxwz9nLTgACmjoCKWqMcIsNko/hWLrbwNSQJrNHOAALhr4zNhQaV2Kz8wybNLSDw==
+
 react-native-picker-select@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/react-native-picker-select/-/react-native-picker-select-7.0.0.tgz#4808a1177f997e234bb8505849dfffe1a01fedac"
