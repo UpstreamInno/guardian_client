@@ -10,8 +10,8 @@ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SplashScreen.show(this, R.style.SplashScreen_SplashTheme);
-        super.onCreate(savedInstanceState);
+       super.onCreate(savedInstanceState);
+       SplashScreen.show(this, R.style.SplashScreen_SplashTheme);
     }
     /**
      * Returns the name of the main component registered from JavaScript.
