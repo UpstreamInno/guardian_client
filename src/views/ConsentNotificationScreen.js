@@ -1,5 +1,5 @@
 import {Image, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View} from "react-native";
-import React, {useState} from "react";
+import React, { useState, useEffect } from 'react';
 import {useDispatch} from "react-redux";
 import {routeTo,} from "Store/actions";
 import {TitleText} from "../components/TitleText";
@@ -8,6 +8,9 @@ import {BodyText} from "../components/BodyText";
 import {RoundedButton} from "../components/RoundedButton";
 import {BackButtonSmall} from "../components/BackButtonSmall";
 import ToggleSwitch from 'toggle-switch-react-native';
+import {request, PERMISSIONS, checkNotifications} from 'react-native-permissions';
+import * as Permissions from "expo-permissions";
+
 
 const styles = StyleSheet.create({
     root: {
@@ -39,6 +42,38 @@ const styles = StyleSheet.create({
 export default function ConsentNotificationScreen() {
     const dispatch = useDispatch();
     const [hasPermission, setPermission] = useState(false);
+
+    useEffect(() => {
+        console.log("ConsentNotificationScreen");
+        // checkNotifications().then(({status, settings}) => {
+        // console.log("statusnotif", status);
+        //     if(status === "granted"){
+        //         setPermission(true);
+        //     }
+        // });
+        const checkPermissions = async () => {
+            const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+            if (status === 'granted') {
+                setPermission(true);
+            } else {
+                setPermission(false);
+            }
+        };
+     
+        checkPermissions();
+        
+    });
+
+
+
+    async function changeToggleValue(isOn) {
+        console.log("changed to : ", isOn);
+        if(isOn == true){
+            let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        }
+        setPermission(isOn);
+    }
+
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
@@ -55,7 +90,7 @@ export default function ConsentNotificationScreen() {
                           label="Notifications"
                           labelStyle={{ color: "black", fontWeight: 'bold', fontSize: 24, marginRight: 100, marginVertical: 40}}
                           size="large"
-                          onToggle={isOn => console.log("changed to : ", setPermission(isOn))}
+                          onToggle={isOn =>  changeToggleValue(isOn)}
                         />
                         <BodyText>
                            We will ask you how you are doing once a day through your notifications.
