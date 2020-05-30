@@ -63,14 +63,6 @@ export default function ConsentLocationScreen() {
             configureBackgroundLocation();
         }
         setPermission(isOn);
-
-        // const { status } = await Permissions.getAsync(Permissions.LOCATION);
-        // if (status === 'granted') {
-        //     setPermission(true);
-        // } else {
-        //     setPermission(false)
-        //     // alert('Hey! You might want to enable notifications for my app, they are good.');
-        // }
     }
 
 

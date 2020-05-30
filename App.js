@@ -20,6 +20,7 @@ export const scheduleTask = async (name) => {
       startOnBoot: true,
       enableHeadless: true,
       delay: 60 * 60 * 1000, // milliseconds (5min)
+      // delay: 1000,
       forceAlarmManager: true,
       forceReload: true, // more precise timing with AlarmManager vs default JobScheduler
       periodic: true, // Fire once only.
@@ -88,6 +89,7 @@ const App = (props) => {
   ///
   const onBackgroundFetchEvent = async (taskId) => {
     console.log("[BackgroundFetch] Event received: ", taskId);
+     Job.executeTasks();
     //   var taskText = await AsyncStorage.getItem("task");
     // taskText = taskText + "\n----------s1" +JSON.stringify(new Date());
     // var save = await AsyncStorage.setItem("task", taskText);
@@ -127,7 +129,7 @@ const App = (props) => {
       requiresStorageNotLow: false,  // Default
     }, onBackgroundFetchEvent, async (status) => {
       // setDefaultStatus(statusToString(status))
-      Job.executeTasks();
+     
     });
     // Turn on the enabled switch.
     onToggleEnabled(true);
