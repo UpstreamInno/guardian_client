@@ -7,12 +7,13 @@ import {Pages} from "../lib/Pages";
 import {SubtitleText} from "../components/SubtitleText";
 import {BodyText} from "../components/BodyText";
 import {CardIcons} from "../components/CardIcons"
+import {MenuButton} from "../components/MenuButton";
 
 const styles = StyleSheet.create({
     root: {
         flex: 1,
         backgroundColor: '#E5E5E5',
-        paddingTop: 80,
+        paddingTop: 25
     },
     center: {
         flex: 1,
@@ -20,9 +21,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#E5E5E5',
     },
+    headerContainer: {
+      height: 110,
+      flex: 1
+    },
     container: {
         marginLeft: 25,
         marginRight: 25
+    },
+    absoluteView: {
+        height: 110,
+        width: 414,
+        position: 'absolute',
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        paddingHorizontal: 10
+    },
+    logo: {
+        height: 45,
+        width: 45
     }
 });
 
@@ -113,6 +132,13 @@ export default function SymptomCheckupScreen() {
         <SafeAreaView style={styles.root}>
             <View style={styles.center}>
              <ScrollView contentcontentContainerStyle={{ backgroundColor: '#E5E5E5'}}>
+                    <View style={styles.headerContainer}>
+                        <Image source={require('../../images/background_header.png')}  />
+                          <View style={styles.absoluteView}>
+                              <Image source={require('../../images/logo2.png')}  style={styles.logo}/>
+                              <MenuButton text={"Menu"} onPress={() => dispatch(routeTo(Pages.MENU_SCREEN)) }/>
+                        </View>
+                    </View>
                     <TitleText style={styles.container}>Symptom{'\n'}Checkup</TitleText>
                         <BodyText style={styles.container}>
                             Donec id blandit erat, vel sagittis quam. In hac habitasse platea dictumst. Maecenas sed
