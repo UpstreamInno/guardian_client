@@ -23,6 +23,7 @@ import PermissionScreen from "../views/PermissionScreen";
 import ConsentLocationScreen from "../views/ConsentLocationScreen";
 import ConsentNotificationScreen from "../views/ConsentNotificationScreen";
 import MenuScreen from "../views/MenuScreen";
+import SymptomCheckupScreen from '../views/SymptomCheckupScreen';
 
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
@@ -86,6 +87,9 @@ export default function GuardianContainer() {
       return <ConsentNotificationScreen/>;  
     case Pages.MENU_SCREEN:
       return <MenuScreen/>; 
+    case Pages.SYMPTOM_CHECKUP_SCREEN:
+      return <SymptomCheckupScreen/>; 
+      
     default:
       return <DebugMenu />;
   }
