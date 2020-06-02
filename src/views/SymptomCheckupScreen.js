@@ -68,6 +68,7 @@ const DATA = [
 export default function SymptomCheckupScreen() {
     const dispatch = useDispatch();
     const [feverToggle, setFeverToggle] = useState(false);
+    const [feverValue, setFeverValue] = useState(36.5);
     const [breathToggle, setBreathToggle] = useState(false);
     const [coughToggle, setCoughToggle] = useState(false);
     const [tiredToggle, setTiredToggle] = useState(false);
@@ -82,6 +83,11 @@ export default function SymptomCheckupScreen() {
       return (
         <CardIcons child={id} text={title} onToggle={clickToggle} toggleState={false} />
       );
+    }
+
+    function changeValueSlider(value){
+        setFeverValue(value);
+        // console.log("fever value: ", feverValue);
     }
 
     function clickToggle({ state, refs}){
@@ -145,7 +151,7 @@ export default function SymptomCheckupScreen() {
                             tellus vel eros laoreet ornare eu id dui. 
                         </BodyText>
                     <View style={styles.container}>
-                        <CardIcons heightCard={(feverToggle) ? 250 : 90} source={require('../../images/termometer.png')} text={"Fever"} onToggle={clickToggle} toggleState={feverToggle} />
+                        <CardIcons heightCard={(feverToggle) ? 250 : 90} source={require('../../images/termometer.png')} text={"Fever"} onToggle={clickToggle} toggleState={feverToggle} onSliderChange={changeValueSlider}/>
                         <CardIcons heightCard={(breathToggle) ? 250 : 90} source={require('../../images/breath.png')} text={"Shortness of breath"} onToggle={clickToggle} toggleState={breathToggle} />
                         <CardIcons heightCard={(coughToggle) ? 250 : 90} source={require('../../images/cough.png')} text={"Dry cough"} onToggle={clickToggle} toggleState={coughToggle} />
                         <CardIcons heightCard={(tiredToggle) ? 250 : 90} source={require('../../images/tired.png')} text={"Tiredness"} onToggle={clickToggle} toggleState={tiredToggle} />
@@ -155,7 +161,6 @@ export default function SymptomCheckupScreen() {
                         <CardIcons heightCard={(diarrhoeaToggle) ? 250 : 90} source={require('../../images/diarrhoea.png')} text={"Diarrhoea"} onToggle={clickToggle} toggleState={diarrhoeaToggle} />
                         <CardIcons heightCard={(noseToggle) ? 250 : 90} source={require('../../images/nose.png')} text={"Runny Nose"} onToggle={clickToggle} toggleState={noseToggle} />
                         <CardIcons heightCard={(sneezeToggle) ? 250 : 90} source={require('../../images/sneeze.png')} text={"Sneezing"} onToggle={clickToggle} toggleState={sneezeToggle} />
-
                     </View>
            </ScrollView>
            </View>
