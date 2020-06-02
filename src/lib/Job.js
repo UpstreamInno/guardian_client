@@ -5,6 +5,7 @@ import Session from "Lib/models/Session";
 import { t } from 'Lib/i18n';
 import {sendLocalPush} from 'Lib/Notifications';
 import { epochToDisplayString, distanceToDisplay } from "Lib/PathHelpers"
+import Message from "Lib/models/Message";
 
 import {
   sendRegionPath,
@@ -19,10 +20,9 @@ export default class Job {
 
     // send region locations every 60 min
     await onSendRegionPath();
-
+ 
+   //polling for “messages” updates every 60 min 
     await onFetchMessages();
-    //polling for “messages” updates every 60 min 
-    // dispatch(fetchMessages());
 
     //data cleanup: delete location data older than 20 days locally -  tested(working)
     await Location.locationDataCleanup();
@@ -67,6 +67,7 @@ const onFetchMessages = async () => {
     console.log("message", message)
 
     if (!messageId) {
+      console.log("messageId null", messageId);
       return;
     }
 
@@ -83,7 +84,7 @@ const onFetchMessages = async () => {
     await ackMessage({messageId: message["message_id"], accessToken:session.accessToken});
 
     if (closestIntersection) {
-
+      console.log("closestIntersection", closestIntersection);
       // if there are intersections, save it as an alert so it shows up in the notifications section
       // TODO: localization, move to a "view"
       let notification = {
@@ -91,8 +92,10 @@ const onFetchMessages = async () => {
         intersection: closestIntersection,
         message,
         id: message["message_id"], // for now just use the message id
+        read: false
       };
 
+      await Message.insert(notification);
       // send a local push notification
       sendLocalPush(t('proximity_alert_title'), notification.displayMessage);
     }
