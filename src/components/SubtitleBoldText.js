@@ -6,7 +6,7 @@ export const SubtitleBoldText = props => {
     return <Text {...props} style={[style, {
         fontFamily: "noto-sans-black",
         fontSize: 32,
-        fontWeight: '900',
+        fontWeight: 'bold',
         marginTop: 30,
         lineHeight: 35
     }]}/>;
