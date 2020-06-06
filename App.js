@@ -10,6 +10,7 @@ import {configureStore} from "Store";
 import i18n from 'Lib/i18n';
 import Job from "Lib/Job";
 import BackgroundFetch from "react-native-background-fetch";
+import SplashScreen from 'react-native-splash-screen'
 
 export const scheduleTask = async (name) => {
   try {
@@ -19,6 +20,7 @@ export const scheduleTask = async (name) => {
       startOnBoot: true,
       enableHeadless: true,
       delay: 60 * 60 * 1000, // milliseconds (5min)
+      // delay: 1000,
       forceAlarmManager: true,
       forceReload: true, // more precise timing with AlarmManager vs default JobScheduler
       periodic: true, // Fire once only.
@@ -66,6 +68,7 @@ const App = (props) => {
   const { skipLoadingScreen } = props;
   /// Switch handler in top-toolbar.
   ///
+
   const onToggleEnabled = async (value) => {
     try {
       if (value) {
@@ -86,6 +89,7 @@ const App = (props) => {
   ///
   const onBackgroundFetchEvent = async (taskId) => {
     console.log("[BackgroundFetch] Event received: ", taskId);
+     Job.executeTasks();
     //   var taskText = await AsyncStorage.getItem("task");
     // taskText = taskText + "\n----------s1" +JSON.stringify(new Date());
     // var save = await AsyncStorage.setItem("task", taskText);
@@ -125,7 +129,7 @@ const App = (props) => {
       requiresStorageNotLow: false,  // Default
     }, onBackgroundFetchEvent, async (status) => {
       // setDefaultStatus(statusToString(status))
-      Job.executeTasks();
+     
     });
     // Turn on the enabled switch.
     onToggleEnabled(true);
@@ -135,6 +139,7 @@ const App = (props) => {
   };
   React.useEffect(() => {
     init();
+    SplashScreen.hide();
     i18n
       .init()
       .then(() => {

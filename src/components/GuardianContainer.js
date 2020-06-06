@@ -18,6 +18,12 @@ import LogoScreen from "../views/LogoScreen";
 import ContactTracingScreen from "../views/ContactTracingScreen";
 import LoginScreen from "../views/LoginScreen";
 import YourInformationScreen from "../views/YourInformationScreen";
+import LanguageScreen from "../views/LanguageScreen";
+import PermissionScreen from "../views/PermissionScreen";
+import ConsentLocationScreen from "../views/ConsentLocationScreen";
+import ConsentNotificationScreen from "../views/ConsentNotificationScreen";
+import MenuScreen from "../views/MenuScreen";
+import SymptomCheckupScreen from '../views/SymptomCheckupScreen';
 import TutorialScreen from "./TutorialScreen";
 
 export default function GuardianContainer() {
@@ -72,6 +78,18 @@ export default function GuardianContainer() {
       return <YourInformationScreen/>;
     case Pages.LOGIN_SCREEN:
       return <LoginScreen/>;
+    case Pages.LANGUAGE_SCREEN:
+      return <LanguageScreen/>;
+    case Pages.PERMISSION_SCREEN:
+      return <PermissionScreen/>;
+    case Pages.LOCATION_CONSENT:
+      return <ConsentLocationScreen/>;
+    case Pages.NOTIFICATION_CONSENT:
+      return <ConsentNotificationScreen/>;
+    case Pages.MENU_SCREEN:
+      return <MenuScreen/>;
+    case Pages.SYMPTOM_CHECKUP_SCREEN:
+      return <SymptomCheckupScreen/>;
 
     default:
       return <HomeScreen />;
