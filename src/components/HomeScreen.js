@@ -1,15 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {
-  Dimensions,
-  Image,
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native";
+import {Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {configureBackgroundLocationIfNecessary} from "Lib/Location";
 import Carousel from 'react-native-snap-carousel';
@@ -19,10 +9,22 @@ import {Pages} from "Lib/Pages";
 import * as Permissions from "expo-permissions";
 import {doPermissionCheck} from "Lib/PermissionsHelper";
 import {TitleText} from "./TitleText";
-import {setTutorialPage} from "../store/actions";
-import {TUTORIAL_PAGE_YOUR_INFORMATION} from "./TutorialScreen";
 import {getStatusBarHeight} from 'react-native-status-bar-height';
+import {LargeButton} from "./LargeButton";
+import {LinearGradient} from "expo-linear-gradient";
 
+const elevationShadowStyle = (elevation) => {
+  return {
+    elevation,
+    borderBottomColor: '#D3D3D3',
+    borderBottomWidth: 0.5,
+    shadowColor: 'rgba(0, 0, 0, 0.55)',
+    shadowOffset: {width: 10, height: 10.5 * elevation},
+    shadowOpacity: 0.5,
+    shadowRadius: 10 * elevation,
+    backgroundColor: 'white'
+  };
+}
 
 const HomeScreen = () => {
   const {accessToken} = useSelector(state => state);
@@ -47,11 +49,117 @@ const HomeScreen = () => {
     doPermissionCheck(Permissions.NOTIFICATIONS, "We need your permission to alert you in case you have been exposed!\nPlease go to settings and grant the permission");
   }, []);
 
+  useEffect(() => {
+    if (swiper.currentIndex !== cardIndex) {
+      swiper.snapToItem(cardIndex, true, false)
+    }
+  }, [cardIndex]);
 
   const renderCard = ({item}) => {
     return (
-      <View style={styles.card}>
+      <LinearGradient colors={['#FFFFFF', '#F8F8F8']} style={styles.card}>
         <Text style={styles.text}>{item.displayMessage}</Text>
+      </LinearGradient>
+    )
+  };
+
+  const onNextPressed = () => {
+    if (cardIndex < alerts.length - 1) {
+      setCardIndex(cardIndex + 1)
+    }
+  }
+
+  const onBackPressed = () => {
+    if (cardIndex > 0) {
+      setCardIndex(cardIndex - 1)
+    }
+  }
+
+  const getForwardVisibility = () => {
+    return cardIndex < alerts.length - 1 ? visibleStyle : invisibleStyle;
+  }
+  const getBackVisibility = () => {
+    return cardIndex > 0 ? visibleStyle : invisibleStyle;
+  }
+  const visibleStyle = {opacity: 100}
+  const invisibleStyle = {opacity: 0, height: 0}
+
+  const controls = () => {
+    return (
+      <View style={styles.controls}>
+        <TouchableOpacity
+          onPress={onBackPressed}>
+          <Image
+            style={getBackVisibility()}
+            source={require("../../images/buttons/Button_Back.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onNextPressed}
+        >
+          <Image
+            style={getForwardVisibility()}
+            source={require("../../images/buttons/Button_Next.png")}
+          />
+        </TouchableOpacity>
+      </View>
+    )
+  };
+
+  const onMenuPress = () => dispatch(routeTo(Pages.MENU_SCREEN))
+
+  const toolbar = () => {
+    return (
+      <View style={[styles.toolbarContainer, styles.shadow]}>
+        <Image style={styles.toolbarLogo}
+               source={require("../../images/logo2.png")}
+        />
+        <TouchableOpacity style={styles.toolbarMenuContainer}
+                          onPress={onMenuPress}>
+          <Image style={styles.toolbarMenu}
+                 source={require("../../images/buttons/Button_Menu_Small.png")}
+          />
+        </TouchableOpacity>
+      </View>
+    )
+  };
+
+  const alertsTile = () => {
+    return (
+      <View style={[styles.alertsTile, styles.shadow]}>
+        <View style={styles.mainContainer}>
+          <Text style={styles.tileInfo}>{alerts.length} unread alerts</Text>
+          <TitleText style={styles.alertsTitle}>Exposure{'\n'}Alerts</TitleText>
+          <Carousel
+            layout={"default"}
+            ref={ref => swiper = ref}
+            data={alerts}
+            sliderWidth={screenWidth}
+            itemWidth={screenWidth - 80}
+            renderItem={renderCard}
+            onSnapToItem={index => setCardIndex(index)}/>
+          {controls()}
+        </View>
+        <View style={styles.buttonContainer}>
+          <LargeButton text={t("View Alert History")} onPress={onSymptoms}/>
+        </View>
+      </View>
+    )
+  };
+
+  const symptomsTile = () => {
+    return (
+      <View style={[styles.symptomsTile, styles.shadow]}>
+        <View style={styles.symptomsContainer}>
+          <Text style={styles.tileInfo}>{t("Action recommended")}</Text>
+          <TitleText style={styles.symptomsTitle}>Check{'\n'}Symptoms</TitleText>
+          <Text
+            style={styles.paragraph}>{t("Your region is currently experiencing a high-risk contact event. In order to help assist your community, we recommend updating your status at least once a week.")}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <LargeButton text={t("Perform Checkup")} onPress={onSymptoms}/>
+        </View>
+
       </View>
     )
   };
@@ -63,87 +171,22 @@ const HomeScreen = () => {
   if (alerts.length > 0) {
     return (
       <SafeAreaView style={styles.outer}>
-        <View style={styles.toolbarContainer}>
-          <Image style={styles.toolbarLogo}
-                 source={require("../../images/logo2.png")}
-          />
-          <Image style={styles.toolbarMenu}
-                 source={require("../../images/buttons/Button_Menu_Small.png")}
-          />
-        </View>
+        {toolbar()}
         <ScrollView style={styles.scrollView}>
-          <View style={styles.alertsTile}>
-            <View style={styles.mainContainer}>
-              <Text style={styles.tileInfo}>{alerts.length} unread alerts</Text>
-              <TitleText style={styles.alertsTitle}>Exposure{'\n'}Alerts</TitleText>
-              <Carousel
-                layout={"default"}
-                ref={ref => swiper = ref}
-                data={alerts}
-                sliderWidth={screenWidth}
-                itemWidth={screenWidth - 80}
-                renderItem={renderCard}
-                onSnapToItem={index => setCardIndex(index)}/>
-              <TouchableOpacity
-                onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_YOUR_INFORMATION))}
-                style={styles.forwardButton}
-              >
-                <Image
-                  source={require("../../images/buttons/Button_Next.png")}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={onSymptoms}>
-                <ImageBackground source={require("../../images/buttons/Button_Template_Rounded.png")}
-                                 style={styles.backgroundImage}>
-                  <Text style={styles.buttonText}>{t("View Alert History")}</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.symptomsTile}>
-            <View style={styles.mainContainer}>
-              <Text style={styles.tileInfo}>{t("Action recommended")}</Text>
-              <TitleText style={styles.sympthomsTitle}>Check{'\n'}Sympthoms</TitleText>
-              <Text
-                style={styles.paragraph}>{t("Your region is currently experiencing a high-risk contact event. In order to help assist your community, we recommend updating your status at least once a week.")}</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={onSymptoms}>
-                <ImageBackground source={require("../../images/buttons/Button_Template_Rounded.png")}
-                                 style={styles.backgroundImage}>
-                  <Text style={styles.buttonText}>{t("Perform Checkup")}</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            </View>
-          </View>
+          {alertsTile()}
+          {symptomsTile()}
         </ScrollView>
       </SafeAreaView>
     );
   }
-  // return (
-  //   <SafeAreaView style={styles.outer}>
-  //     <View style={styles.titleContainer}>
-  //       <Text style={styles.welcome}> {t("Guardian")} </Text>
-  //     </View>
-  //     <View style={styles.textContainer}>
-  //       <Text style={styles.paragraph}>{t("You currently have no proximity alerts!")}</Text>
-  //     </View>
-  //     <View style={styles.buttonContainer}>
-  //       <TouchableOpacity style={styles.button} onPress={onSymptoms}>
-  //         <Text style={styles.buttonText}>{t("Report Symptoms")}</Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   </SafeAreaView>
-  // );
 };
 
 const styles = StyleSheet.create({
   outer: {
     flex: 1,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: '#FFFFFF',
   },
+  shadow: elevationShadowStyle(20),
   toolbarContainer: {
     backgroundColor: 'white',
     flexDirection: 'row',
@@ -156,22 +199,28 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     margin: 12
   },
+  toolbarMenuContainer: {
+    alignSelf: 'flex-end',
+    marginBottom: 16
+  },
   toolbarMenu: {
     width: 100,
     height: 40,
     resizeMode: 'contain',
-    alignSelf: 'flex-end',
-    marginBottom: 16
   },
   scrollView: {},
   alertsTile: {
-    height: 750
+    height: 600,
+    borderRadius: 10,
+    marginBottom: 50,
   },
   symptomsTile: {
-    height: 500
+    height: 500,
+    borderRadius: 10,
+    marginBottom: 30,
   },
   mainContainer: {
-    flex: 2,
+    flex: 4,
     justifyContent: 'center',
   },
   paragraph: {
@@ -189,7 +238,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30
   },
-  sympthomsTitle: {
+  symptomsContainer: {
+    flex: 2,
+    justifyContent: 'center',
+  },
+  symptomsTitle: {
     width: '40%',
     lineHeight: 32,
     marginTop: 20,
@@ -211,14 +264,21 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: '#E8E8E8',
-    backgroundColor: 'white',
-    padding: 20
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    padding: 20,
+    borderColor: '#D3D3D3',
+    borderWidth: 0.5,
+    shadowOffset: {width: 10, height: 10.5},
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    marginBottom: 10,
+    elevation: 3,
   },
-  forwardButton: {
-    alignSelf: 'flex-end'
+  controls: {
+    justifyContent: 'space-between',
+    width: '100%',
+    flexDirection: 'row'
   },
   text: {
     textAlign: 'left',
