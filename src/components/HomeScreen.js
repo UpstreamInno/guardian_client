@@ -32,7 +32,7 @@ const HomeScreen = () => {
   const [cardIndex, setCardIndex] = useState(0);
   // const {notifications} = useSelector(state => state);
   let swiper;
-  const alerts = [{displayMessage: "salut"}, {displayMessage: "serif"}, {displayMessage: "bosulica"}]
+  const alerts = [{displayMessage: "You have been exposed 1"}, {displayMessage: "You have been exposed 2"}, {displayMessage: "You have been exposed 3"}]
   const screenWidth = Math.round(Dimensions.get('window').width);
 
   useEffect(() => {
