@@ -6,7 +6,7 @@ import {routeTo} from "Store/actions";
 import DebugMenu from "Components/DebugMenu";
 import HomeScreen from "Components/HomeScreen";
 import OtpScreen from "Components/OtpScreen";
-import SignupScreen from "Components/SignupScreen";
+// import SignupScreen from "Components/SignupScreen";
 import LocationScreen from "Components/LocationScreen";
 import NotificationScreen from "Components/NotificationScreen";
 import AlertScreen from "Components/AlertScreen";
@@ -25,6 +25,8 @@ import ConsentNotificationScreen from "../views/ConsentNotificationScreen";
 import MenuScreen from "../views/MenuScreen";
 import SymptomCheckupScreen from '../views/SymptomCheckupScreen';
 import TutorialScreen from "./TutorialScreen";
+import NewSignupScreen from "../views/NewSignupScreen";
+import NewSignupVerifyScreen from "../views/NewSignupVerifyScreen";
 
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
@@ -89,9 +91,13 @@ export default function GuardianContainer() {
     case Pages.MENU_SCREEN:
       return <MenuScreen/>;
     case Pages.SYMPTOM_CHECKUP_SCREEN:
-      return <SymptomCheckupScreen/>;
+      return <SymptomCheckupScreen/>; 
+    case Pages.NEWSIGNUP_SCREEN:
+      return <NewSignupScreen/>;
+    case Pages.NEWSIGNUPVERIFY_SCREEN:
+      return <NewSignupVerifyScreen/>;
 
     default:
-      return <HomeScreen />;
+      return <DebugMenu />;
   }
 }

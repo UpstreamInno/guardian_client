@@ -21,6 +21,7 @@ export const MediumButton = props => {
 	        borderRadius: 30,
 	        width:150,
 	        height:30,
+	        marginTop:5,
 	        backgroundColor: 'white',
 	    },
 	    centerContent: {
