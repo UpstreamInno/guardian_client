@@ -42,7 +42,7 @@ function* userSignUp(action) {
     const { id, code } = yield call(signUp, userPhone);
     yield put(setUserSignUpData({ registrationCode: code, registrationId: id }));
     if (redirect) {
-      yield put(routeTo(Pages.SIGNUP_VERIFY));
+      yield put(routeTo(Pages.NEWSIGNUPVERIFY_SCREEN));
     }
   } catch (error) {
     console.error("Failed signUp, error: ", error);
@@ -70,7 +70,7 @@ function* userVerify(action) {
       yield call(Session.write, {accessToken, refreshToken});
 
       if (redirect) {
-        yield put(routeTo(Pages.CONSENT_LOCATION));
+        yield put(routeTo(Pages.WELCOME_SCREEN));
       }
     } else {
       // unable to validate code, send them back to try again
