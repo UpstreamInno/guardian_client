@@ -41,7 +41,7 @@ export default function YourInformationScreen() {
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
                  <BackButtonSmall style={styles.backContainer}
-                 onPress={() => dispatch(routeTo(Pages.LANGUAGE_SCREEN))}/>
+                 onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_CONTACT_TRACING))}/>
             </View>
             <View style={styles.container}>
                 <View style={styles.center}>

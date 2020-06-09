@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     bottom: {
-        flex: 1,
+        marginVertical: 15,
         justifyContent: 'flex-end',
         flexDirection: 'row'
     }

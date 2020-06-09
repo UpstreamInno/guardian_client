@@ -16,7 +16,7 @@ export const NextButtonSmall = props => {
 	}
 
 	const styles = StyleSheet.create({
-	    shadow: elevationShadowStyle(40),
+	    shadow: elevationShadowStyle(5),
 	    box: {
 		    borderTopLeftRadius: 15,
 			borderTopRightRadius: 0,

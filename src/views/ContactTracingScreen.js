@@ -9,6 +9,7 @@ import {TUTORIAL_PAGE_WELCOME, TUTORIAL_PAGE_YOUR_INFORMATION} from "../views/Tu
 import {setTutorialPage} from "../store/actions";
 import {LargeButton} from "../components/LargeButton"
 import {BackButtonSmall} from "../components/BackButtonSmall";
+import {NextButtonSmall} from "../components/NextButtonSmall";
 
 const styles = StyleSheet.create({
     root: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     bottom: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        flexDirection: 'row'
     }
 });
 
@@ -42,7 +43,7 @@ export default function ContactTracingScreen() {
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
                   <BackButtonSmall style={styles.backContainer}
-                 onPress={() => dispatch(routeTo(Pages.LANGUAGE_SCREEN))}/> 
+                 onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_WELCOME))}/> 
             </View>
             <View style={styles.container}>
                 <View style={styles.center}>
@@ -61,7 +62,8 @@ export default function ContactTracingScreen() {
                 </View>
             </View>
             <View style={styles.bottom}>
-        
+                 <NextButtonSmall  style={{alignSelf: 'flex-end'}}
+                 text="Learn more" onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_YOUR_INFORMATION))}/>
             </View>
         </SafeAreaView>
     );
