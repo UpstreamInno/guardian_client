@@ -12,7 +12,7 @@ export const TitleText = props => {
         borderBottomWidth: 4,
         borderBottomColor: '#2A79A7',
         paddingBottom: 10,
-        width: '70%',
+        width: '80%',
         marginBottom: 15,
     }, style]}/>;
 };

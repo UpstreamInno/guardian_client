@@ -1,5 +1,5 @@
-import {Image, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View, Text} from "react-native";
-import React, {useState, useEffect} from "react";
+import {Image, SafeAreaView, ScrollView, StyleSheet, KeyboardAvoidingView, TouchableOpacity, View, Text} from "react-native";
+import React, {useState, useEffect, useSelector} from "react";
 import {useDispatch} from "react-redux";
 import {routeTo,} from "Store/actions";
 import { userSignUpVerify } from "Store/actions";
@@ -28,20 +28,25 @@ const styles = StyleSheet.create({
     root: {
         flex: 1,
         backgroundColor: '#F0F0F0',
-        paddingTop: 55,
+        paddingTop: 25,
     },
     backContainer: {
         flex: 1,
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        marginBottom: 10,
     },
     container: {
-        flex: 4,
-        paddingHorizontal: 25,
+        flex: 1,
         marginTop: 45
     },
     center: {
         flex: 1,
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        paddingHorizontal: 25,
+        marginTop: 20,
+    },
+    scrollViewContainer: {
+      backgroundColor: '#F0F0F0'
     },
     bottom: {
         flex: 2,
@@ -78,9 +83,12 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'absolute',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 });
+
+const RESEND_OTP_TIME_LIMIT = 60; // 30 secs
+let resendOtpTimerInterval;
 
 export default function NewSignupVerifyScreen() {
     const dispatch = useDispatch();
@@ -91,50 +99,63 @@ export default function NewSignupVerifyScreen() {
         setValue,
     });
     const [phoneNumber, setPhoneNumber] = useState("+40 751 240 794");
-
+    const [resendButtonDisabledTime, setResendButtonDisabledTime] = useState(
+        RESEND_OTP_TIME_LIMIT,
+    );
     const onSubmit = () => {
       dispatch(userSignUpVerify(value));
     };
 
     useEffect(() => {
-        var duration = 120 ;
-        var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
-        setInterval(function () {
-            diff = duration - (((Date.now() - start) / 1000) | 0);
+        startResendOtpTimer();
+        return () => {
+          if (resendOtpTimerInterval) {
+            clearInterval(resendOtpTimerInterval);
+          }
+        };
+      }, [resendButtonDisabledTime]);
 
-            // does the same job as parseInt truncates the float
-            minutes = (diff / 60) | 0;
-            seconds = (diff % 60) | 0;
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            // display.textContent = minutes + ":" + seconds; 
-            // console.log(minutes +":"+ seconds, value);
-            setCodeExpiration(minutes+":"+seconds);
-            if (diff <= 0) {
-                // add one second so that the count down starts at the full duration
-                // example 05:00 not 04:59
-                start = Date.now() + 1000;
-            }
+      const startResendOtpTimer = () => {
+        if (resendOtpTimerInterval) {
+          clearInterval(resendOtpTimerInterval);
+        }
+        resendOtpTimerInterval = setInterval(() => {
+          if (resendButtonDisabledTime <= 0) {
+            clearInterval(resendOtpTimerInterval);
+          } else {
+            setResendButtonDisabledTime(resendButtonDisabledTime - 1);
+          }
         }, 1000);
-    },[]);
+      };
+
+      const onResend = () => {
+        setValue("");
+
+        setResendButtonDisabledTime(RESEND_OTP_TIME_LIMIT);
+        startResendOtpTimer();
+
+        // resend OTP Api call
+        // todo
+        console.log('todo: Resend OTP');
+      };
+
 
     function updateValue(value){
         console.log(value);
         setValue(value);
-        if(value.length == 6){
+        if(value.length == 6 && value == registrationCode){
             onSubmit();
         }
     }
 
     return (
-        <SafeAreaView style={styles.root}>
-            <BackButtonSmall onPress={() => dispatch(routeTo(Pages.NEWSIGNUP_SCREEN))}/>  
-            <View style={styles.container}>
+        <KeyboardAvoidingView 
+                behavior='padding'
+                 style={styles.root}>
+            <ScrollView style={styles.scrollViewContainer}>
+               <View style={styles.container}>
+                <BackButtonSmall style={styles.backContainer}
+                 onPress={() => dispatch(routeTo(Pages.NEWSIGNUP_SCREEN))}/>  
                 <View style={styles.center}>
                         <SubtitleText>Please</SubtitleText>
                         <TitleText>Verify Device</TitleText>
@@ -165,15 +186,13 @@ export default function NewSignupVerifyScreen() {
                           />
                           <View style={styles.infoContainer}>
                             <Text style={styles.textStyle}>
-                              Code expires in {codeExpiration}
+                              Code expires in {resendButtonDisabledTime}s
                             </Text>
-
-                            <MediumButton text={"Resend code"} onPress={() => alert("resend code")}/>
-                          </View>
-                        
-                                          
+                        <MediumButton text={"Resend code"} onPress={onResend}/>
+                    </View>             
                 </View>
             </View>
-        </SafeAreaView>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }

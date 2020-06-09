@@ -5,13 +5,11 @@ import {
 } from "react-native";
 import BackgroundFetch from "react-native-background-fetch";
 import Job from "Lib/Job";
-import { Client } from 'bugsnag-react-native';
 import App from './App';
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in the Expo client or in a native build,
 // the environment is set up appropriately
-const bugsnag = new Client("41388efa795c65268807bb2940b20f82");
 
 let MyHeadlessTask = async (event) => {
   // Get task id from event {}:

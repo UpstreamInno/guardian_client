@@ -40,6 +40,7 @@ function* userSignUp(action) {
   yield put(setUserPhone(userPhone));
   try {
     const { id, code } = yield call(signUp, userPhone);
+    console.log("userSignUp id  code", id , code);
     yield put(setUserSignUpData({ registrationCode: code, registrationId: id }));
     if (redirect) {
       yield put(routeTo(Pages.NEWSIGNUPVERIFY_SCREEN));

@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
         flex: 4,
         paddingHorizontal: 25,
     },
+    pickerContainer:{
+        height: 0
+    },
     center: {
         flex: 1,
         justifyContent: 'flex-start'
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
         flex: 2,
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
-        marginBottom: 20,
+        marginBottom: 0,
         marginRight: 20,
         backgroundColor: '#F0F0F0'
     }
@@ -147,7 +150,7 @@ export default function NewSignupScreen() {
                         <RoundedButton  onPress={onSignUp}/>
                     </View>}
                     <CountryPicker
-                      style={styles.scrollViewContainer}
+                      style={styles.pickerContainer}
                       placeholder={""}
                       visible={showCountryPicker}
                       onSelect={(value)=> updateCountry(value)}
