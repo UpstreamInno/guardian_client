@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     root: {
         flex: 1,
         backgroundColor: '#F0F0F0',
-        paddingTop: 25,
+        marginTop:25
     },
     backContainer: {
         flex: 1,
@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        marginTop: 45
     },
     center: {
         flex: 1,
@@ -143,7 +142,7 @@ export default function NewSignupVerifyScreen() {
     function updateValue(value){
         console.log(value);
         setValue(value);
-        if(value.length == 6 && value == registrationCode){
+        if(value.length == 6 ){
             onSubmit();
         }
     }

@@ -12,6 +12,9 @@ import {TitleText} from "./TitleText";
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {LargeButton} from "./LargeButton";
 import {LinearGradient} from "expo-linear-gradient";
+import {NextButtonSmall} from "../components/NextButtonSmall";
+import {BackButtonSmall} from "../components/BackButtonSmall";
+import {MenuButton} from "../components/MenuButton";
 
 const elevationShadowStyle = (elevation) => {
   return {
@@ -114,12 +117,10 @@ const HomeScreen = () => {
         <Image style={styles.toolbarLogo}
                source={require("../../images/logo2.png")}
         />
-        <TouchableOpacity style={styles.toolbarMenuContainer}
-                          onPress={onMenuPress}>
-          <Image style={styles.toolbarMenu}
-                 source={require("../../images/buttons/Button_Menu_Small.png")}
-          />
-        </TouchableOpacity>
+        <View style={styles.toolbarMenuContainer}>
+                 <MenuButton text={"Menu"} />
+
+        </View>
       </View>
     )
   };
@@ -201,7 +202,8 @@ const styles = StyleSheet.create({
   },
   toolbarMenuContainer: {
     alignSelf: 'flex-end',
-    marginBottom: 16
+    marginBottom: 16,
+    marginRight:16
   },
   toolbarMenu: {
     width: 100,
