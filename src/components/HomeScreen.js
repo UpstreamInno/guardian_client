@@ -118,7 +118,7 @@ const HomeScreen = () => {
                source={require("../../images/logo2.png")}
         />
         <View style={styles.toolbarMenuContainer}>
-                 <MenuButton text={"Menu"} />
+                 <MenuButton text={"Menu"} onPress={onMenuPress}/>
 
         </View>
       </View>
