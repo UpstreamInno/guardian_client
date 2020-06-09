@@ -9,6 +9,7 @@ import {Dimensions } from "react-native";
 import StepIndicator from 'react-native-step-indicator'
 import {Pages} from "../lib/Pages";
 import {routeTo, setTutorialPage} from "../store/actions";
+import {LargeButton} from "../components/LargeButton"
 
 export const TUTORIAL_PAGE_WELCOME = 0
 export const TUTORIAL_PAGE_CONTACT_TRACING = 1
@@ -70,16 +71,11 @@ const TutorialScreen = () => {
         currentPosition={currentTutorialPage}
       />
       <View style={styles.bottom}>
-        <TouchableOpacity onPress={() => dispatch(routeTo(Pages.LOGIN_SCREEN))}>
-          <Image
-            source={require("../../images/buttons/Button_Login.png")}
-          />
-        </TouchableOpacity>
+        <LargeButton text={"Sign In"} onPress={() => dispatch(routeTo(Pages.NEWSIGNUP_SCREEN))}/>
       </View>
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   outer: {
@@ -87,6 +83,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0',
   },
   bottom: {
+    marginBottom: 40,
+    marginTop:20,
     justifyContent: 'flex-end',
     alignItems: 'center'
   }

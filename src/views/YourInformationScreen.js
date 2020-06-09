@@ -6,7 +6,8 @@ import {TitleText} from "../components/TitleText";
 import {Pages} from "../lib/Pages";
 import {BodyText} from "../components/BodyText";
 import {setTutorialPage} from "../store/actions";
-import {TUTORIAL_PAGE_CONTACT_TRACING} from "../components/TutorialScreen";
+import {TUTORIAL_PAGE_CONTACT_TRACING} from "../views/TutorialScreen";
+import {BackButtonSmall} from "../components/BackButtonSmall";
 
 const styles = StyleSheet.create({
     root: {
@@ -39,11 +40,8 @@ export default function YourInformationScreen() {
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
-                <TouchableOpacity onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_CONTACT_TRACING))}>
-                    <Image
-                        source={require("../../images/buttons/Button_Back.png")}
-                    />
-                </TouchableOpacity>
+                 <BackButtonSmall style={styles.backContainer}
+                 onPress={() => dispatch(routeTo(Pages.LANGUAGE_SCREEN))}/>
             </View>
             <View style={styles.container}>
                 <View style={styles.center}>

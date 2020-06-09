@@ -7,7 +7,9 @@ import {Pages} from "../lib/Pages";
 import {SubtitleText} from "../components/SubtitleText";
 import {BodyText} from "../components/BodyText";
 import {setTutorialPage} from "../store/actions";
-import {TUTORIAL_PAGE_CONTACT_TRACING} from "../components/TutorialScreen";
+import {TUTORIAL_PAGE_CONTACT_TRACING} from "../views/TutorialScreen";
+import {BackButtonSmall} from "../components/BackButtonSmall";
+import {LargeButton} from "../components/LargeButton"
 
 const styles = StyleSheet.create({
     root: {
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
     },
     backContainer: {
         flex: 1,
-        alignItems: 'flex-start'
+         backgroundColor: '#F0F0F0',
     },
     container: {
         flex: 4,
@@ -40,11 +42,8 @@ export default function WelcomeScreen() {
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
-                <TouchableOpacity onPress={() => dispatch(routeTo(Pages.LOGO_SCREEN))}>
-                    <Image
-                        source={require("../../images/buttons/Button_Back.png")}
-                    />
-                </TouchableOpacity>
+                 <BackButtonSmall style={styles.backContainer}
+                 onPress={() => dispatch(routeTo(Pages.LANGUAGE_SCREEN))}/> 
             </View>
             <View style={styles.container}>
                 <View style={styles.center}>
@@ -63,16 +62,7 @@ export default function WelcomeScreen() {
                     </ScrollView>
                 </View>
             </View>
-            <View style={styles.bottom}>
-                <TouchableOpacity
-                    onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_CONTACT_TRACING))}
-                    style={{alignSelf: 'flex-end'}}
-                >
-                    <Image
-                        source={require("../../images/buttons/Button_LearnMore.png")}
-                    />
-                </TouchableOpacity>
-            </View>
+       
         </SafeAreaView>
     );
 }

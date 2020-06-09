@@ -10,8 +10,8 @@ export const BackButtonSmall = props => {
 	    shadowColor: 'rgba(0, 0, 0, 0.55)',
 	    shadowOffset: { width: 10, height: 10.5 * elevation },
 	    shadowOpacity: 30,
-	    shadowRadius: 10 * elevation,
-	    backgroundColor: "#FAFAFA",
+	    shadowRadius: 20 * elevation,
+        backgroundColor: '#F0F0F0',
 	    };
 	}
 
@@ -22,18 +22,19 @@ export const BackButtonSmall = props => {
 	        borderBottomLeftRadius: 15,
 	        width:70,
 	        height:60,
-	        backgroundColor: 'white',
+    	    backgroundColor: '#F0F0F0',
 	    },
 	    centerContent: {
 	        justifyContent: 'center',
-	        alignItems: 'center'
+	        alignItems: 'center',
+	        backgroundColor: '#F0F0F0',
 	    },
 	 	absoluteView: {
 	        flex: 1,
 	        position: 'absolute',
 	        alignItems: 'center',
 	        justifyContent: 'center',
-	        backgroundColor: 'transparent'
+	        backgroundColor: 'transparent',
 	    },
 	    img: {paddingBottom: 10},
 	    btn: {justifyContent: 'center', alignItems: 'center'},

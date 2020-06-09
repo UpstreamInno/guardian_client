@@ -5,8 +5,10 @@ import {routeTo,} from "Store/actions";
 import {TitleText} from "../components/TitleText";
 import {Pages} from "../lib/Pages";
 import {BodyText} from "../components/BodyText";
-import {TUTORIAL_PAGE_WELCOME, TUTORIAL_PAGE_YOUR_INFORMATION} from "../components/TutorialScreen";
+import {TUTORIAL_PAGE_WELCOME, TUTORIAL_PAGE_YOUR_INFORMATION} from "../views/TutorialScreen";
 import {setTutorialPage} from "../store/actions";
+import {LargeButton} from "../components/LargeButton"
+import {BackButtonSmall} from "../components/BackButtonSmall";
 
 const styles = StyleSheet.create({
     root: {
@@ -39,11 +41,8 @@ export default function ContactTracingScreen() {
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
-                <TouchableOpacity onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_WELCOME))}>
-                    <Image
-                        source={require("../../images/buttons/Button_Back.png")}
-                    />
-                </TouchableOpacity>
+                  <BackButtonSmall style={styles.backContainer}
+                 onPress={() => dispatch(routeTo(Pages.LANGUAGE_SCREEN))}/> 
             </View>
             <View style={styles.container}>
                 <View style={styles.center}>
@@ -62,14 +61,7 @@ export default function ContactTracingScreen() {
                 </View>
             </View>
             <View style={styles.bottom}>
-                <TouchableOpacity
-                    onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_YOUR_INFORMATION))}
-                    style={{alignSelf: 'flex-end'}}
-                >
-                    <Image
-                        source={require("../../images/buttons/Button_Next.png")}
-                    />
-                </TouchableOpacity>
+        
             </View>
         </SafeAreaView>
     );

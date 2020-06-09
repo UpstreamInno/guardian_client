@@ -24,7 +24,7 @@ import ConsentLocationScreen from "../views/ConsentLocationScreen";
 import ConsentNotificationScreen from "../views/ConsentNotificationScreen";
 import MenuScreen from "../views/MenuScreen";
 import SymptomCheckupScreen from '../views/SymptomCheckupScreen';
-import TutorialScreen from "./TutorialScreen";
+import TutorialScreen from "../views/TutorialScreen";
 import NewSignupScreen from "../views/NewSignupScreen";
 import NewSignupVerifyScreen from "../views/NewSignupVerifyScreen";
 
