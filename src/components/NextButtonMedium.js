@@ -10,19 +10,19 @@ export const NextButtonMedium = props => {
 	    shadowColor: 'rgba(0, 0, 0, 0.55)',
 	    shadowOffset: { width: 10, height: 10.5 * elevation },
 	    shadowOpacity: 30,
-	    shadowRadius: 10 * elevation,
+	    shadowRadius: 5 * elevation,
 	    backgroundColor: "#FAFAFA",
 	    };
 	}
 
 	const styles = StyleSheet.create({
-	    shadow: elevationShadowStyle(40),
+	    shadow: elevationShadowStyle(5),
 	    box: {
 		    borderTopLeftRadius: 15,
 			borderTopRightRadius: 0,
 			borderBottomRightRadius: 0,
 			borderBottomLeftRadius: 15,
-	        width:169,
+	        width:207,
 	        height:60,
 	        backgroundColor: 'white',
 	    },

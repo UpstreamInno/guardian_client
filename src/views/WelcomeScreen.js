@@ -9,7 +9,8 @@ import {BodyText} from "../components/BodyText";
 import {setTutorialPage} from "../store/actions";
 import {TUTORIAL_PAGE_CONTACT_TRACING} from "../views/TutorialScreen";
 import {BackButtonSmall} from "../components/BackButtonSmall";
-import {LargeButton} from "../components/LargeButton"
+import {LargeButton} from "../components/LargeButton";
+import {NextButtonMedium} from "../components/NextButtonMedium";
 
 const styles = StyleSheet.create({
     root: {
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     bottom: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        flexDirection: 'row'
     }
 });
 
@@ -62,7 +63,11 @@ export default function WelcomeScreen() {
                     </ScrollView>
                 </View>
             </View>
-       
+                <View style={styles.bottom}>
+                <NextButtonMedium  style={{alignSelf: 'flex-end'}}
+                 text="Learn more" onPress={() => dispatch(setTutorialPage(TUTORIAL_PAGE_CONTACT_TRACING))}/>
+            </View>
+
         </SafeAreaView>
     );
 }
