@@ -10,6 +10,7 @@ import StepIndicator from 'react-native-step-indicator'
 import {Pages} from "../lib/Pages";
 import {routeTo, setTutorialPage} from "../store/actions";
 import {LargeButton} from "../components/LargeButton"
+import Session from "Lib/models/Session";
 
 export const TUTORIAL_PAGE_WELCOME = 0
 export const TUTORIAL_PAGE_CONTACT_TRACING = 1
@@ -55,6 +56,12 @@ const TutorialScreen = () => {
     currentStepIndicatorLabelFontSize: 0,
   }
 
+  const onPress = async () => {
+    let session = await Session.read();
+    await Session.update("seenTutorial", true);
+    dispatch(routeTo(Pages.NEWSIGNUP_SCREEN));
+  } 
+ 
   return (
     <SafeAreaView style={styles.outer}>
       <Carousel
@@ -71,7 +78,7 @@ const TutorialScreen = () => {
         currentPosition={currentTutorialPage}
       />
       <View style={styles.bottom}>
-        <LargeButton text={"Sign In"} onPress={() => dispatch(routeTo(Pages.NEWSIGNUP_SCREEN))}/>
+        <LargeButton text={"Sign In"} onPress={onPress}/>
       </View>
     </SafeAreaView>
   );

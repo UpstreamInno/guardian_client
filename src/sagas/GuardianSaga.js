@@ -60,20 +60,24 @@ function* userVerify(action) {
   } = action.payload;
 
   const { registrationId } = yield select(state => state);
-
+  console.log("userVerify ", registrationCode);
   try {
     const { accessToken, refreshToken } = yield call(signIn, {registrationCode, registrationId});
+    console.log("aaa1");
+    console.log("userVerify", { accessToken, refreshToken });
     if (accessToken) {
+      console.log("aaa2");
       // send session to redux store
       yield put(setUserSession({accessToken, refreshToken}));
 
       // send session to local storage
-      yield call(Session.write, {accessToken, refreshToken});
+      yield call(Session.write, {accessToken, refreshToken });
 
       if (redirect) {
-        yield put(routeTo(Pages.WELCOME_SCREEN));
+        yield put(routeTo(Pages.PERMISSION_SCREEN));
       }
     } else {
+      console.lg("aaa3");
       // unable to validate code, send them back to try again
       console.error("unable to validate code");
       if (redirect) {
@@ -81,6 +85,7 @@ function* userVerify(action) {
       }
     }
   } catch (error) {
+    console.log("aaa4", error);
     console.error("Failed signUp, error: ", error);
     if (redirect) {
       yield put(routeTo(Pages.HOME));

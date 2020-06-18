@@ -34,7 +34,7 @@ export default function LogoScreen() {
             <View style={styles.container}>
                 <View style={styles.center}>
                     <Image
-                        source={require("../../images/logo2.png")}
+                        source={require("../../images/logo_blue.png")}
                         style={{width: 73, height: 75, marginBottom: 15}}
                     />
                     <TitleText>Project{'\n'}Guardian</TitleText>

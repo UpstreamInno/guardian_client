@@ -166,7 +166,7 @@ const HomeScreen = () => {
   };
 
   const onSymptoms = () => {
-    dispatch(routeTo(Pages.SYMPTOM_SURVEY));
+    dispatch(routeTo(Pages.SYMPTOM_CHECKUP_SCREEN));
   };
 
   if (alerts.length > 0) {

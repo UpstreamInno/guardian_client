@@ -101,8 +101,9 @@ export default function NewSignupVerifyScreen() {
     const [resendButtonDisabledTime, setResendButtonDisabledTime] = useState(
         RESEND_OTP_TIME_LIMIT,
     );
-    const onSubmit = () => {
-      dispatch(userSignUpVerify(value));
+    const onSubmit = (val) => {
+      console.log("on onSubmit", val);
+      dispatch(userSignUpVerify(val));
     };
 
     useEffect(() => {
@@ -139,11 +140,11 @@ export default function NewSignupVerifyScreen() {
       };
 
 
-    function updateValue(value){
-        console.log(value);
-        setValue(value);
-        if(value.length == 6 ){
-            onSubmit();
+    function updateValue(val){
+        console.log(val, val.length);
+        setValue(val);
+        if(val.length == 6){
+            onSubmit(val);
         }
     }
 

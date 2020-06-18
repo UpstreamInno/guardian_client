@@ -44,7 +44,7 @@ export default function WelcomeScreen() {
         <SafeAreaView style={styles.root}>
             <View style={styles.backContainer}>
                  <BackButtonSmall style={styles.backContainer}
-                 onPress={() => dispatch(routeTo(Pages.LANGUAGE_SCREEN))}/> 
+                 onPress={() => dispatch(routeTo(Pages.LOGO_SCREEN))}/> 
             </View>
             <View style={styles.container}>
                 <View style={styles.center}>

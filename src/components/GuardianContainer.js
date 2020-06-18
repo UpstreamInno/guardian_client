@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Button, Text} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
+import Session from "Lib/models/Session";
 
 import {routeTo} from "Store/actions";
 import DebugMenu from "Components/DebugMenu";
@@ -31,6 +32,22 @@ import NewSignupVerifyScreen from "../views/NewSignupVerifyScreen";
 export default function GuardianContainer() {
   const { currentPage } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let session = await Session.read();
+      alert("Use effect" + JSON.stringify(session));
+      if(session.seenTutorial == false){
+        dispatch(routeTo(Pages.LOGO_SCREEN))
+      } else if(session.accessToken != null){
+        dispatch(routeTo(Pages.HOME));
+      } else if(session.accessToken == null){
+         dispatch(routeTo(Pages.NEWSIGNUP_SCREEN));
+      }
+    };
+    fetchData();
+  },[]);
 
   // TODO: remove this when other pages are complete!
   const placeholder = (page) => {
@@ -98,6 +115,6 @@ export default function GuardianContainer() {
       return <NewSignupVerifyScreen/>;
 
     default:
-      return <DebugMenu />;
+      return <LogoScreen />;
   }
 }

@@ -92,7 +92,7 @@ export default function ConsentLocationScreen() {
                 </View>
             </View>
             <View style={styles.bottom}>
-                <RoundedButton onPress={() => dispatch(routeTo(Pages.DEBUG_MENU))}>
+                <RoundedButton onPress={() => dispatch(routeTo(Pages.HOME))}>
                 </RoundedButton>
             </View>
         </SafeAreaView>

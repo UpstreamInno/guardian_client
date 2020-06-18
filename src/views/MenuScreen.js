@@ -58,15 +58,15 @@ export default function MenuScreen() {
             <View style={styles.container}>
                 <View style={styles.center}>
                     <MediumTitleText>Menu</MediumTitleText>
-                    <LargeButtonRectangle text={"Alert History"} onPress={() => dispatch(routeTo(Pages.DEBUG_MENU))}/>
-                    <LargeButtonRectangle text={"Perform Checkup"} onPress={() => dispatch(routeTo(Pages.DEBUG_MENU))}/>
-                    <LargeButtonRectangle text={"Health tips"} onPress={() => dispatch(routeTo(Pages.DEBUG_MENU))}/>
-                    <LargeButtonRectangle text={"About"} onPress={() => dispatch(routeTo(Pages.DEBUG_MENU))} />
+                    <LargeButtonRectangle text={"Alert History"} onPress={() => dispatch(routeTo(Pages.HOME))}/>
+                    <LargeButtonRectangle text={"Perform Checkup"} onPress={() => dispatch(routeTo(Pages.HOME))}/>
+                    <LargeButtonRectangle text={"Health tips"} onPress={() => dispatch(routeTo(Pages.HOME))}/>
+                    <LargeButtonRectangle text={"About"} onPress={() => dispatch(routeTo(Pages.HOME))} />
                     <LargeButtonRectangle text={"Permissions"} onPress={() => dispatch(routeTo(Pages.PERMISSION_SCREEN))}/>
                 </View>
             </View>
             <View style={styles.bottom}>
-                <MediumButton text={"Close"} />
+                <MediumButton text={"Close"} onPress={() => dispatch(routeTo(Pages.HOME))}/>
             </View>
         </SafeAreaView>
     );
