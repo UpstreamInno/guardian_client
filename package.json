@@ -9,9 +9,9 @@
     "test:watch": "jest --watchAll"
   },
   "rnpm": {
-      "assets": [
-        "./assets/fonts/"
-       ]
+    "assets": [
+      "./assets/fonts/"
+    ]
   },
   "dependencies": {
     "99": "^0.0.1",
@@ -22,15 +22,18 @@
     "@react-navigation/web": "^1.0.0-alpha.9",
     "@twotalltotems/react-native-otp-input": "^1.3.5",
     "crypto-js": "^4.0.0",
-    "expo": "~37.0.3",
+    "expo": "~38.0.1",
     "expo-constants": "^9.0.0",
     "expo-linear-gradient": "^8.1.0",
     "expo-localization": "^8.1.0",
     "expo-location": "^8.1.0",
     "expo-permissions": "^8.1.0",
     "expo-secure-store": "^8.1.0",
+    "expo-splash-screen": "~0.3.1",
+    "expo-status-bar": "^1.0.0",
     "expo-task-manager": "^8.1.0",
-    "expo-updates": "~0.1.0",
+    "expo-updates": "~0.2.10",
+    "expo-web-browser": "^8.3.1",
     "galio-framework": "^0.6.3",
     "i18next": "^19.3.4",
     "i18next-xhr-backend": "^3.2.2",
@@ -40,7 +43,7 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-i18next": "^11.3.4",
-    "react-native": "~0.61.5",
+    "react-native": "~0.62.2",
     "react-native-background-fetch": "^3.0.4",
     "react-native-background-geolocation": "^3.6.2",
     "react-native-background-task": "^0.2.1",
@@ -60,7 +63,7 @@
     "react-native-picker-module": "^1.3.1",
     "react-native-picker-select": "^7.0.0",
     "react-native-push-notification": "~3.3.0",
-    "react-native-reanimated": "~1.7.1",
+    "react-native-reanimated": "~1.9.1",
     "react-native-screens": "2.2.0",
     "react-native-shadow": "^1.2.2",
     "react-native-shapes": "^0.1.0",
@@ -70,7 +73,7 @@
     "react-native-status-bar-height": "^2.5.0",
     "react-native-step-indicator": "^0.0.11",
     "react-native-svg": "X.X.X",
-    "react-native-unimodules": "~0.9.0",
+    "react-native-unimodules": "~0.10.1",
     "react-native-web": "~0.11.7",
     "react-navigation": "~4.0.10",
     "react-navigation-stack": "~1.10.3",
@@ -81,16 +84,16 @@
     "toggle-switch-react-native": "^2.1.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.6.0",
+    "@babel/core": "~7.8.6",
     "@bam.tech/react-native-make": "^3.0.0",
     "@expo/webpack-config": "^0.11.19",
-    "babel-jest": "~24.9.0",
-    "babel-preset-expo": "~8.0.0",
+    "babel-jest": "~25.2.6",
+    "babel-preset-expo": "~8.1.0",
     "google-libphonenumber": "^3.2.10",
-    "jest": "^25.2.4",
+    "jest": "^25.2.6",
     "jest-expo": "^36.0.1",
     "metro-react-native-babel-preset": "~0.56.0",
-    "react-test-renderer": "~16.9.0",
+    "react-test-renderer": "~16.11.0",
     "remote-redux-devtools": "^0.5.16"
   },
   "jest": {
