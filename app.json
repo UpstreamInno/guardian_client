@@ -28,6 +28,7 @@
     "android": {
       "package": "com.covidguardianclient",
       "versionCode": 1
-    }
+    },
+    "assets": ["./assets/fonts/"], 
   }
 }

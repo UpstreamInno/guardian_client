@@ -57,8 +57,8 @@ const TutorialScreen = () => {
   }
 
   const onPress = async () => {
-    let session = await Session.read();
-    await Session.update("seenTutorial", true);
+    // let session = await Session.read();
+    // await Session.update("seenTutorial", true);
     dispatch(routeTo(Pages.NEWSIGNUP_SCREEN));
   } 
  

@@ -8,6 +8,11 @@
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
+  "rnpm": {
+      "assets": [
+        "./assets/fonts/"
+       ]
+  },
   "dependencies": {
     "99": "^0.0.1",
     "@expo/samples": "~36.0.0",

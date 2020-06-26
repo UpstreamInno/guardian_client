@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
 });
 
 async function loadResourcesAsync() {
+        // alert("load fonts");
+
   await Promise.all([
     Font.loadAsync({
       // This is the font that we are using for our tab bar
@@ -152,6 +154,7 @@ const App = (props) => {
 
           Updates.reloadFromCache();
         }
+          loadResourcesAsync();
 
           setIsI18nInitialized(true);
         })
