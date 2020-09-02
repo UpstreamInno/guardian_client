@@ -9,6 +9,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     backgroundColor: "#fff",
+    paddingLeft: 30,
     paddingBottom: 50,
     maxHeight: "100%",
   },
@@ -79,21 +81,21 @@ const TRACK_COLOR = { false: "#696969", true: "#32cd32" };
 const THUMB_COLOR = "#fff";
 const IOS_SWITCH_BG_COLOR = "#696969";
 
-const ReportScreen = () => {
+const SymptomSurveyScreen = () => {
+  const dispatch = useDispatch();
+
   const [symptoms, setSymptoms] = React.useState({});
 
   const onSubmit = () => {
-    () => useDispatch({ symptoms });
+    console.log("reported symptoms", symptoms);
+    dispatch(routeTo(Pages.SURVEY_COMPLETE));
+  };
+
+  const switchHandler = (switchState, points) => {
+    return switchState ? points : 0;
   };
 
   const SwitchRow = ({ symptom, userFriendlyText, points }) => {
-
-    const switchHandler = (switchState, points) => {
-      return switchState ? points : 0;
-    };
-
-    const getSwitchValue = (symptom) => symptom != null && symptom !== 0;
-
     return (
       <View style={styles.row}>
         <Switch
@@ -107,7 +109,7 @@ const ReportScreen = () => {
               [symptom]: switchHandler(switchState, points),
             })
           }
-          value={getSwitchValue(symptoms[symptom])}
+          value={symptoms[symptom]}
           style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
         />
         <Text style={styles.label}>{t(userFriendlyText)}</Text>
@@ -119,13 +121,10 @@ const ReportScreen = () => {
     <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
       <Text style={styles.title}>
         {t(
-          "Please check any of the following symptoms you have experienced since your exposure"
+          "Please check any of the following symptoms you have experianced in the last 5 days"
         )}
       </Text>
-      <ScrollView
-        contentContainerStyle={styles.switchContainer}
-        indicatorStyle="white"
-      >
+      <ScrollView contentContainerStyle={styles.switchContainer}>
         <SwitchRow
           symptom="lossOfSenseOfSmell"
           userFriendlyText="Loss of Sense of Smell"
@@ -187,8 +186,4 @@ const ReportScreen = () => {
   );
 };
 
-ReportScreen.navigationOptions = {
-  title: "Report",
-};
-
-export default ReportScreen;
+export default SymptomSurveyScreen;

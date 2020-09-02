@@ -10,33 +10,18 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  AsyncStorage,
   I18nManager as RNI18nManager,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
+import AppNavigator from "./src/navigation/AppNavigator";
+import { store } from "Store";
+import { LinearGradient } from "expo-linear-gradient";
+import LocationScreen from "./src/screens/LocationScreen.js";
 import GuardianContainer from "Components/GuardianContainer";
 import { configureStore } from "Store";
-import i18n from 'Lib/i18n';
-import Job from "Lib/Job";
-import BackgroundFetch from "react-native-background-fetch";
 
-export const scheduleTask = async (name) => {
-  try {
-    await BackgroundFetch.scheduleTask({
-      taskId: name,
-      stopOnTerminate: false,
-      startOnBoot: true,
-      enableHeadless: true,
-      delay: 60 * 60 * 1000, // milliseconds (5min)
-      forceAlarmManager: true,
-      forceReload: true, // more precise timing with AlarmManager vs default JobScheduler
-      periodic: true, // Fire once only.
-    });
-  } catch (e) {
-    console.warn("[BackgroundFetch] scheduleTask fail", e);
-  }
-};
+import i18n from "Lib/i18n";
 
 const styles = StyleSheet.create({
   container: {
@@ -95,60 +80,7 @@ const App = (props) => {
     }
   };
 
-  /// BackgroundFetch event-handler.
-  /// All events from the plugin arrive here, including #scheduleTask events.
-  ///
-  const onBackgroundFetchEvent = async (taskId) => {
-    console.log("[BackgroundFetch] Event received: ", taskId);
-    //   var taskText = await AsyncStorage.getItem("task");
-    // taskText = taskText + "\n----------s1" +JSON.stringify(new Date());
-    // var save = await AsyncStorage.setItem("task", taskText);
-    if (taskId === 'react-native-background-fetch') {
-      // Test initiating a #scheduleTask when the periodic fetch event is received.
-      try {
-        await scheduleTask("com.transistorsoft.customtask");
-      } catch (e) {
-        console.warn("[BackgroundFetch] scheduleTask falied", e);
-      }
-    }
-    // Required: Signal completion of your task to native code
-    // If you fail to do this, the OS can terminate your app
-    // or assign battery-blame for consuming too much background-time
-    BackgroundFetch.finish(taskId);
-  };
-
-  /// Configure BackgroundFetch
-  ///
-  const init = async () => {
-    
-    // var taskText = await AsyncStorage.getItem("task");
-    // alert(taskText);
-
-    BackgroundFetch.configure({
-      minimumFetchInterval: 15,      // <-- minutes (15 is minimum allowed)
-      // Android options
-      forceAlarmManager: false,      // <-- Set true to bypass JobScheduler.
-      stopOnTerminate: false,
-      enableHeadless: true,
-      startOnBoot: true,
-      forceReload:true,
-      requiredNetworkType: BackgroundFetch.NETWORK_TYPE_NONE, // Default
-      requiresCharging: false,       // Default
-      requiresDeviceIdle: false,     // Default
-      requiresBatteryNotLow: false,  // Default
-      requiresStorageNotLow: false,  // Default
-    }, onBackgroundFetchEvent, async (status) => {
-      // setDefaultStatus(statusToString(status))
-      Job.executeTasks();
-    });
-    // Turn on the enabled switch.
-    onToggleEnabled(true);
-    // Load the list with persisted events.
-    // const events = await loadEvents<Event[]>();
-    // events && setEvents(events);
-  };
   React.useEffect(() => {
-    init();
     i18n
       .init()
       .then(() => {
@@ -162,30 +94,32 @@ const App = (props) => {
           Updates.reloadFromCache();
         }
 
-          setIsI18nInitialized(true);
-        })
-        .catch((error) => console.warn(error));
-  },[]);
-  
-  // if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {  // AppLoading, temporary remove apploading -> not working on expo sdk
+        setIsI18nInitialized(true);
+      })
+      .catch((error) => console.warn(error));
+  });
 
-  //   return (
-  //     <AppLoading
-  //       startAsync={loadResourcesAsync}
-  //       onError={handleLoadingError}
-  //       onFinish={() => handleFinishLoading(setLoadingComplete)}
-  //     />
-  //   );
-  // }
+  if (!isLoadingComplete && !skipLoadingScreen && !isI18nInitialized) {
+    return (
+      <AppLoading
+        startAsync={loadResourcesAsync}
+        onError={handleLoadingError}
+        onFinish={() => handleFinishLoading(setLoadingComplete)}
+      />
+    );
+  }
   return (
-    <Provider store={store}>
-      <React.Suspense fallback="loading">
+    <LinearGradient
+      colors={["#4c669f", "#3b5998", "#192f6a"]}
+      style={{ padding: 15, alignItems: "center", borderRadius: 5 }}
+    >
+      <Provider store={store}>
         <View style={styles.container}>
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <GuardianContainer />
+          <AppNavigator />
         </View>
-      </React.Suspense>
-    </Provider>
+      </Provider>
+    </LinearGradient>
   );
 };
 

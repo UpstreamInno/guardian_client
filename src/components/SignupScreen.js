@@ -4,6 +4,7 @@ import {
   Image,
   Button,
   KeyboardAvoidingView,
+  TouchableOpacity
 } from "react-native";
 import Constants from "expo-constants";
 import React, { useState } from "react";
@@ -62,19 +63,16 @@ export default function SignupScreen() {
   const onSignUp = () => dispatch(userSignUp(phone));
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.wrapper}>
-        <Text style={styles.title}>{t("guardian")}</Text>
-        <Image
-          source={require("../../images/logo.png")}
-          style={{ width: 200, height: 200, marginBottom: 50 }}
-        />
-        <UserPhoneInput onChange={setPhone} phoneNumber={phone} />
-        <Button title={t("register")} onPress={onSignUp} />
-      </LinearGradient>
-    </KeyboardAvoidingView>
+    <LinearGradient colors={["#94e4f9", "#2d93d8"]} style={styles.container}>
+      <Text style={styles.title}>{t("guardian")}</Text>
+      <Image
+        source={require("../../images/logo.png")}
+        style={{ width: 200, height: 200, marginBottom: 50 }}
+      />
+      <UserPhoneInput onChange={setPhone} phoneNumber={phone} />
+      <TouchableOpacity onPress={onSignUp} style={styles.button}>
+        <Text style={styles.buttonText}>{t("register")}</Text>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 }
